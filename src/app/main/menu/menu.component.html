@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="onClickOnLeftToolbarIcon()">
+    <mat-icon id="menu-toolbar-left-icon">menu</mat-icon>
+  </button>
+
+  <span>PlanSoftApp</span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav>
+    <div class="menu-button-container">
+      <button mat-button>
+        <mat-icon>assessment</mat-icon>
+        <span>PlanSoftApp</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button">
+        <mat-icon>work</mat-icon>
+        <span>My work</span>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon>list</mat-icon>
+        <span>Projects</span>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon>perm_identity</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-button class="menu-button">
+        <mat-icon>info</mat-icon>
+        <span>About</span>
+      </button>
+      <button mat-button id="logout-button" class="menu-button">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z4">
+      Main Content
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
