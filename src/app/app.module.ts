@@ -15,6 +15,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatSortModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,7 +20,7 @@
         <mat-icon>work</mat-icon>
         <span>My work</span>
       </button>
-      <button mat-button class="menu-button">
+      <button routerLink="/projects" mat-button class="menu-button">
         <mat-icon>list</mat-icon>
         <span>Projects</span>
       </button>
@@ -40,7 +40,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z5">
-      <app-project-list></app-project-list>
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
