@@ -4,10 +4,10 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.css']
 })
-export class MenuComponent {
+export class LayoutComponent {
 
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
