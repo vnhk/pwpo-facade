@@ -1,16 +1,16 @@
-import {HttpClient} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {SortDirection} from '@angular/material/sort';
-import {Observable} from 'rxjs';
+import { Component } from '@angular/core';
 import {HttpDatabase, Item, ItemApi, ListComponent} from "../../main/list/list.component";
+import {HttpClient} from "@angular/common/http";
+import {SortDirection} from "@angular/material/sort";
+import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-project-list',
-  templateUrl: './project-list.component.html',
+  selector: 'app-task-list',
+  templateUrl: './task-list.component.html',
   styleUrls: ['../../main/list/list.component.css']
 })
-export class ProjectListComponent extends ListComponent {
-  displayedColumns: string[] = ['shortForm', 'name', 'summary', 'status', "owner"];
+export class TaskListComponent extends ListComponent {
+  displayedColumns: string[] = ['name'];
 
   constructor(httpClient: HttpClient) {
     super(httpClient);
@@ -21,11 +21,11 @@ export class ProjectListComponent extends ListComponent {
   }
 }
 
-export interface ProjectApi extends ItemApi {
-  items: Project[];
+export interface TaskApi extends ItemApi {
+  items: Task[];
 }
 
-export interface Project extends Item {
+export interface Task extends Item {
   deleted: boolean;
   shortForm: string;
   name: string;
@@ -39,10 +39,10 @@ export class ProjectHttpDatabase extends HttpDatabase {
     super(httpClient);
   }
 
-  getList(sort: string, order: SortDirection, page: number): Observable<ProjectApi> {
+  getList(sort: string, order: SortDirection, page: number): Observable<TaskApi> {
     const href = 'http://localhost:8080/projects';
     const requestUrl = href;
 
-    return this._httpClient.get<ProjectApi>(requestUrl);
+    return this._httpClient.get<TaskApi>(requestUrl);
   }
 }

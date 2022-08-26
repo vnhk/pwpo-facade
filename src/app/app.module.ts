@@ -16,12 +16,17 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
+import { TaskListComponent } from './tasks/task-list/task-list.component';
+import { ProjectInfoComponent } from './projects/project-info/project-info.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     ProjectListComponent,
+    TaskListComponent,
+    ProjectInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import {AppRoutingModule} from "./app-routing.module";
     MatPaginatorModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
