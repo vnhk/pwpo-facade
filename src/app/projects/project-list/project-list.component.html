@@ -15,7 +15,7 @@
       <ng-container matColumnDef="shortForm">
         <th mat-header-cell *matHeaderCellDef>#</th>
         <td mat-cell *matCellDef="let row">
-          <a routerLink="/projects/details">{{row.shortForm}}</a>
+          <a routerLink='/projects/details/{{row.id}}'>{{row.shortForm}}</a>
         </td>
       </ng-container>
 

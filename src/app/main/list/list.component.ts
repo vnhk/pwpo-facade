@@ -1,9 +1,9 @@
-import {HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, SortDirection} from '@angular/material/sort';
-import {merge, Observable, of as observableOf} from 'rxjs';
+import {MatSort} from '@angular/material/sort';
+import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {HttpService} from "../http.service";
 
 
 @Component({
@@ -11,7 +11,6 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
   styleUrls: ['list.component.css']
 })
 export abstract class ListComponent implements AfterViewInit {
-  exampleDatabase: HttpDatabase | null | undefined;
   data: Object[] = [];
 
   resultsLength = 0;
@@ -20,15 +19,12 @@ export abstract class ListComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  protected httpClient: HttpClient;
 
-  protected constructor(httpClient: HttpClient) {
-    this.httpClient = httpClient;
+  protected constructor(private httpService: HttpService) {
+
   }
 
   ngAfterViewInit() {
-    this.exampleDatabase = this.getDB(this.httpClient);
-
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -37,7 +33,7 @@ export abstract class ListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getList(
+          return this.httpService.getItems(
             this.sort.active,
             this.sort.direction,
             this.paginator.pageIndex,
@@ -48,7 +44,6 @@ export abstract class ListComponent implements AfterViewInit {
           this.isLoadingResults = false;
           this.isRateLimitReached = data === null;
 
-          console.log(data);
           if (data === null) {
             return [];
           }
@@ -62,15 +57,6 @@ export abstract class ListComponent implements AfterViewInit {
       )
       .subscribe(data => (this.data = data));
   };
-
-  abstract getDB(_httpClient: HttpClient): HttpDatabase;
-}
-
-export abstract class HttpDatabase {
-  protected constructor(protected _httpClient: HttpClient) {
-  }
-
-  abstract getList(sort: string, order: SortDirection, page: number): Observable<ItemApi>;
 }
 
 export interface ItemApi {
@@ -79,7 +65,7 @@ export interface ItemApi {
 }
 
 export interface Item {
-  id: number;
+  id?: number;
 }
 
 

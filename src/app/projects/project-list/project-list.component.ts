@@ -1,8 +1,6 @@
-import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
-import {SortDirection} from '@angular/material/sort';
-import {Observable} from 'rxjs';
-import {HttpDatabase, Item, ItemApi, ListComponent} from "../../main/list/list.component";
+import {Item, ItemApi, ListComponent} from "../../main/list/list.component";
+import {ProjectService} from "../service/project.service";
 
 @Component({
   selector: 'app-project-list',
@@ -12,12 +10,9 @@ import {HttpDatabase, Item, ItemApi, ListComponent} from "../../main/list/list.c
 export class ProjectListComponent extends ListComponent {
   displayedColumns: string[] = ['shortForm', 'name', 'summary', 'status', "owner"];
 
-  constructor(httpClient: HttpClient) {
-    super(httpClient);
-  }
-
-  getDB(httpClient: HttpClient): HttpDatabase {
-    return new ProjectHttpDatabase(httpClient);
+  constructor(private projectService: ProjectService
+  ) {
+    super(projectService);
   }
 }
 
@@ -26,23 +21,9 @@ export interface ProjectApi extends ItemApi {
 }
 
 export interface Project extends Item {
-  deleted: boolean;
-  shortForm: string;
-  name: string;
-  summary: string;
-  status: string;
-  owner: string;
-}
-
-export class ProjectHttpDatabase extends HttpDatabase {
-  constructor(httpClient: HttpClient) {
-    super(httpClient);
-  }
-
-  getList(sort: string, order: SortDirection, page: number): Observable<ProjectApi> {
-    const href = 'http://localhost:8080/projects';
-    const requestUrl = href;
-
-    return this._httpClient.get<ProjectApi>(requestUrl);
-  }
+  shortForm?: string;
+  name?: string;
+  summary?: string;
+  status?: string;
+  owner?: string;
 }

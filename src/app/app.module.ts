@@ -16,9 +16,13 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
-import { TaskListComponent } from './tasks/task-list/task-list.component';
-import { ProjectInfoComponent } from './projects/project-info/project-info.component';
-import { MatTabsModule } from '@angular/material/tabs';
+import {TaskListComponent} from './tasks/task-list/task-list.component';
+import {ProjectInfoComponent} from './projects/project-info/project-info.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from "@angular/material/card";
+import {ProjectDetailsComponent} from './projects/project-info/project-details/project-details.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {DetailsComponent} from "./main/details/details.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     ProjectListComponent,
     TaskListComponent,
     ProjectInfoComponent,
+    ProjectDetailsComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatProgressSpinnerModule,
     HttpClientModule,
     AppRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

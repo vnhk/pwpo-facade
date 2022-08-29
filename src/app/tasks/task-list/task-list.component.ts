@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import {HttpDatabase, Item, ItemApi, ListComponent} from "../../main/list/list.component";
-import {HttpClient} from "@angular/common/http";
-import {SortDirection} from "@angular/material/sort";
-import {Observable} from "rxjs";
+import {Component} from '@angular/core';
+import {Item, ItemApi, ListComponent} from "../../main/list/list.component";
+import {ProjectService} from "../../projects/service/project.service";
 
 @Component({
   selector: 'app-task-list',
@@ -12,12 +10,8 @@ import {Observable} from "rxjs";
 export class TaskListComponent extends ListComponent {
   displayedColumns: string[] = ['name'];
 
-  constructor(httpClient: HttpClient) {
-    super(httpClient);
-  }
-
-  getDB(httpClient: HttpClient): HttpDatabase {
-    return new ProjectHttpDatabase(httpClient);
+  constructor(projectService: ProjectService) {
+    super(projectService);
   }
 }
 
@@ -32,17 +26,4 @@ export interface Task extends Item {
   summary: string;
   status: string;
   owner: string;
-}
-
-export class ProjectHttpDatabase extends HttpDatabase {
-  constructor(httpClient: HttpClient) {
-    super(httpClient);
-  }
-
-  getList(sort: string, order: SortDirection, page: number): Observable<TaskApi> {
-    const href = 'http://localhost:8080/projects';
-    const requestUrl = href;
-
-    return this._httpClient.get<TaskApi>(requestUrl);
-  }
 }
