@@ -3,8 +3,7 @@ import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpService} from "../../main/http.service";
 import {HttpClient} from "@angular/common/http";
-import {Project, ProjectApi} from "../project-list/project-list.component";
-import {Item} from "../../main/list/list.component";
+import {Item, ItemApi} from "../../main/list/list.component";
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +23,32 @@ export class ProjectService extends HttpService {
     );
   }
 
-  getById(id: string | null): Observable<Item> {
+  getByIdPrimaryAttr(id: string | null): Observable<Item> {
     return this.http.get<Project>(
-      `${this.baseUrl}/projects/project/${id}`
+      `${this.baseUrl}/projects/project/${id}/primary-attributes`
+    );
+  }
+
+  getByIdSecondaryAttr(id: string | null): Observable<Item> {
+    return this.http.get<Project>(
+      `${this.baseUrl}/projects/project/${id}/secondary-attributes`
     );
   }
 }
+
+export interface ProjectApi extends ItemApi {
+  items: Project[];
+}
+
+export interface Project extends Item {
+  name?: string;
+  summary?: string;
+  status?: string;
+  description?: string;
+  shortForm?: string;
+  owner?: string;
+  createdBy?: string;
+  created?: string;
+  modified?: string;
+}
+

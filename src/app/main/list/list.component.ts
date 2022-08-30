@@ -48,7 +48,7 @@ export abstract class ListComponent implements AfterViewInit {
             return [];
           }
 
-          // Only refresh the result length if there is new data. In case of rate
+          // Only refresh the result length if there is new primaryAttributes. In case of rate
           // limit errors, we do not want to reset the paginator to zero, as that
           // would prevent users from re-triggering requests.
           this.resultsLength = data.totalCount;

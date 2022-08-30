@@ -1,5 +1,6 @@
 mat-card {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .details {
@@ -9,4 +10,9 @@ mat-card {
 
 mat-card-content {
   padding: 10px;
+}
+
+.attribute-label {
+  font-size: 15px;
+  font-weight: bold;
 }

@@ -14,7 +14,9 @@ export abstract class HttpService {
 
   abstract getItems(sort: string, order: SortDirection, page: number): Observable<ItemApi>;
 
-  abstract getById(id: string | null): Observable<Item>;
+  abstract getByIdPrimaryAttr(id: string | null): Observable<Item>;
+
+  abstract getByIdSecondaryAttr(id: string | null): Observable<Item>;
 
   toHttpParams(sort: string, order: SortDirection, page: number): object {
     return {};

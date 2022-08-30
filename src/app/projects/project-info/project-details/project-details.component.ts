@@ -1,6 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {ProjectService} from "../../service/project.service";
-import {Project} from "../../project-list/project-list.component";
+import {Project, ProjectService} from "../../service/project.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -9,7 +8,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['../../../main/details/details.component.css']
 })
 export class ProjectDetailsComponent implements AfterViewInit {
-  data: Project = {};
+  primaryAttributes: Project = {};
+  secondaryAttributes: Project = {};
 
   constructor(private projectService: ProjectService,
               private route: ActivatedRoute) {
@@ -17,6 +17,7 @@ export class ProjectDetailsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     let id = this.route.snapshot.paramMap.get("id");
-    this.projectService.getById(id).subscribe(value => this.data = value);
+    this.projectService.getByIdPrimaryAttr(id).subscribe(value => this.primaryAttributes = value);
+    this.projectService.getByIdSecondaryAttr(id).subscribe(value => this.secondaryAttributes = value);
   }
 }

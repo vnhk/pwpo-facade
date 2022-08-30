@@ -16,14 +16,3 @@ export class ProjectListComponent extends ListComponent {
   }
 }
 
-export interface ProjectApi extends ItemApi {
-  items: Project[];
-}
-
-export interface Project extends Item {
-  shortForm?: string;
-  name?: string;
-  summary?: string;
-  status?: string;
-  owner?: string;
-}
