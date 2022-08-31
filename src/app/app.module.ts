@@ -23,6 +23,8 @@ import {MatCardModule} from "@angular/material/card";
 import {ProjectDetailsComponent} from './projects/project-info/project-details/project-details.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DetailsComponent} from "./main/details/details.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {DetailsComponent} from "./main/details/details.component";
   ],
   imports: [
     BrowserModule,
+    MatInputModule,
+    MatFormFieldModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,

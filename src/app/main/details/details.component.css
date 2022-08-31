@@ -1,15 +1,6 @@
-mat-card {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
 .details {
   margin-left: 15px;
   margin-right: 15px;
-}
-
-mat-card-content {
-  padding: 10px;
 }
 
 .attribute-label {
