@@ -25,6 +25,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DetailsComponent} from "./main/details/details.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from '@angular/material/input';
+import { MyWorkComponent } from './mywork/my-work/my-work.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatInputModule} from '@angular/material/input';
     TaskListComponent,
     ProjectInfoComponent,
     ProjectDetailsComponent,
-    DetailsComponent
+    DetailsComponent,
+    MyWorkComponent
   ],
   imports: [
     BrowserModule,

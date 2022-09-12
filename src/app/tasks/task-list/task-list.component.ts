@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
 import {TaskService} from "../service/task.service";
 import {ActivatedRoute} from "@angular/router";
+import {SessionService} from "../../main/session/session.service";
 
 @Component({
   selector: 'app-task-list',
@@ -12,7 +13,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['../../main/list/list.component.css']
 })
 export class TaskListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['type','number','summary','status','assignee','dueDate','priority'];
+  displayedColumns: string[] = ['type', 'number', 'summary', 'status', 'assignee', 'dueDate', 'priority'];
 
   MAX_SUMMARY_LENGTH: number = 30;
 
@@ -24,13 +25,18 @@ export class TaskListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  @Input() criteria = 'projectId';
+
+
   public constructor(private taskService: TaskService,
-                     private route: ActivatedRoute) {
+                     private route: ActivatedRoute,
+                     private session: SessionService) {
 
   }
 
   ngAfterViewInit() {
     let projectId = this.route.snapshot.paramMap.get("id");
+
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -39,11 +45,7 @@ export class TaskListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.taskService.getAllByProjectIdPrimaryAttr(projectId,
-            this.sort.active,
-            this.sort.direction,
-            this.paginator.pageIndex
-          ).pipe(catchError(() => observableOf(null)));
+          return this.getData(projectId).pipe(catchError(() => observableOf(null)));
         }),
         map(data => {
           // Flip flag to show that loading has finished.
@@ -63,4 +65,32 @@ export class TaskListComponent implements AfterViewInit {
       )
       .subscribe(data => (this.data = data));
   };
+
+  private getData(projectId: string | null) {
+    if (this.criteria === 'projectId') {
+      return this.taskService.getAllByProjectIdPrimaryAttr(projectId,
+        this.sort.active,
+        this.sort.direction,
+        this.paginator.pageIndex
+      );
+    }
+
+    if (this.criteria === 'assignee') {
+      return this.taskService.getAllByAssignee(this.session.getLoggedUser().username,
+        this.sort.active,
+        this.sort.direction,
+        this.paginator.pageIndex
+      );
+    }
+
+    if (this.criteria === 'creator') {
+      return this.taskService.getAllByCreator(this.session.getLoggedUser().username,
+        this.sort.active,
+        this.sort.direction,
+        this.paginator.pageIndex
+      );
+    }
+
+    throw new Error('Valid criteria');
+  }
 }

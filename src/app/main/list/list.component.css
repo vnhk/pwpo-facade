@@ -1,5 +1,7 @@
 .example-container {
   position: relative;
+  width: 80%;
+  margin: auto;
 }
 
 .example-table-container {

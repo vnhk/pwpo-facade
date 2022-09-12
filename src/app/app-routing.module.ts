@@ -4,6 +4,7 @@ import {ProjectListComponent} from "./projects/project-list/project-list.compone
 import {TaskListComponent} from "./tasks/task-list/task-list.component";
 import {ProjectInfoComponent} from "./projects/project-info/project-info.component";
 import {ProjectResolver} from "./projects/project.resolver";
+import {MyWorkComponent} from "./mywork/my-work/my-work.component";
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         ProjectResolver
       }
+  },
+  {
+    path: 'my-work',
+    component: MyWorkComponent
   },
   {path: 'projects/details/:id', component: ProjectInfoComponent},
   {path: 'tasks', component: TaskListComponent}

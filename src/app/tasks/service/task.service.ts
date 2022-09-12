@@ -46,6 +46,18 @@ export class TaskService extends HttpService {
       `${this.baseUrl}/projects/project/${id}/tasks/secondary-attributes`
     );
   }
+
+  getAllByCreator(username: string, active: string, direction: SortDirection, pageIndex: number) {
+    return this.http.get<TaskApi>(
+      `${this.baseUrl}/tasks/search?createdBy=${username}`
+    );
+  }
+
+  getAllByAssignee(username: string, active: string, direction: SortDirection, pageIndex: number) {
+    return this.http.get<TaskApi>(
+      `${this.baseUrl}/tasks/search?assignee=${username}`
+    );
+  }
 }
 
 export interface TaskApi extends ItemApi {
