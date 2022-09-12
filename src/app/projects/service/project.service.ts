@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpService} from "../../main/http.service";
 import {HttpClient} from "@angular/common/http";
-import {Item, ItemApi} from "../../main/list/list.component";
+import {Item, ItemApi} from "../../main/list/item";
 
 @Injectable({
   providedIn: 'root'

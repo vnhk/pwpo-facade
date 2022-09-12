@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {SortDirection} from "@angular/material/sort";
 import {Observable} from "rxjs";
-import {Item, ItemApi} from "./list/list.component";
+import {Item, ItemApi} from "./list/item";
 
 @Injectable({
   providedIn: 'root'
