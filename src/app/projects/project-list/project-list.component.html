@@ -26,7 +26,11 @@
 
       <ng-container matColumnDef="summary">
         <th mat-header-cell *matHeaderCellDef>Summary</th>
-        <td mat-cell *matCellDef="let row">{{row.summary}}</td>
+        <td mat-cell *matCellDef="let row">
+          <span *ngIf="row.summary.length > MAX_SUMMARY_LENGTH; then substrSummary else origSummary"></span>
+          <ng-template #origSummary>{{row.summary}}</ng-template>
+          <ng-template #substrSummary>{{row.summary.substring(0, MAX_SUMMARY_LENGTH) + '...'}}</ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="status">

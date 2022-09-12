@@ -1,11 +1,10 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {Item, ItemApi} from "../../main/list/item";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {HttpService} from "../../main/http.service";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
-import {ProjectService} from "../../projects/service/project.service";
+import {TaskService} from "../service/task.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-task-list',
@@ -13,22 +12,25 @@ import {ProjectService} from "../../projects/service/project.service";
   styleUrls: ['../../main/list/list.component.css']
 })
 export class TaskListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['type','number','summary','status','assignee','dueDate','priority'];
+
+  MAX_SUMMARY_LENGTH: number = 30;
 
   data: Object[] = [];
-
   resultsLength = 0;
   isLoadingResults = true;
-  isRateLimitReached = false;
 
+  isRateLimitReached = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  public constructor(private httpService: ProjectService) {
+  public constructor(private taskService: TaskService,
+                     private route: ActivatedRoute) {
 
   }
 
   ngAfterViewInit() {
+    let projectId = this.route.snapshot.paramMap.get("id");
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -37,10 +39,10 @@ export class TaskListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.httpService.getItems(
+          return this.taskService.getAllByProjectIdPrimaryAttr(projectId,
             this.sort.active,
             this.sort.direction,
-            this.paginator.pageIndex,
+            this.paginator.pageIndex
           ).pipe(catchError(() => observableOf(null)));
         }),
         map(data => {
@@ -61,17 +63,4 @@ export class TaskListComponent implements AfterViewInit {
       )
       .subscribe(data => (this.data = data));
   };
-}
-
-export interface TaskApi extends ItemApi {
-  items: Task[];
-}
-
-export interface Task extends Item {
-  deleted: boolean;
-  shortForm: string;
-  name: string;
-  summary: string;
-  status: string;
-  owner: string;
 }

@@ -20,6 +20,8 @@ export class ProjectListComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = false;
 
+  MAX_SUMMARY_LENGTH: number = 30;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
