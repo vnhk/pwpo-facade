@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {ProjectService} from "../service/project.service";
+import {HttpService} from "../../main/service/http.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
@@ -24,7 +24,7 @@ export class ProjectListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  public constructor(private httpService: ProjectService) {
+  public constructor(private httpService: HttpService) {
 
   }
 
@@ -37,7 +37,7 @@ export class ProjectListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.httpService.getItems(
+          return this.httpService.getProjects(
             this.sort.active,
             this.sort.direction,
             this.paginator.pageIndex,

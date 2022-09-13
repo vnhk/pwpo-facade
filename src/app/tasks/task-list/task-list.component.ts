@@ -3,9 +3,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
-import {TaskService} from "../service/task.service";
 import {ActivatedRoute} from "@angular/router";
 import {SessionService} from "../../main/session/session.service";
+import {HttpService} from "../../main/service/http.service";
 
 @Component({
   selector: 'app-task-list',
@@ -28,7 +28,7 @@ export class TaskListComponent implements AfterViewInit {
   @Input() criteria = 'projectId';
 
 
-  public constructor(private taskService: TaskService,
+  public constructor(private httpService: HttpService,
                      private route: ActivatedRoute,
                      private session: SessionService) {
 
@@ -68,7 +68,7 @@ export class TaskListComponent implements AfterViewInit {
 
   private getData(projectId: string | null) {
     if (this.criteria === 'projectId') {
-      return this.taskService.getAllByProjectIdPrimaryAttr(projectId,
+      return this.httpService.getAllTasksByProjectIdPrimaryAttr(projectId,
         this.sort.active,
         this.sort.direction,
         this.paginator.pageIndex
@@ -76,7 +76,7 @@ export class TaskListComponent implements AfterViewInit {
     }
 
     if (this.criteria === 'assignee') {
-      return this.taskService.getAllByAssignee(this.session.getLoggedUser().username,
+      return this.httpService.getAllTasksByAssignee(this.session.getLoggedUser().username,
         this.sort.active,
         this.sort.direction,
         this.paginator.pageIndex
@@ -84,7 +84,7 @@ export class TaskListComponent implements AfterViewInit {
     }
 
     if (this.criteria === 'owner') {
-      return this.taskService.getAllByOwner(this.session.getLoggedUser().username,
+      return this.httpService.getAllTasksByOwner(this.session.getLoggedUser().username,
         this.sort.active,
         this.sort.direction,
         this.paginator.pageIndex

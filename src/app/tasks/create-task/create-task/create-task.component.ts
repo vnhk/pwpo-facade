@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ProjectService} from "../../../projects/service/project.service";
+import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder} from "@angular/forms";
-import {Person} from "../../../main/api-models";
+import {DataEnum, Person} from "../../../main/api-models";
+import {TaskService} from "../../service/task.service";
 
 @Component({
   selector: 'app-create-task',
@@ -10,17 +11,22 @@ import {Person} from "../../../main/api-models";
   styleUrls: ['./create-task.component.css']
 })
 export class CreateTaskComponent implements OnInit {
-  constructor(private projectService: ProjectService,
+  priority: DataEnum[] | undefined;
+  taskType: DataEnum[] | undefined;
+  addedToProject: Person[] | undefined;
+
+  constructor(private httpService: HttpService,
+              private taskService: TaskService,
               private route: ActivatedRoute,
               private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get("id");
-    this.projectService.getUsersWithAccessToTheProject(id).subscribe(value => this.addedToProject = value.items);
+    this.httpService.getUsersWithAccessToTheProject(id).subscribe(value => this.addedToProject = value.items);
+    this.httpService.getEnumByName("com.pwpo.common.enums.Priority").subscribe(value => this.priority = value.items);
+    this.httpService.getEnumByName("com.pwpo.task.enums.TaskType").subscribe(value => this.taskType = value.items);
   }
-
-  addedToProject: Person[] | undefined;
 
 
   profileForm = this.fb.group({

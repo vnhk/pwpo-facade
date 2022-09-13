@@ -50,3 +50,12 @@ export interface Task extends Item {
   created?: string;
   modified?: string;
 }
+
+export interface DataEnumApi extends ItemApi {
+  items: DataEnum[];
+}
+
+export interface DataEnum extends Item {
+  internalName?: string;
+  displayName?: string;
+}

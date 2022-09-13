@@ -1,5 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {ProjectService} from "../../service/project.service";
+import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {Project} from "../../../main/api-models";
 
@@ -12,13 +12,13 @@ export class ProjectDetailsComponent implements AfterViewInit {
   primaryAttributes: Project = {};
   secondaryAttributes: Project = {};
 
-  constructor(private projectService: ProjectService,
+  constructor(private httpService: HttpService,
               private route: ActivatedRoute) {
   }
 
   ngAfterViewInit() {
     let id = this.route.snapshot.paramMap.get("id");
-    this.projectService.getByIdPrimaryAttr(id).subscribe(value => this.primaryAttributes = value);
-    this.projectService.getByIdSecondaryAttr(id).subscribe(value => this.secondaryAttributes = value);
+    this.httpService.getProjectByIdPrimaryAttr(id).subscribe(value => this.primaryAttributes = value);
+    this.httpService.getProjectByIdSecondaryAttr(id).subscribe(value => this.secondaryAttributes = value);
   }
 }

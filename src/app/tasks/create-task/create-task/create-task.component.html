@@ -9,10 +9,8 @@
           <mat-form-field appearance="fill">
             <mat-label>Type</mat-label>
             <mat-select name="type" required>
-              <mat-option value="STORY">Story</mat-option>
-              <mat-option value="OBJECTIVE">Objective</mat-option>
-              <mat-option value="FEATURE">Feature</mat-option>
-              <mat-option value="TASK">Task</mat-option>
+              <mat-option *ngFor="let type of taskType"
+                          [value]="type.internalName">{{type.displayName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -21,10 +19,8 @@
           <mat-form-field appearance="fill">
             <mat-label>Priority</mat-label>
             <mat-select name="priority" required>
-              <mat-option value="LOW">Low</mat-option>
-              <mat-option value="MEDIUM">Medium</mat-option>
-              <mat-option value="HIGH">High</mat-option>
-              <mat-option value="CRITICAL">Critical</mat-option>
+              <mat-option *ngFor="let p of priority"
+                          [value]="p.internalName">{{p.displayName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
