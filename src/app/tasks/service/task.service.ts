@@ -1,18 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
-import {HttpService} from "../../main/http.service";
 import {HttpClient} from "@angular/common/http";
-import {Item, ItemApi} from "../../main/list/item";
+import {Item, TaskApi} from "../../main/api-models";
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService extends HttpService {
+export class TaskService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
   }
 
   getItems(sort: string, order: SortDirection, page: number): Observable<TaskApi> {
@@ -23,13 +21,13 @@ export class TaskService extends HttpService {
     );
   }
 
-  getByIdPrimaryAttr(id: string | null): Observable<Item> {
+  getByIdPrimaryAttr(id: string | null): Observable<Task> {
     return this.http.get<Task>(
       `${this.baseUrl}/tasks/task/${id}/primary-attributes`
     );
   }
 
-  getByIdSecondaryAttr(id: string | null): Observable<Item> {
+  getByIdSecondaryAttr(id: string | null): Observable<Task> {
     return this.http.get<Task>(
       `${this.baseUrl}/tasks/task/${id}/secondary-attributes`
     );
@@ -58,24 +56,9 @@ export class TaskService extends HttpService {
       `${this.baseUrl}/tasks/search?assignee=${username}`
     );
   }
-}
 
-export interface TaskApi extends ItemApi {
-  items: Task[];
-}
+  private toHttpParams(sort: string, order: SortDirection, page: number) {
 
-export interface Task extends Item {
-  type?: string;
-  number?: string;
-  summary?: string;
-  status?: string;
-  assignee?: string;
-  dueDate?: string;
-  priority?: string;
-  description?: string;
-  estimation?: string;
-  createdBy?: string;
-  created?: string;
-  modified?: string;
+  }
 }
 

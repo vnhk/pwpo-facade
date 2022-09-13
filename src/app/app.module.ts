@@ -25,7 +25,14 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DetailsComponent} from "./main/details/details.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from '@angular/material/input';
-import { MyWorkComponent } from './mywork/my-work/my-work.component';
+import {MyWorkComponent} from './mywork/my-work/my-work.component';
+import {CreateTaskComponent} from './tasks/create-task/create-task/create-task.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -36,12 +43,12 @@ import { MyWorkComponent } from './mywork/my-work/my-work.component';
     ProjectInfoComponent,
     ProjectDetailsComponent,
     DetailsComponent,
-    MyWorkComponent
+    MyWorkComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,
     MatInputModule,
-    MatFormFieldModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -57,6 +64,14 @@ import { MyWorkComponent } from './mywork/my-work/my-work.component';
     MatTabsModule,
     MatCardModule,
     MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

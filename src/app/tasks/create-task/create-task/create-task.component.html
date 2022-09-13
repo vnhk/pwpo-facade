@@ -1,0 +1,97 @@
+<form [formGroup]="profileForm" class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Task Form</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select name="type" required>
+              <mat-option value="STORY">Story</mat-option>
+              <mat-option value="OBJECTIVE">Objective</mat-option>
+              <mat-option value="FEATURE">Feature</mat-option>
+              <mat-option value="TASK">Task</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Priority</mat-label>
+            <mat-select name="priority" required>
+              <mat-option value="LOW">Low</mat-option>
+              <mat-option value="MEDIUM">Medium</mat-option>
+              <mat-option value="HIGH">High</mat-option>
+              <mat-option value="CRITICAL">Critical</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" hintLabel="Max 150 characters">
+            <mat-label>Summary</mat-label>
+            <input #summary matInput maxlength="150" name="summary" required>
+            <mat-hint align="end">{{summary.value?.length || 0}}/150</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Assignee</mat-label>
+            <mat-select name="assignee" required>
+              <mat-option *ngFor="let user of addedToProject"
+                          [value]="user.id">{{user.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Due Date</mat-label>
+            <input [matDatepicker]="datepicker" matInput name="dueDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="fill" hintLabel="Max 3600h">
+            <mat-label>Estimation</mat-label>
+            <input matInput name="estimation">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Owner</mat-label>
+            <mat-select name="assignee" required>
+              <mat-option *ngFor="let user of addedToProject"
+                          [value]="user.id">{{user.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="fill" hintLabel="Max 1500 characters">
+          <mat-label>Description</mat-label>
+          <textarea #description matInput maxlength="1500"></textarea>
+          <mat-hint align="end">{{description.value?.length || 0}}/1500</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="onSubmit()" color="primary" mat-raised-button>Save</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -7,30 +7,38 @@
   <span title>{{primaryAttributes.name}}</span>
   <span subtitle>#{{primaryAttributes.shortForm}}</span>
   <span content>
-    <mat-card>
-      <label class="attribute-label">Summary:</label>
-      <br>
-      {{primaryAttributes.summary}}
+    <label class="attribute-label">Summary:</label>
+    <br>
+    {{primaryAttributes.summary}}
 
-      <br>
-      <br>
+    <br>
+    <br>
 
-      <label class="attribute-label">Description:</label>
-      <br>
-      {{secondaryAttributes.description}}
-    </mat-card>
+    <label class="attribute-label">Description:</label>
+    <br>
+    {{secondaryAttributes.description}}
 
-     <mat-card>
-       <label class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy}}
-       <br>
-       <br>
-       <label class="attribute-label">Created:</label> {{secondaryAttributes.created}}
-       <br>
-       <br>
-       <label class="attribute-label">Modified:</label> {{secondaryAttributes.modified}}
+    <br>
+    <br>
+    <label class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy}}
+    <br>
+    <label class="attribute-label">Created:</label> {{secondaryAttributes.created}}
+    <br>
+    <label class="attribute-label">Modified:</label> {{secondaryAttributes.modified}}
+  </span>
 
-    </mat-card>
-
-
+  <span buttons>
+    <button mat-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-button>
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-button>
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button routerLink="/project/{{primaryAttributes.id}}/create-task" mat-button>
+      <mat-icon>note_add</mat-icon>
+    </button>
   </span>
 </app-details>

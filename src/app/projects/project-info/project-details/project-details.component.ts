@@ -1,6 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {Project, ProjectService} from "../../service/project.service";
+import {ProjectService} from "../../service/project.service";
 import {ActivatedRoute} from "@angular/router";
+import {Project} from "../../../main/api-models";
 
 @Component({
   selector: 'app-project-details',

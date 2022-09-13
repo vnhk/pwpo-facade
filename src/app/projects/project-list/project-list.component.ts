@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {ProjectService} from "../service/project.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {HttpService} from "../../main/http.service";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
 

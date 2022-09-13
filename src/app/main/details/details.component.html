@@ -12,4 +12,11 @@
   <mat-card-content>
     <ng-content select="[content]"></ng-content>
   </mat-card-content>
+  <section>
+    <div class="details-button-row">
+      <div class="details-flex-container">
+        <ng-content select="[buttons]"></ng-content>
+      </div>
+    </div>
+  </section>
 </mat-card>

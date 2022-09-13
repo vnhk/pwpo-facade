@@ -1,18 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
-import {HttpService} from "../../main/http.service";
 import {HttpClient} from "@angular/common/http";
-import {Item, ItemApi} from "../../main/list/item";
+import {Person, PersonApi, Project, ProjectApi} from "../../main/api-models";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService extends HttpService {
+export class ProjectService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
   }
 
   getItems(sort: string, order: SortDirection, page: number): Observable<ProjectApi> {
@@ -23,32 +21,25 @@ export class ProjectService extends HttpService {
     );
   }
 
-  getByIdPrimaryAttr(id: string | null): Observable<Item> {
+  getByIdPrimaryAttr(id: string | null): Observable<Project> {
     return this.http.get<Project>(
       `${this.baseUrl}/projects/project/${id}/primary-attributes`
     );
   }
 
-  getByIdSecondaryAttr(id: string | null): Observable<Item> {
+  getByIdSecondaryAttr(id: string | null): Observable<Project> {
     return this.http.get<Project>(
       `${this.baseUrl}/projects/project/${id}/secondary-attributes`
     );
   }
-}
 
-export interface ProjectApi extends ItemApi {
-  items: Project[];
-}
+  getUsersWithAccessToTheProject(id: string | null): Observable<PersonApi> {
+    return this.http.get<PersonApi>(
+      `${this.baseUrl}/projects/project/${id}/users`
+    );
+  }
 
-export interface Project extends Item {
-  name?: string;
-  summary?: string;
-  status?: string;
-  description?: string;
-  shortForm?: string;
-  owner?: string;
-  createdBy?: string;
-  created?: string;
-  modified?: string;
-}
+  private toHttpParams(sort: string, order: SortDirection, page: number) {
 
+  }
+}

@@ -7,3 +7,38 @@
   font-size: 15px;
   font-weight: bold;
 }
+
+section {
+  display: table;
+}
+
+.details-label {
+  display: table-cell;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.details-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.details-button-row .mat-button-base {
+  margin: 2px 2px 2px 0;
+}
+
+.details-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.details-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+:host /deep/ .mat-card-header-text {
+  margin: 0;
+}
