@@ -41,7 +41,7 @@
         <div class="col-md-6">
           <mat-form-field appearance="fill">
             <mat-label>Assignee</mat-label>
-            <mat-select name="assignee" required>
+            <mat-select name="assignee">
               <mat-option *ngFor="let user of addedToProject"
                           [value]="user.id">{{user.fullName}}</mat-option>
             </mat-select>

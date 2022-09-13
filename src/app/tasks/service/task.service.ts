@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
-import {Item, TaskApi} from "../../main/api-models";
+import {TaskApi} from "../../main/api-models";
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +45,9 @@ export class TaskService {
     );
   }
 
-  getAllByCreator(username: string, active: string, direction: SortDirection, pageIndex: number) {
+  getAllByOwner(username: string, active: string, direction: SortDirection, pageIndex: number) {
     return this.http.get<TaskApi>(
-      `${this.baseUrl}/tasks/search?createdBy=${username}`
+      `${this.baseUrl}/tasks/search?owner=${username}`
     );
   }
 

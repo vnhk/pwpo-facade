@@ -83,8 +83,8 @@ export class TaskListComponent implements AfterViewInit {
       );
     }
 
-    if (this.criteria === 'creator') {
-      return this.taskService.getAllByCreator(this.session.getLoggedUser().username,
+    if (this.criteria === 'owner') {
+      return this.taskService.getAllByOwner(this.session.getLoggedUser().username,
         this.sort.active,
         this.sort.direction,
         this.paginator.pageIndex
