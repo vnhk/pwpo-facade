@@ -86,4 +86,11 @@ export class HttpService {
       `${this.baseUrl}/tasks/search?assignee=${username}`
     );
   }
+
+  createTask(value: string) {
+    return this.http.post<Task>(
+      `${this.baseUrl}/tasks`,
+      value
+    );
+  }
 }

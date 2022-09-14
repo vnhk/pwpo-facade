@@ -42,6 +42,7 @@ export interface Task extends Item {
   summary?: string;
   status?: string;
   assignee?: string;
+  owner?: string;
   dueDate?: string;
   priority?: string;
   description?: string;
@@ -49,6 +50,7 @@ export interface Task extends Item {
   createdBy?: string;
   created?: string;
   modified?: string;
+  projectId?: string;
 }
 
 export interface DataEnumApi extends ItemApi {
