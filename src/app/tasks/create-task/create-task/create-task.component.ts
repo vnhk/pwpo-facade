@@ -32,7 +32,7 @@ export class CreateTaskComponent implements OnInit {
       'owner': [null, [Validators.required]],
       'estimation': [null, []],
       'description': [null, [Validators.maxLength(1500)]],
-      'projectId': []
+      'project': []
     });
   }
 
@@ -45,7 +45,7 @@ export class CreateTaskComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      this.formGroup.value.projectId = this.id;
+      this.formGroup.value.project = this.id;
       this.httpService.createTask(this.formGroup.value).subscribe(value => console.log(value));
     }
   }
