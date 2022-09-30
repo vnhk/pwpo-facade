@@ -9,35 +9,37 @@ import {DataEnumApi, PersonApi, Project, ProjectApi, TaskApi} from "../api-model
 })
 export class HttpService {
   private baseUrl = 'http://localhost:8080';
+  private projectClass = "com.pwpo.project.Project";
+  private projectDTOPrimaryClass = "com.pwpo.project.dto.ProjectPrimaryResponseDTO";
+  private projectDTOSecondaryClass = "com.pwpo.project.dto.ProjectSecondaryResponseDTO";
+  private taskClass = "com.pwpo.task.Task";
+  private taskDTOPrimaryClass = "com.pwpo.task.dto.TaskPrimaryResponseDTO";
+  private taskDTOSecondaryClass = "com.pwpo.task.dto.TaskSecondaryResponseDTO";
 
   constructor(private http: HttpClient) {
   }
 
-  getProjects(sort: string, order: SortDirection, page: number): Observable<ProjectApi> {
-    const params = this.toHttpParams(sort, order, page);
-
+  getProjects(sort: string, order: SortDirection, page: number, pageSize: number): Observable<ProjectApi> {
     return this.http.get<ProjectApi>(
-      `${this.baseUrl}/projects`
+      `${this.baseUrl}/projects?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}&entityToFind=${this.projectClass}`
     );
   }
 
   getTasks(sort: string, order: SortDirection, page: number): Observable<TaskApi> {
-    const params = this.toHttpParams(sort, order, page);
-
     return this.http.get<TaskApi>(
       `${this.baseUrl}/tasks`
     );
   }
 
-  getProjectByIdPrimaryAttr(id: string | null): Observable<Project> {
-    return this.http.get<Project>(
-      `${this.baseUrl}/projects/project/${id}/primary-attributes`
+  getProjectByIdPrimaryAttr(id: string | null): Observable<ProjectApi> {
+    return this.http.get<ProjectApi>(
+      `${this.baseUrl}/projects/project?id=${id}&dto=${this.projectDTOPrimaryClass}`
     );
   }
 
-  getProjectByIdSecondaryAttr(id: string | null): Observable<Project> {
-    return this.http.get<Project>(
-      `${this.baseUrl}/projects/project/${id}/secondary-attributes`
+  getProjectByIdSecondaryAttr(id: string | null): Observable<ProjectApi> {
+    return this.http.get<ProjectApi>(
+      `${this.baseUrl}/projects/project?id=${id}&dto=${this.projectDTOSecondaryClass}`
     );
   }
 
@@ -53,35 +55,29 @@ export class HttpService {
     );
   }
 
-  private toHttpParams(sort: string, order: SortDirection, page: number) {
-
-  }
-
-  getTaskByIdSecondaryAttr(id: string | null): Observable<Task> {
-    return this.http.get<Task>(
-      `${this.baseUrl}/tasks/task/${id}/secondary-attributes`
-    );
-  }
-
-  getAllTasksByProjectIdPrimaryAttr(id: string | null, sort: string, order: SortDirection, page: number): Observable<TaskApi> {
+  getAllTasksByProjectIdPrimaryAttr(id: string | null, sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
     return this.http.get<TaskApi>(
-      `${this.baseUrl}/projects/project/${id}/tasks/primary-attributes`
+      `${this.baseUrl}/projects/project/${id}/tasks` +
+      `?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
+      `&entityToFind=${this.taskClass}&dto=${this.taskDTOPrimaryClass}`
     );
   }
 
-  getAllTasksByProjectIdSecondaryAttr(id: string | null): Observable<TaskApi> {
+  getAllTasksByProjectIdSecondaryAttr(id: string | null, sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
     return this.http.get<TaskApi>(
-      `${this.baseUrl}/projects/project/${id}/tasks/secondary-attributes`
+      `${this.baseUrl}/projects/project/${id}/tasks` +
+      `?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
+      `&entityToFind=${this.taskClass}&dto=${this.taskDTOSecondaryClass}`
     );
   }
 
-  getAllTasksByOwner(username: string, active: string, direction: SortDirection, pageIndex: number) {
+  getAllTasksByOwner(username: string, active: string, direction: SortDirection, page: number, pageSize: number) {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/tasks/search?owner=${username}`
     );
   }
 
-  getAllTasksByAssignee(username: string, active: string, direction: SortDirection, pageIndex: number) {
+  getAllTasksByAssignee(username: string, active: string, direction: SortDirection, page: number, pageSize: number) {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/tasks/search?assignee=${username}`
     );

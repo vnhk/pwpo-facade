@@ -59,7 +59,7 @@ export class TaskListComponent implements AfterViewInit {
           // Only refresh the result length if there is new primaryAttributes. In case of rate
           // limit errors, we do not want to reset the paginator to zero, as that
           // would prevent users from re-triggering requests.
-          this.resultsLength = data.totalCount;
+          this.resultsLength = data.allFound;
           return data.items;
         }),
       )
@@ -71,7 +71,8 @@ export class TaskListComponent implements AfterViewInit {
       return this.httpService.getAllTasksByProjectIdPrimaryAttr(projectId,
         this.sort.active,
         this.sort.direction,
-        this.paginator.pageIndex
+        this.paginator.pageIndex + 1,
+        this.paginator.pageSize
       );
     }
 
@@ -79,7 +80,8 @@ export class TaskListComponent implements AfterViewInit {
       return this.httpService.getAllTasksByAssignee(this.session.getLoggedUser().username,
         this.sort.active,
         this.sort.direction,
-        this.paginator.pageIndex
+        this.paginator.pageIndex + 1,
+        this.paginator.pageSize
       );
     }
 
@@ -87,10 +89,11 @@ export class TaskListComponent implements AfterViewInit {
       return this.httpService.getAllTasksByOwner(this.session.getLoggedUser().username,
         this.sort.active,
         this.sort.direction,
-        this.paginator.pageIndex
+        this.paginator.pageIndex + 1,
+        this.paginator.pageSize
       );
     }
 
-    throw new Error('Valid criteria');
+    throw new Error('Invalid criteria');
   }
 }

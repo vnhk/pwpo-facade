@@ -1,6 +1,8 @@
 export interface ItemApi {
   items: Item[];
-  totalCount: number;
+  currentFound: number;
+  currentPage: number;
+  allFound: number;
 }
 
 export interface Item {
@@ -26,8 +28,8 @@ export interface Project extends Item {
   status?: string;
   description?: string;
   shortForm?: string;
-  owner?: string;
-  createdBy?: string;
+  owner?: Person;
+  createdBy?: Person;
   created?: string;
   modified?: string;
 }
@@ -41,13 +43,13 @@ export interface Task extends Item {
   number?: string;
   summary?: string;
   status?: string;
-  assignee?: string;
-  owner?: string;
+  assignee?: Person;
+  owner?: Person;
   dueDate?: string;
   priority?: string;
   description?: string;
   estimation?: string;
-  createdBy?: string;
+  createdBy?: Person;
   created?: string;
   modified?: string;
   projectId?: string;

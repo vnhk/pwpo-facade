@@ -18,7 +18,7 @@ export class ProjectDetailsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     let id = this.route.snapshot.paramMap.get("id");
-    this.httpService.getProjectByIdPrimaryAttr(id).subscribe(value => this.primaryAttributes = value);
-    this.httpService.getProjectByIdSecondaryAttr(id).subscribe(value => this.secondaryAttributes = value);
+    this.httpService.getProjectByIdPrimaryAttr(id).subscribe(value => this.primaryAttributes = value.items[0]);
+    this.httpService.getProjectByIdSecondaryAttr(id).subscribe(value => this.secondaryAttributes = value.items[0]);
   }
 }
