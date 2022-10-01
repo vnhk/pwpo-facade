@@ -26,7 +26,7 @@ import {DetailsComponent} from "./main/details/details.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from '@angular/material/input';
 import {MyWorkComponent} from './mywork/my-work/my-work.component';
-import {CreateTaskComponent} from './tasks/create-task/create-task/create-task.component';
+import {CreateTaskComponent} from './tasks/create-task/create-task.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -34,6 +34,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
+import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ProjectDetailsComponent,
     DetailsComponent,
     MyWorkComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    TaskInfoComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,

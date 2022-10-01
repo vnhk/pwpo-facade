@@ -30,8 +30,8 @@ export interface Project extends Item {
   shortForm?: string;
   owner?: Person;
   createdBy?: Person;
-  created?: string;
-  modified?: string;
+  created?: Date;
+  modified?: Date;
 }
 
 export interface TaskApi extends ItemApi {
@@ -45,14 +45,14 @@ export interface Task extends Item {
   status?: string;
   assignee?: Person;
   owner?: Person;
-  dueDate?: string;
+  dueDate?: any;
   priority?: string;
   description?: string;
   estimation?: string;
   createdBy?: Person;
-  created?: string;
-  modified?: string;
-  projectId?: string;
+  created?: Date;
+  modified?: Date;
+  project?: Project;
 }
 
 export interface DataEnumApi extends ItemApi {

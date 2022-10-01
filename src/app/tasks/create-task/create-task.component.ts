@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpService} from "../../../main/service/http.service";
+import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {DataEnum, Person} from "../../../main/api-models";
-import {TaskService} from "../../service/task.service";
+import {DataEnum, Person} from "../../main/api-models";
+import {TaskService} from "../service/task.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {retry, throwError} from "rxjs";
@@ -23,6 +23,7 @@ export class CreateTaskComponent implements OnInit {
   MAX_DESC_LENGTH = 1500;
   MAX_SUMMARY_LENGTH = 150;
   id: string | null | undefined;
+  oneDayInMs = 86400000;
 
   constructor(private httpService: HttpService,
               private taskService: TaskService,
@@ -57,34 +58,47 @@ export class CreateTaskComponent implements OnInit {
   onSubmit() {
     if (this.formGroup.valid) {
       this.formGroup.value.project = this.id;
+      let time = this.formGroup.value.dueDate.getTime();
+      let twelveClock = time + (this.oneDayInMs / 2);
+      this.formGroup.value.dueDate = new Date(twelveClock);
+      console.log(this.formGroup.value.dueDate);
       this.httpService.createTask(this.formGroup.value)
         .pipe(
           retry(3),
-          catchError(this.handleError)
-        ).subscribe(() => this.showSuccessPopup('Task created!'));
+          catchError(this.handleError.bind(this))
+        ).subscribe(() => this.successCreation());
     }
+  }
+
+  resetForm() {
+    console.log(this.addedToProject);
+    this.formGroup.reset();
   }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
-      console.error('An error occurred:', error.error);
+      console.log('An error occurred:', error.error);
       this.showErrorPopup('Task could not be created!');
     } else {
-      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+      console.log(`Backend returned code ${error.status}, body was: `, error.error);
       this.showErrorPopup('Task could not be created!');
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
   private showErrorPopup(message: string) {
-    this.snackBar.open(message, 'Ok', {
-      duration: 2500
-    });
+    this.openBarWithMessage(message, ['error-bar'], 15000);
   }
 
-  private showSuccessPopup(message: string) {
-    this.snackBar.open(message, 'Ok', {
-      duration: 2500
+  private successCreation() {
+    this.openBarWithMessage('Task created!', ['success-bar'], 15000);
+    this.resetForm();
+  }
+
+  private openBarWithMessage(message: string, classes: string[], duration: number) {
+    this.snackBar.open(message, "Ok", {
+      duration: duration,
+      panelClass: classes
     });
   }
 }

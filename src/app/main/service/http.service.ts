@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
-import {DataEnumApi, PersonApi, Project, ProjectApi, TaskApi} from "../api-models";
+import {DataEnumApi, PersonApi, ProjectApi, TaskApi} from "../api-models";
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +87,18 @@ export class HttpService {
     return this.http.post<Task>(
       `${this.baseUrl}/tasks`,
       value
+    );
+  }
+
+  getTaskPrimaryById(id: string | null): Observable<TaskApi> {
+    return this.http.get<TaskApi>(
+      `${this.baseUrl}/tasks/task?id=${id}&dto=${this.taskDTOPrimaryClass}`
+    );
+  }
+
+  getTaskSecondaryById(id: string | null): Observable<TaskApi> {
+    return this.http.get<TaskApi>(
+      `${this.baseUrl}/tasks/task?id=${id}&dto=${this.taskDTOSecondaryClass}`
     );
   }
 }

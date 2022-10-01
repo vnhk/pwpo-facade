@@ -1,7 +1,10 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="form-container">
   <mat-card>
-    <mat-card-header>
+    <mat-card-header class="form-header">
       <mat-card-title>Task Form</mat-card-title>
+      <button mat-button>
+        <mat-icon (click)="goBack()">close</mat-icon>
+      </button>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
@@ -53,10 +56,10 @@
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
+<!--              <mat-datepicker-actions>-->
+<!--                <button mat-button matDatepickerCancel>Cancel</button>-->
+<!--                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>-->
+<!--              </mat-datepicker-actions>-->
             </mat-datepicker>
           </mat-form-field>
         </div>
@@ -90,8 +93,8 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="!formGroup.valid" color="primary" mat-raised-button type="submit">Save</button>
-      <button (click)="this.goBack()" color="secondary" mat-raised-button type="button">Cancel</button>
+      <button [disabled]="!formGroup.valid" mat-raised-button class="save-button" type="submit">Save</button>
+      <button (click)="this.resetForm()" mat-raised-button class="reset-button" type="button">Reset</button>
     </mat-card-actions>
   </mat-card>
 </form>

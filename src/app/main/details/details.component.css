@@ -42,3 +42,12 @@ section {
 :host /deep/ .mat-card-header-text {
   margin: 0;
 }
+
+
+.dueDateExceeded {
+  color: #b21010;
+}
+
+.dueDateComingUp {
+  color: #c96b0c;
+}

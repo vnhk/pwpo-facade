@@ -16,9 +16,36 @@ mat-card {
 }
 
 mat-divider {
-  background-color: #002b5c !important;
+  background-color: #494D5F !important;
 }
 
 mat-card-content {
   padding: 10px;
+}
+
+mat-card-header.form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*snackbar*/
+.success-bar {
+  background: #494D5F;
+  color: #e5eaf5;
+}
+
+.error-bar {
+  background: #fa625f;
+  color: #e5eaf5;
+}
+/*snackbar*/
+
+.save-button {
+  background: #494D5F;
+  color: #e5eaf5;
+}
+
+.reset-button {
+  background: #feda6a;
+  color: #494D5F;
 }

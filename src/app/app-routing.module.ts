@@ -5,7 +5,8 @@ import {TaskListComponent} from "./tasks/task-list/task-list.component";
 import {ProjectInfoComponent} from "./projects/project-info/project-info.component";
 import {ProjectResolver} from "./projects/project.resolver";
 import {MyWorkComponent} from "./mywork/my-work/my-work.component";
-import {CreateTaskComponent} from "./tasks/create-task/create-task/create-task.component";
+import {CreateTaskComponent} from "./tasks/create-task/create-task.component";
+import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     component: CreateTaskComponent
   },
   {path: 'projects/details/:id', component: ProjectInfoComponent},
+  {path: 'tasks/:id/details', component: TaskInfoComponent},
   {path: 'tasks', component: TaskListComponent}
 ];
 

@@ -4,9 +4,19 @@
          style="float:left;background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); background-size: cover;">
     </div>
   </span>
-  <span title>{{primaryAttributes.name}}</span>
-  <span subtitle>#{{primaryAttributes.shortForm}}</span>
+  <span title>{{primaryAttributes.number}} - {{primaryAttributes.type}}</span>
+  <span subtitle><a
+    routerLink='/projects/details/{{primaryAttributes.project?.id}}'>{{primaryAttributes.project?.name}}</a></span>
   <span content>
+    <label class="attribute-label">Priority:</label> {{primaryAttributes.priority}}
+    <br>
+    <label class="attribute-label">Due Date:</label>
+    <strong
+      [ngClass]="{'dueDateExceeded': dueDateExceeded, 'dueDateComingUp': dueDateComingUp}"> {{primaryAttributes.dueDate | date: 'dd MMMM yyyy'}}</strong>
+    <br>
+    <label class="attribute-label">Status:</label> {{primaryAttributes.status}}
+    <br>
+    <br>
     <label class="attribute-label">Summary:</label>
     <br>
     {{primaryAttributes.summary}}
@@ -33,12 +43,6 @@
     </button>
     <button mat-button>
       <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-button>
-      <mat-icon>person_add</mat-icon>
-    </button>
-    <button routerLink="/project/{{primaryAttributes.id}}/create-task" mat-button>
-      <mat-icon>note_add</mat-icon>
     </button>
   </span>
 </app-details>
