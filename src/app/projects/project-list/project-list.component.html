@@ -1,5 +1,5 @@
-<div class="example-container mat-elevation-z8">
-  <div class="example-loading-shade"
+<div class="main-table-container mat-elevation-z8">
+  <div class="table-loading-shade"
        *ngIf="isLoadingResults || isRateLimitReached">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
@@ -7,9 +7,9 @@
     </div>
   </div>
 
-  <div class="example-table-container">
+  <div class="table-container">
 
-    <table mat-table [dataSource]="data" class="example-table"
+    <table mat-table [dataSource]="data" class="http-table"
            matSort matSortActive="status" matSortDisableClear matSortDirection="desc">
 
       <ng-container matColumnDef="shortForm">

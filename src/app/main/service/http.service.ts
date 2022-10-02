@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
-import {DataEnumApi, PersonApi, ProjectApi, TaskApi} from "../api-models";
+import {DataEnumApi, PersonApi, ProjectApi, TaskApi, TaskListDisplayOption} from "../api-models";
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +55,7 @@ export class HttpService {
     );
   }
 
-  getAllTasksByProjectIdPrimaryAttr(id: string | null, sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
+  getAllTasksByProjectIdPrimaryAttr(id: string | null, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/projects/project/${id}/tasks` +
       `?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
@@ -71,15 +71,27 @@ export class HttpService {
     );
   }
 
-  getAllTasksByOwner(username: string, active: string, direction: SortDirection, page: number, pageSize: number) {
+  getAllTasksByQuery(query: string, sort: string, order: SortDirection, page: number, pageSize: number) {
     return this.http.get<TaskApi>(
-      `${this.baseUrl}/tasks/search?owner=${username}`
+      `${this.baseUrl}/search?query=${query}` +
+      `&sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
+      `&entityToFind=${this.taskClass}&dto=${this.taskDTOPrimaryClass}`
     );
   }
 
-  getAllTasksByAssignee(username: string, active: string, direction: SortDirection, page: number, pageSize: number) {
+  getAllTasksByOwner(username: string, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number) {
     return this.http.get<TaskApi>(
-      `${this.baseUrl}/tasks/search?assignee=${username}`
+      `${this.baseUrl}/search?query=(owner.nick EQUALS_OPERATION ${username})` +
+      `&sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
+      `&entityToFind=${this.taskClass}&dto=${this.taskDTOPrimaryClass}`
+    );
+  }
+
+  getAllTasksByAssignee(username: string, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number) {
+    return this.http.get<TaskApi>(
+      `${this.baseUrl}/search?query=(assignee.nick EQUALS_OPERATION ${username})` +
+      `&sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
+      `&entityToFind=${this.taskClass}&dto=${this.taskDTOPrimaryClass}`
     );
   }
 

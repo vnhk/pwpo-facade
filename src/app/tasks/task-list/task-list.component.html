@@ -1,15 +1,94 @@
-<div class="example-container mat-elevation-z8">
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false" class="main-table-container mat-elevation-z8">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Preferences
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <section class="preferences-section">
+    <!--STATUS-->
+    <span id="status-preferences">
+      <span class="preferences-list-section">
+        <mat-checkbox class="preferences-parent-checkbox" [checked]="allChecked[STATUS_INDEX]" color="primary"
+                      [indeterminate]="someChecked(STATUS_INDEX)"
+                      (change)="setAll(STATUS_INDEX, $event.checked)">
+        </mat-checkbox>
+        {{searchOptions[STATUS_INDEX].name}}
+      </span>
+      <span class="preferences-list-section">
+        <ul>
+          <li *ngFor="let subOptions of searchOptions[STATUS_INDEX].subOptions">
+            <mat-checkbox [(ngModel)]="subOptions.checked" color="warn"
+                          (ngModelChange)="updateAllChecked(STATUS_INDEX)">
+              {{subOptions.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </span>
+    <!--PRIORITY-->
+    <span id="priority-preferences">
+      <span class="preferences-list-section">
+        <mat-checkbox class="preferences-parent-checkbox" [checked]="allChecked[PRIORITY_INDEX]" color="primary"
+                      [indeterminate]="someChecked(PRIORITY_INDEX)"
+                      (change)="setAll(PRIORITY_INDEX, $event.checked)">
+        </mat-checkbox>
+        {{searchOptions[PRIORITY_INDEX].name}}
+      </span>
+      <span class="preferences-list-section">
+        <ul>
+          <li *ngFor="let subOptions of searchOptions[PRIORITY_INDEX].subOptions">
+            <mat-checkbox [(ngModel)]="subOptions.checked" color="warn"
+                          (ngModelChange)="updateAllChecked(PRIORITY_INDEX)">
+              {{subOptions.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </span>
+    <!--TASK_TYPE-->
+    <span id="task-type-preferences">
+      <span class="preferences-list-section">
+        <mat-checkbox class="preferences-parent-checkbox" [checked]="allChecked[TASKS_TYPE_INDEX]" color="primary"
+                      [indeterminate]="someChecked(TASKS_TYPE_INDEX)"
+                      (change)="setAll(TASKS_TYPE_INDEX, $event.checked)">
+        </mat-checkbox>
+        {{searchOptions[TASKS_TYPE_INDEX].name}}
+      </span>
+      <span class="preferences-list-section">
+        <ul>
+          <li *ngFor="let subOptions of searchOptions[TASKS_TYPE_INDEX].subOptions">
+            <mat-checkbox [(ngModel)]="subOptions.checked" color="warn"
+                          (ngModelChange)="updateAllChecked(TASKS_TYPE_INDEX)">
+              {{subOptions.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </span>
+  </section>
+  <button mat-button class="save-button" (click)="savePreferencesAndRefreshTable()">Save</button>
+
+</mat-expansion-panel>
+
+<br>
+
+<div class="main-table-container mat-elevation-z8">
+
   <div *ngIf="isLoadingResults || isRateLimitReached"
-       class="example-loading-shade">
+       class="table-loading-shade">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div *ngIf="isRateLimitReached" class="example-rate-limit-reached">
       Wait...
     </div>
   </div>
 
-  <div class="example-table-container">
+  <div class="table-container">
 
-    <table [dataSource]="data" class="example-table" mat-table
+    <table [dataSource]="data" class="http-table" mat-table
            matSort matSortActive="status" matSortDirection="desc" matSortDisableClear>
 
       <ng-container matColumnDef="number">

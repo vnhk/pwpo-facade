@@ -60,6 +60,13 @@ export interface DataEnumApi extends ItemApi {
 }
 
 export interface DataEnum extends Item {
-  internalName?: string;
-  displayName?: string;
+  internalName: string;
+  displayName: string;
+}
+
+export interface TaskListDisplayOption {
+  name: string;
+  internalName: string;
+  checked: boolean;
+  subOptions: TaskListDisplayOption[];
 }

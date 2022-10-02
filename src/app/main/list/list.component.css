@@ -1,10 +1,10 @@
-.example-container {
+.main-table-container {
   position: relative;
   width: 80%;
   margin: auto;
 }
 
-.example-table-container {
+.table-container {
   position: relative;
   min-height: 200px;
   max-height: 400px;
@@ -15,7 +15,7 @@ table {
   width: 100%;
 }
 
-.example-loading-shade {
+.table-loading-shade {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,4 +40,19 @@ table {
 
 .mat-column-created {
   max-width: 124px;
+}
+
+.preferences-section {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.preferences-parent-checkbox {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
 }

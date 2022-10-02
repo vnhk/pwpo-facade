@@ -36,6 +36,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.component";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -51,34 +52,35 @@ import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.
     TaskInfoComponent,
     TaskDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MatTabsModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    NgSelectModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatTabsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        NgSelectModule,
+        MatSnackBarModule,
+        MatExpansionModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
