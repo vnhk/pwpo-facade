@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
-import {DataEnumApi, PersonApi, ProjectApi, TaskApi, TaskListDisplayOption} from "../api-models";
+import {DataEnumApi, PersonApi, Project, ProjectApi, TaskApi, TaskListDisplayOption} from "../api-models";
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,13 @@ export class HttpService {
     );
   }
 
+
+  getAllUsers(): Observable<PersonApi> {
+    return this.http.get<PersonApi>(
+      `${this.baseUrl}/users`
+    );
+  }
+
   getAllTasksByProjectIdPrimaryAttr(id: string | null, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/projects/project/${id}/tasks` +
@@ -98,6 +105,13 @@ export class HttpService {
   createTask(value: string) {
     return this.http.post<Task>(
       `${this.baseUrl}/tasks`,
+      value
+    );
+  }
+
+  createProject(value: string) {
+    return this.http.post<Project>(
+      `${this.baseUrl}/projects`,
       value
     );
   }

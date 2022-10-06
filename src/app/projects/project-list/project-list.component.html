@@ -8,6 +8,9 @@
   </div>
 
   <div class="table-container">
+    <button routerLink="/create-project" mat-button>
+      <mat-icon>note_add</mat-icon>
+    </button>
 
     <table mat-table [dataSource]="data" class="http-table"
            matSort matSortActive="status" matSortDisableClear matSortDirection="desc">

@@ -1,0 +1,62 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="form-container">
+  <mat-card>
+    <mat-card-header class="form-header">
+      <mat-card-title>Project Form</mat-card-title>
+      <button mat-button>
+        <mat-icon (click)="goBack()">close</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" hintLabel="Max {{MAX_SUMMARY_LENGTH}} characters">
+            <mat-label>Summary</mat-label>
+            <input #summary formControlName="summary" matInput>
+            <mat-hint align="end">{{summary.value?.length || 0}}/{{MAX_SUMMARY_LENGTH}}</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" hintLabel="Max {{SHORT_FORM_MAX_LENGTH}} characters">
+            <mat-label>Short Form</mat-label>
+            <input #shortForm formControlName="shortForm" matInput>
+            <mat-hint align="end">{{shortForm.value.length || 0}}/{{SHORT_FORM_MAX_LENGTH}}</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Owner</mat-label>
+            <mat-select formControlName="owner" required>
+              <mat-option *ngFor="let user of users"
+                          [value]="user.id">{{user.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" hintLabel="Max {{NAME_MAX_LENGTH}} characters">
+            <mat-label>Name</mat-label>
+            <input #name formControlName="name" matInput>
+            <mat-hint align="end">{{name.value.length || 0}}/{{NAME_MAX_LENGTH}}</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="fill" hintLabel="Max {{MAX_DESC_LENGTH}} characters">
+          <mat-label>Description</mat-label>
+          <textarea #description formControlName="description" matAutosizeMaxRows="5" matAutosizeMinRows="2" matInput
+                    matTextareaAutosize></textarea>
+          <mat-hint align="end">{{description.value?.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="!formGroup.valid" mat-raised-button class="save-button" type="submit">Save</button>
+      <button (click)="this.resetForm()" mat-raised-button class="reset-button" type="button">Reset</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

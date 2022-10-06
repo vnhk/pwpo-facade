@@ -37,6 +37,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.component";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {CreateProjectComponent} from "./projects/create-project/create-project.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MyWorkComponent,
     CreateTaskComponent,
     TaskInfoComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    CreateProjectComponent
   ],
     imports: [
         BrowserModule,
