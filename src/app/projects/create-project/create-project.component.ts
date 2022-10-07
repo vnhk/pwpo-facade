@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {retry, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -59,9 +59,18 @@ export class CreateProjectComponent implements OnInit {
   }
 
   private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.log('An error occurred:', error.error);
-      this.showErrorPopup('Project could not be created!');
+    if (error.status === 400) {
+      if(error.error.code === "FIELD_VALIDATION") {
+        let formInput = this.formGroup.get(error.error.field);
+        formInput?.setErrors({'incorrect': true});
+
+        this.showErrorPopup((error.error.message));
+
+      } else if (error.error.code === "GENERAL_VALIDATION") {
+        this.showErrorPopup((error.error.message));
+      } else {
+        this.showErrorPopup('Project could not be created!');
+      }
     } else {
       console.log(`Backend returned code ${error.status}, body was: `, error.error);
       this.showErrorPopup('Project could not be created!');
