@@ -56,10 +56,6 @@
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
-<!--              <mat-datepicker-actions>-->
-<!--                <button mat-button matDatepickerCancel>Cancel</button>-->
-<!--                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>-->
-<!--              </mat-datepicker-actions>-->
             </mat-datepicker>
           </mat-form-field>
         </div>
@@ -87,7 +83,7 @@
           <mat-label>Description</mat-label>
           <textarea #description formControlName="description" matAutosizeMaxRows="5" matAutosizeMinRows="2" matInput
                     matTextareaAutosize></textarea>
-          <mat-hint align="end">{{description.value?.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
+          <mat-hint align="end">{{description.value.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
         </mat-form-field>
       </div>
 

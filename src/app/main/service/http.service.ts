@@ -2,7 +2,16 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
-import {DataEnumApi, PersonApi, Project, ProjectApi, TaskApi, TaskListDisplayOption} from "../api-models";
+import {
+  DataEnumApi,
+  PersonApi,
+  Project,
+  ProjectApi,
+  Task,
+  TaskApi,
+  TaskListDisplayOption,
+  UserProject
+} from "../api-models";
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +64,11 @@ export class HttpService {
     );
   }
 
+  getUsersNotAddedToTheProject(id: string | null | undefined): Observable<PersonApi> {
+    return this.http.get<PersonApi>(
+      `${this.baseUrl}/projects/project/${id}/users-not-added`
+    );
+  }
 
   getAllUsers(): Observable<PersonApi> {
     return this.http.get<PersonApi>(
@@ -125,6 +139,13 @@ export class HttpService {
   getTaskSecondaryById(id: string | null): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/tasks/task?id=${id}&dto=${this.taskDTOSecondaryClass}`
+    );
+  }
+
+  addUserToProject(value: string, id: string | null | undefined) {
+    return this.http.post<UserProject>(
+      `${this.baseUrl}/projects/project/${id}/users`,
+      value
     );
   }
 }

@@ -49,7 +49,7 @@
           <mat-label>Description</mat-label>
           <textarea #description formControlName="description" matAutosizeMaxRows="5" matAutosizeMinRows="2" matInput
                     matTextareaAutosize></textarea>
-          <mat-hint align="end">{{description.value?.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
+          <mat-hint align="end">{{description.value.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
         </mat-form-field>
       </div>
 

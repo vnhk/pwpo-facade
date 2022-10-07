@@ -38,6 +38,7 @@ import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.component";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {CreateProjectComponent} from "./projects/create-project/create-project.component";
+import {AddUserProjectComponent} from "./projects/add-user-project/add-user-project.component";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {CreateProjectComponent} from "./projects/create-project/create-project.c
     CreateTaskComponent,
     TaskInfoComponent,
     TaskDetailsComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    AddUserProjectComponent
   ],
     imports: [
         BrowserModule,

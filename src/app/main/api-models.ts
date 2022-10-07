@@ -38,6 +38,11 @@ export interface TaskApi extends ItemApi {
   items: Task[];
 }
 
+export interface UserProject {
+  user: number;
+  projectRole: string;
+}
+
 export interface Task extends Item {
   type?: string;
   number?: string;
