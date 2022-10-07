@@ -140,13 +140,12 @@ export class TaskListComponent implements AfterViewInit {
 
   initPref(items: DataEnum[], OPTION_INDEX: number) {
     let localStorageDataIsValidAndActual = true;
-    let item = localStorage.getItem("TASK_SEARCH_OPTION_PREF" + OPTION_INDEX);
+    let item = localStorage.getItem("TASK_SEARCH_OPTION_PREF" + this.criteria.toUpperCase() + OPTION_INDEX);
     if (item !== null && item !== "") {
       let parsed: TaskListDisplayOption = JSON.parse(item);
       if (parsed.subOptions.length === items.length) {
         for (let p = 0; p < items.length; p++) {
           if (items[p].displayName !== parsed.subOptions[p].name || items[p].internalName !== parsed.subOptions[p].internalName) {
-            //data changed on BE, and we need to break and clean storage option
             localStorageDataIsValidAndActual = false;
             break;
           }
@@ -158,7 +157,7 @@ export class TaskListComponent implements AfterViewInit {
       }
     }
     //clear
-    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + OPTION_INDEX, "");
+    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.criteria.toUpperCase() + OPTION_INDEX, "");
     this.searchOptions[OPTION_INDEX].subOptions = Array(items.length);
     for (let op = 0; op < items.length; op++) {
       this.searchOptions[OPTION_INDEX].subOptions[op] = {
@@ -209,9 +208,9 @@ export class TaskListComponent implements AfterViewInit {
   }
 
   savePreferencesAndRefreshTable() {
-    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.STATUS_INDEX, JSON.stringify(this.searchOptions[this.STATUS_INDEX]));
-    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.TASKS_TYPE_INDEX, JSON.stringify(this.searchOptions[this.TASKS_TYPE_INDEX]));
-    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.PRIORITY_INDEX, JSON.stringify(this.searchOptions[this.PRIORITY_INDEX]));
+    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.criteria.toUpperCase() + this.STATUS_INDEX, JSON.stringify(this.searchOptions[this.STATUS_INDEX]));
+    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.criteria.toUpperCase() + this.TASKS_TYPE_INDEX, JSON.stringify(this.searchOptions[this.TASKS_TYPE_INDEX]));
+    localStorage.setItem("TASK_SEARCH_OPTION_PREF" + this.criteria.toUpperCase() + this.PRIORITY_INDEX, JSON.stringify(this.searchOptions[this.PRIORITY_INDEX]));
 
     this.panelOpenState = false;
     this.refreshTable();

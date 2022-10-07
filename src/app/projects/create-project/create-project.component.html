@@ -12,7 +12,7 @@
           <mat-form-field appearance="fill" hintLabel="Max {{MAX_SUMMARY_LENGTH}} characters">
             <mat-label>Summary</mat-label>
             <input #summary formControlName="summary" matInput>
-            <mat-hint align="end">{{summary.value?.length || 0}}/{{MAX_SUMMARY_LENGTH}}</mat-hint>
+            <mat-hint align="end">{{summary.value.length || 0}}/{{MAX_SUMMARY_LENGTH}}</mat-hint>
           </mat-form-field>
         </div>
 
