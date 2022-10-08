@@ -11,8 +11,7 @@ import {TimeLog, TimeLogApi} from "../../../../../main/api-models";
 })
 export class TaskTimelogListComponent implements AfterViewInit {
   length = 0;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSize = 5;
 
   pageEvent: PageEvent | undefined;
   timelogs: TimeLog[] = [];
