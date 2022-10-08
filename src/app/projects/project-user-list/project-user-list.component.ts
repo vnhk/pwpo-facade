@@ -12,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['../../main/list/list.component.css']
 })
 export class ProjectUserListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['fullName', 'nickname', 'projectRole'];
+  displayedColumns: string[] = ['fullName', 'nick', 'projectRole'];
 
   data: Object[] = [];
 
