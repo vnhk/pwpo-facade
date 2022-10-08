@@ -9,7 +9,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import {ProjectListComponent} from './projects/project-list/project-list.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -39,6 +38,8 @@ import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.
 import {MatExpansionModule} from "@angular/material/expansion";
 import {CreateProjectComponent} from "./projects/create-project/create-project.component";
 import {AddUserProjectComponent} from "./projects/add-user-project/add-user-project.component";
+import {ProjectListComponent} from "./projects/project-list/project-list.component";
+import {ProjectUserListComponent} from "./projects/project-user-list/project-user-list.component";
 
 @NgModule({
   declarations: [
@@ -54,37 +55,38 @@ import {AddUserProjectComponent} from "./projects/add-user-project/add-user-proj
     TaskInfoComponent,
     TaskDetailsComponent,
     CreateProjectComponent,
-    AddUserProjectComponent
+    AddUserProjectComponent,
+    ProjectUserListComponent
   ],
-    imports: [
-        BrowserModule,
-        MatInputModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatProgressSpinnerModule,
-        HttpClientModule,
-        AppRoutingModule,
-        MatTabsModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        NgSelectModule,
-        MatSnackBarModule,
-        MatExpansionModule
-    ],
+  imports: [
+    BrowserModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatTabsModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    NgSelectModule,
+    MatSnackBarModule,
+    MatExpansionModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

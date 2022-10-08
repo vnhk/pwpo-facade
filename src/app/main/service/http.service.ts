@@ -58,9 +58,9 @@ export class HttpService {
     );
   }
 
-  getUsersWithAccessToTheProject(id: string | null): Observable<PersonApi> {
+  getUsersWithAccessToTheProject(id: string | null | undefined, sort: string, order: SortDirection, page: number, pageSize: number): Observable<PersonApi> {
     return this.http.get<PersonApi>(
-      `${this.baseUrl}/projects/project/${id}/users`
+      `${this.baseUrl}/projects/project/${id}/users?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}`
     );
   }
 
