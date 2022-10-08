@@ -16,6 +16,7 @@ export class TaskDetailsComponent implements AfterViewInit {
   dueDateExceeded = false;
   dueDateComingUp = false;
   oneDay = 24 * 60 * 60;
+  estimation: string = "";
 
   constructor(private httpService: HttpService,
               private route: ActivatedRoute) {
@@ -33,7 +34,10 @@ export class TaskDetailsComponent implements AfterViewInit {
       this.primaryAttributes = value.items[0];
       this.afterPrimaryLoaded();
     });
-    this.httpService.getTaskSecondaryById(id).subscribe(value => this.secondaryAttributes = value.items[0]);
+    this.httpService.getTaskSecondaryById(id).subscribe(value => {
+      this.secondaryAttributes = value.items[0];
+      this.afterSecondaryLoaded();
+    });
   }
 
   afterPrimaryLoaded() {
@@ -43,6 +47,23 @@ export class TaskDetailsComponent implements AfterViewInit {
         this.dueDateExceeded = true;
       } else if (this.primaryAttributes.dueDate.getTime() - this.today.getTime() <= this.oneDay) {
         this.dueDateComingUp = true;
+      }
+    }
+  }
+
+  afterSecondaryLoaded() {
+    console.log(this.secondaryAttributes.estimation);
+    if (this.secondaryAttributes.estimation != undefined) {
+      let estimation = this.secondaryAttributes.estimation;
+      if (estimation >= 60) {
+        let minutes = estimation % 60;
+        let hours = parseInt(String((estimation - (minutes)) / 60), 10);
+        this.estimation = hours + "h ";
+        if (minutes > 0) {
+          this.estimation += minutes + "m";
+        }
+      } else {
+        this.estimation = estimation + "m";
       }
     }
   }

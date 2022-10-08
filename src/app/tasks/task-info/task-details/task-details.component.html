@@ -8,6 +8,8 @@
   <span subtitle><a
     routerLink='/projects/details/{{primaryAttributes.project?.id}}'>{{primaryAttributes.project?.name}}</a></span>
   <span content>
+    <label class="attribute-label">Estimation:</label> {{estimation}}
+    <br>
     <label class="attribute-label">Priority:</label> {{primaryAttributes.priority}}
     <br>
     <label class="attribute-label">Due Date:</label>

@@ -73,7 +73,7 @@ export interface Task extends Item {
   dueDate?: any;
   priority?: string;
   description?: string;
-  estimation?: string;
+  estimation?: number;
   createdBy?: Person;
   created?: Date;
   modified?: Date;
