@@ -1,0 +1,22 @@
+<mat-card-title>
+  <button mat-button style="float: right">
+    <mat-icon (click)="goBack()">close</mat-icon>
+  </button>
+  <br>
+  <br>
+</mat-card-title>
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false" class="main-table-container mat-elevation-z8">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <strong>Log time:</strong>
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-add-task-timelog (addedTimelog)="list.findTimeLogs()"></app-add-task-timelog>
+</mat-expansion-panel>
+
+<mat-divider></mat-divider>
+<app-task-timelog-list #list></app-task-timelog-list>

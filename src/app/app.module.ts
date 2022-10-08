@@ -40,6 +40,12 @@ import {CreateProjectComponent} from "./projects/create-project/create-project.c
 import {AddUserProjectComponent} from "./projects/add-user-project/add-user-project.component";
 import {ProjectListComponent} from "./projects/project-list/project-list.component";
 import {ProjectUserListComponent} from "./projects/project-user-list/project-user-list.component";
+import {TaskTimelogComponent} from './tasks/task-info/task-details/task-timelog/task-timelog.component';
+import {
+  AddTaskTimelogComponent
+} from './tasks/task-info/task-details/task-timelog/add-task-timelog/add-task-timelog.component';
+import { TaskTimelogListComponent } from './tasks/task-info/task-details/task-timelog/task-timelog-list/task-timelog-list.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -56,7 +62,10 @@ import {ProjectUserListComponent} from "./projects/project-user-list/project-use
     TaskDetailsComponent,
     CreateProjectComponent,
     AddUserProjectComponent,
-    ProjectUserListComponent
+    ProjectUserListComponent,
+    TaskTimelogComponent,
+    AddTaskTimelogComponent,
+    TaskTimelogListComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +94,8 @@ import {ProjectUserListComponent} from "./projects/project-user-list/project-use
     MatFormFieldModule,
     NgSelectModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

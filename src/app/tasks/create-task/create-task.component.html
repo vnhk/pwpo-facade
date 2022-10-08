@@ -49,7 +49,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <mat-form-field appearance="fill">
             <mat-label>Due Date</mat-label>
             <input [matDatepicker]="datepicker" formControlName="dueDate" matInput>
@@ -60,10 +60,24 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
           <mat-form-field appearance="fill" hintLabel="Max 3600h">
-            <mat-label>Estimation</mat-label>
-            <input formControlName="estimation" matInput>
+            <mat-label>Estimation (hours)</mat-label>
+            <input formControlName="estimationInHours" matInput type="number" #estimationInHours>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2">
+          <mat-form-field appearance="fill" hintLabel="Max 60m">
+            <mat-label>Estimation (minutes)</mat-label>
+            <input formControlName="estimationInMinutes" matInput type="number" #estimationInMinutes>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Estimation result in minutes</mat-label>
+            <input matInput value="{{parseInt(estimationInMinutes.value) + parseInt(estimationInHours.value) * 60}}" disabled>
           </mat-form-field>
         </div>
 
@@ -86,6 +100,7 @@
           <mat-hint align="end">{{description.value.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
         </mat-form-field>
       </div>
+
 
     </mat-card-content>
     <mat-card-actions>

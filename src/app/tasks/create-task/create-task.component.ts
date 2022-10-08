@@ -38,7 +38,8 @@ export class CreateTaskComponent implements OnInit {
       'dueDate': [null, [Validators.required]],
       'assignee': [null, []],
       'owner': [null, [Validators.required]],
-      'estimation': [null, []],
+      'estimationInHours': [0, [Validators.min(0), Validators.max(3600)]],
+      'estimationInMinutes': [0, [Validators.min(0), Validators.max(60)]],
       'description': [null, [Validators.maxLength(1500)]],
       'project': []
     });
@@ -72,6 +73,10 @@ export class CreateTaskComponent implements OnInit {
 
   resetForm() {
     this.formGroup.reset();
+  }
+
+  parseInt(value: string) {
+    return parseInt(value, 10);
   }
 
   private handleError(error: HttpErrorResponse) {

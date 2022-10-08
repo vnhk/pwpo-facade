@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header class="form-header">
+    <mat-card-title>History:</mat-card-title>
+  </mat-card-header>
+  <mat-list role="list">
+    <mat-card role="listitem" *ngFor="let log of timelogs">
+      <a routerLink='/user/details/{{log.user?.id}}'>{{log.user?.fullName}} ({{log.user?.nick}})</a>
+      logged <strong>{{log.loggedTimeInMinutes}} {{log.loggedTimeInMinutes == 1 ? "minute" : "minutes"}}</strong>
+      at {{log.date}}.
+      <br>
+      Comment: {{log?.comment == undefined ? "No comment" : log.comment}}
+    </mat-card>
+  </mat-list>
+
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageChanged($event)"
+                 aria-label="Select page">
+  </mat-paginator>
+
+</mat-card>

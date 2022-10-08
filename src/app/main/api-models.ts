@@ -44,6 +44,25 @@ export interface UserProject {
   projectRole: string;
 }
 
+
+export interface TimeLogRequest {
+  date: number;
+  timeInHours: number;
+  timeInMinutes: number;
+  comment: number;
+}
+
+export interface TimeLog extends Item {
+  date?: Date;
+  loggedTimeInMinutes?: number;
+  comment?: string;
+  user?: Person;
+}
+
+export interface TimeLogApi extends ItemApi {
+  items: TimeLog[];
+}
+
 export interface Task extends Item {
   type?: string;
   number?: string;
