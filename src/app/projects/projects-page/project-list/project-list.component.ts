@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {HttpService} from "../../main/service/http.service";
+import {HttpService} from "../../../main/service/http.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
@@ -8,7 +8,7 @@ import {catchError, map, startWith, switchMap} from "rxjs/operators";
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['../../main/list/list.component.css']
+  styleUrls: ['../../../main/list/list.component.css']
 })
 export class ProjectListComponent implements AfterViewInit {
   displayedColumns: string[] = ['shortForm', 'name', 'summary', 'status', "owner"];

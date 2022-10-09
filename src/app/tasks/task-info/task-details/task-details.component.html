@@ -4,7 +4,8 @@
          [ngStyle]="{'background-image': 'url('+ avatar +')', 'background-size' : 'cover'}">
     </div>
   </span>
-  <span title>{{primaryAttributes.number}} - {{primaryAttributes.type}}</span>
+  <span title>{{primaryAttributes.number}} - {{primaryAttributes.type}}
+  </span>
   <span subtitle><a
     routerLink='/projects/details/{{primaryAttributes.project?.id}}'>{{primaryAttributes.project?.name}}</a></span>
   <span content>

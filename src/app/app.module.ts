@@ -36,9 +36,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.component";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {CreateProjectComponent} from "./projects/create-project/create-project.component";
+import {CreateProjectComponent} from "./projects/projects-page/create-project/create-project.component";
 import {AddUserProjectComponent} from "./projects/add-user-project/add-user-project.component";
-import {ProjectListComponent} from "./projects/project-list/project-list.component";
+import {ProjectListComponent} from "./projects/projects-page/project-list/project-list.component";
 import {ProjectUserListComponent} from "./projects/project-user-list/project-user-list.component";
 import {TaskTimelogComponent} from './tasks/task-info/task-details/task-timelog/task-timelog.component';
 import {
@@ -49,6 +49,7 @@ import {
 } from './tasks/task-info/task-details/task-timelog/task-timelog-list/task-timelog-list.component';
 import {MatListModule} from "@angular/material/list";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { ProjectsPageComponent } from './projects/projects-page/projects-page.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ProjectUserListComponent,
     TaskTimelogComponent,
     AddTaskTimelogComponent,
-    TaskTimelogListComponent
+    TaskTimelogListComponent,
+    ProjectsPageComponent
   ],
   imports: [
     BrowserModule,

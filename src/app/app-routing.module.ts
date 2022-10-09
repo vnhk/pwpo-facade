@@ -2,40 +2,18 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {TaskListComponent} from "./tasks/task-list/task-list.component";
 import {ProjectInfoComponent} from "./projects/project-info/project-info.component";
-import {ProjectResolver} from "./projects/project.resolver";
 import {MyWorkComponent} from "./mywork/my-work/my-work.component";
 import {CreateTaskComponent} from "./tasks/create-task/create-task.component";
 import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
-import {CreateProjectComponent} from "./projects/create-project/create-project.component";
 import {AddUserProjectComponent} from "./projects/add-user-project/add-user-project.component";
-import {ProjectListComponent} from "./projects/project-list/project-list.component";
 import {TaskTimelogComponent} from "./tasks/task-info/task-details/task-timelog/task-timelog.component";
+import {ProjectsPageComponent} from "./projects/projects-page/projects-page.component";
 
 const routes: Routes = [
-  {
-    path: 'projects',
-    component: ProjectListComponent,
-    resolve:
-      {
-        ProjectResolver
-      }
-  },
-  {
-    path: 'my-work',
-    component: MyWorkComponent
-  },
-  {
-    path: 'project/:id/create-task',
-    component: CreateTaskComponent
-  },
-  {
-    path: 'project/:id/add-user',
-    component: AddUserProjectComponent
-  },
-  {
-    path: 'create-project',
-    component: CreateProjectComponent
-  },
+  {path: 'projects', component: ProjectsPageComponent},
+  {path: 'my-work', component: MyWorkComponent},
+  {path: 'project/:id/create-task', component: CreateTaskComponent},
+  {path: 'project/:id/add-user', component: AddUserProjectComponent},
   {path: 'projects/details/:id', component: ProjectInfoComponent},
   {path: 'tasks/:id/details', component: TaskInfoComponent},
   {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent},
