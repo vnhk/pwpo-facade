@@ -44,8 +44,11 @@ import {TaskTimelogComponent} from './tasks/task-info/task-details/task-timelog/
 import {
   AddTaskTimelogComponent
 } from './tasks/task-info/task-details/task-timelog/add-task-timelog/add-task-timelog.component';
-import { TaskTimelogListComponent } from './tasks/task-info/task-details/task-timelog/task-timelog-list/task-timelog-list.component';
+import {
+  TaskTimelogListComponent
+} from './tasks/task-info/task-details/task-timelog/task-timelog-list/task-timelog-list.component';
 import {MatListModule} from "@angular/material/list";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -95,7 +98,8 @@ import {MatListModule} from "@angular/material/list";
     NgSelectModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

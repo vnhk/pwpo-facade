@@ -1,42 +1,59 @@
 <app-details>
   <span avatar>
     <div mat-card-avatar
-         style="float:left;background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); background-size: cover;">
+         [ngStyle]="{'background-image': 'url('+ avatar +')', 'background-size' : 'cover'}">
     </div>
   </span>
   <span title>{{primaryAttributes.number}} - {{primaryAttributes.type}}</span>
   <span subtitle><a
     routerLink='/projects/details/{{primaryAttributes.project?.id}}'>{{primaryAttributes.project?.name}}</a></span>
   <span content>
-    <label class="attribute-label">Estimation:</label> {{estimation}}
-    <br>
-    <label class="attribute-label">Priority:</label> {{primaryAttributes.priority}}
-    <br>
-    <label class="attribute-label">Due Date:</label>
-    <strong
-      [ngClass]="{'dueDateExceeded': dueDateExceeded, 'dueDateComingUp': dueDateComingUp}"> {{primaryAttributes.dueDate | date: 'dd MMMM yyyy'}}</strong>
-    <br>
-    <label class="attribute-label">Status:</label> {{primaryAttributes.status}}
-    <br>
-    <br>
-    <label class="attribute-label">Summary:</label>
-    <br>
-    {{primaryAttributes.summary}}
+    <div class="row">
+      <div class="col-md-8">
+        <label class="attribute-label">Priority:</label> {{primaryAttributes.priority}}
+        <br>
+         <label class="attribute-label">Due Date:</label>
+         <strong
+           [ngClass]="{'dueDateExceeded': dueDateExceeded, 'dueDateComingUp': dueDateComingUp}"> {{primaryAttributes.dueDate | date: 'dd MMMM yyyy'}}</strong>
+        <br>
+        <label class="attribute-label">Status:</label> {{primaryAttributes.status}}
+      </div>
+      <div class="col-md-1">
+
+      </div>
+      <div class="col-md-3">
+        <label class="attribute-label">Estimation:</label> {{estimationText}}
+        <br>
+        <label class="attribute-label">Logged:</label> {{loggedTimeText}}
+        <mat-progress-bar [ngClass]='loggedTimeProgressBar > 100 ? "exceeded-estimation": "" ' mode="determinate"
+                          value="{{loggedTimeProgressBar}}"></mat-progress-bar>
+      </div>
+    </div>
 
     <br>
-    <br>
 
-    <label class="attribute-label">Description:</label>
-    <br>
-    {{secondaryAttributes.description}}
+    <div class="row">
+      <div class="col-md-8">
+        <label class="attribute-label">Summary:</label>
+        <br>
+        {{primaryAttributes.summary}}
+        <br>
+        <br>
+        <label class="attribute-label">Description:</label>
+        <br>
+        {{secondaryAttributes.description}}
+      </div>
+      <div class="col-md-1">
 
-    <br>
-    <br>
-    <label class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy?.fullName}}
-    <br>
-    <label class="attribute-label">Created:</label> {{secondaryAttributes.created | date: 'medium'}}
-    <br>
-    <label class="attribute-label">Modified:</label> {{secondaryAttributes.modified | date: 'medium'}}
+      </div>
+      <div class="col-md-3">
+         <label class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy?.fullName}}
+        <br>
+         <label class="attribute-label">Created:</label> {{secondaryAttributes.created | date: 'medium'}}
+        <br>
+         <label class="attribute-label">Modified:</label> {{secondaryAttributes.modified | date: 'medium'}}
+      </div>
+    </div>
   </span>
 
   <span buttons>

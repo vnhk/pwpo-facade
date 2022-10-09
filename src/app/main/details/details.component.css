@@ -12,6 +12,15 @@ section {
   display: table;
 }
 
+mat-card-title {
+  margin-left: 10px;
+}
+
+mat-card-subtitle {
+  margin-left: 10px;
+}
+
+
 .details-label {
   display: table-cell;
   font-size: 14px;
@@ -42,7 +51,6 @@ section {
 :host /deep/ .mat-card-header-text {
   margin: 0;
 }
-
 
 .dueDateExceeded {
   color: #b21010;

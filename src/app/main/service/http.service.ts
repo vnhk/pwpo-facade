@@ -84,7 +84,14 @@ export class HttpService {
     );
   }
 
-  getAllTasksByProjectIdPrimaryAttr(id: string | null, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
+  getLoggedTime(taskId: string | null | undefined): Observable<number> {
+    return this.http.get<number>(
+      `${this.baseUrl}/tasks/task/${taskId}/timelogs/logged-time`
+    );
+  }
+
+  getAllTasksByProjectIdPrimaryAttr(id: string | null, searchOptions: TaskListDisplayOption[], sort: string,
+                                    order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/projects/project/${id}/tasks` +
       `?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
@@ -92,7 +99,8 @@ export class HttpService {
     );
   }
 
-  getAllTasksByProjectIdSecondaryAttr(id: string | null, sort: string, order: SortDirection, page: number, pageSize: number): Observable<TaskApi> {
+  getAllTasksByProjectIdSecondaryAttr(id: string | null, sort: string, order: SortDirection,
+                                      page: number, pageSize: number): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/projects/project/${id}/tasks` +
       `?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
@@ -108,7 +116,8 @@ export class HttpService {
     );
   }
 
-  getAllTasksByOwner(username: string, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number) {
+  getAllTasksByOwner(username: string, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection,
+                     page: number, pageSize: number) {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/search?query=(owner.nick EQUALS_OPERATION ${username})` +
       `&sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
@@ -116,7 +125,8 @@ export class HttpService {
     );
   }
 
-  getAllTasksByAssignee(username: string, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection, page: number, pageSize: number) {
+  getAllTasksByAssignee(username: string, searchOptions: TaskListDisplayOption[], sort: string, order: SortDirection,
+                        page: number, pageSize: number) {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/search?query=(assignee.nick EQUALS_OPERATION ${username})` +
       `&sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}` +
