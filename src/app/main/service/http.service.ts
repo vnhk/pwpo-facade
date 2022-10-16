@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
 import {
+  ChartData,
   DataEnumApi,
   PersonApi,
   Project,
@@ -171,6 +172,30 @@ export class HttpService {
     return this.http.post<TimeLogRequest>(
       `${this.baseUrl}/tasks/task/${taskId}/timelogs`,
       value
+    );
+  }
+
+  getProjectTaskTypeChartData(id: string | null): Observable<ChartData[]> {
+    return this.http.get<ChartData[]>(
+      `${this.baseUrl}/projects/project/${id}/visualization/task-types`
+    );
+  }
+
+  getProjectTaskPriorityChartData(id: string | null): Observable<ChartData[]> {
+    return this.http.get<ChartData[]>(
+      `${this.baseUrl}/projects/project/${id}/visualization/task-priorities`
+    );
+  }
+
+  getProjectRolesChartData(id: string | null): Observable<ChartData[]> {
+    return this.http.get<ChartData[]>(
+      `${this.baseUrl}/projects/project/${id}/visualization/project-roles`
+    );
+  }
+
+  getProjectSumTimeChartData(id: string | null): Observable<ChartData[]> {
+    return this.http.get<ChartData[]>(
+      `${this.baseUrl}/projects/project/${id}/visualization/sum-time`
     );
   }
 }

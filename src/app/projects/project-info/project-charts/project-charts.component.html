@@ -1,0 +1,76 @@
+<mat-card>
+  <div class="row">
+    <div class="col-md-5 d-grid">
+      <ngx-charts-bar-vertical
+        [barPadding]="40"
+        [gradient]="false"
+        [results]="taskTypes"
+        [roundDomains]="true"
+        [scheme]="'forest'"
+        [showXAxisLabel]="true"
+        [xAxisLabel]="'The number of tasks of each type'"
+        [xAxis]="true"
+        [yAxisTickFormatting]="axisDecimalFormat"
+        [yAxis]="true">
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5 d-grid">
+      <ngx-charts-bar-horizontal
+        [barPadding]="40"
+        [gradient]="false"
+        [results]="projectRoles"
+        [roundDomains]="true"
+        [scheme]="'forest'"
+        [showXAxisLabel]="true"
+        [xAxisLabel]="'The number of users for each role'"
+        [xAxisTickFormatting]="axisDecimalFormat"
+        [xAxis]="true"
+        [yAxis]="true">
+      </ngx-charts-bar-horizontal>
+    </div>
+  </div>
+
+  <br>
+  <mat-divider></mat-divider>
+  <br>
+
+  <div class="row">
+    <div class="col-md-5 d-grid">
+      <ngx-charts-bar-vertical
+        [barPadding]="40"
+        [gradient]="false"
+        [results]="taskPriorities"
+        [roundDomains]="true"
+        [scheme]="'forest'"
+        [showXAxisLabel]="true"
+        [xAxisLabel]="'The number of tasks for each priority'"
+        [xAxis]="true"
+        [yAxisTickFormatting]="axisDecimalFormat"
+        [yAxis]="true">
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-3 d-grid">
+      <ngx-charts-bar-vertical
+        [barPadding]="40"
+        [results]="time"
+        [roundDomains]="true"
+        [scheme]="'ocean'"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Sum of estimated and logged time'"
+        [xAxis]="true"
+        [yAxisLabel]="'Time in minutes'"
+        [yAxis]="true">
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <div class="col-md-2"></div>
+
+  </div>
+
+</mat-card>
+

@@ -44,6 +44,11 @@ export interface UserProject {
   projectRole: string;
 }
 
+export interface ChartData {
+  name: string;
+  value: number;
+}
+
 
 export interface TimeLogRequest {
   date: number;

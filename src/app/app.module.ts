@@ -41,15 +41,13 @@ import {AddUserProjectComponent} from "./projects/add-user-project/add-user-proj
 import {ProjectListComponent} from "./projects/projects-page/project-list/project-list.component";
 import {ProjectUserListComponent} from "./projects/project-user-list/project-user-list.component";
 import {TaskTimelogComponent} from './tasks/task-info/task-details/task-timelog/task-timelog.component';
-import {
-  AddTaskTimelogComponent
-} from './tasks/task-info/task-details/task-timelog/add-task-timelog/add-task-timelog.component';
-import {
-  TaskTimelogListComponent
-} from './tasks/task-info/task-details/task-timelog/task-timelog-list/task-timelog-list.component';
+import {AddTaskTimelogComponent} from './tasks/task-info/task-details/task-timelog/add-task-timelog/add-task-timelog.component';
+import {TaskTimelogListComponent} from './tasks/task-info/task-details/task-timelog/task-timelog-list/task-timelog-list.component';
 import {MatListModule} from "@angular/material/list";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { ProjectsPageComponent } from './projects/projects-page/projects-page.component';
+import {ProjectsPageComponent} from './projects/projects-page/projects-page.component';
+import {ProjectChartsComponent} from './projects/project-info/project-charts/project-charts.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -70,7 +68,8 @@ import { ProjectsPageComponent } from './projects/projects-page/projects-page.co
     TaskTimelogComponent,
     AddTaskTimelogComponent,
     TaskTimelogListComponent,
-    ProjectsPageComponent
+    ProjectsPageComponent,
+    ProjectChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +100,8 @@ import { ProjectsPageComponent } from './projects/projects-page/projects-page.co
     MatSnackBarModule,
     MatExpansionModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
