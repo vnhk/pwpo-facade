@@ -48,6 +48,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {ProjectsPageComponent} from './projects/projects-page/projects-page.component';
 import {ProjectChartsComponent} from './projects/project-info/project-charts/project-charts.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {EditProjectComponent} from "./projects/edit-project/edit-project.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     AddTaskTimelogComponent,
     TaskTimelogListComponent,
     ProjectsPageComponent,
+    EditProjectComponent,
     ProjectChartsComponent
   ],
   imports: [

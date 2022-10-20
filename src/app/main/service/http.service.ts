@@ -149,6 +149,13 @@ export class HttpService {
     );
   }
 
+  editProject(value: string) {
+    return this.http.put<Project>(
+      `${this.baseUrl}/projects`,
+      value
+    );
+  }
+
   getTaskPrimaryById(id: string | null): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/tasks/task?id=${id}&dto=${this.taskDTOPrimaryClass}`

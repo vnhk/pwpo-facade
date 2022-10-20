@@ -8,12 +8,14 @@ import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 import {AddUserProjectComponent} from "./projects/add-user-project/add-user-project.component";
 import {TaskTimelogComponent} from "./tasks/task-info/task-details/task-timelog/task-timelog.component";
 import {ProjectsPageComponent} from "./projects/projects-page/projects-page.component";
+import {EditProjectComponent} from "./projects/edit-project/edit-project.component";
 
 const routes: Routes = [
   {path: 'projects', component: ProjectsPageComponent},
   {path: 'my-work', component: MyWorkComponent},
   {path: 'project/:id/create-task', component: CreateTaskComponent},
   {path: 'project/:id/add-user', component: AddUserProjectComponent},
+  {path: 'project/:id/edit', component: EditProjectComponent},
   {path: 'projects/details/:id', component: ProjectInfoComponent},
   {path: 'tasks/:id/details', component: TaskInfoComponent},
   {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent},

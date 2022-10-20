@@ -24,7 +24,6 @@ export class CreateProjectComponent implements OnInit {
 
   constructor(private httpService: HttpService,
               private location: Location,
-              private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               public snackBar: MatSnackBar) {
     this.formGroup = this.formBuilder.group({
