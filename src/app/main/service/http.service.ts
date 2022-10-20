@@ -8,6 +8,7 @@ import {
   PersonApi,
   Project,
   ProjectApi,
+  ProjectHistoryApi,
   Task,
   TaskApi,
   TaskListDisplayOption,
@@ -82,6 +83,12 @@ export class HttpService {
   getTimelogs(taskId: string | null | undefined, page: number, pageSize: number): Observable<TimeLogApi> {
     return this.http.get<TimeLogApi>(
       `${this.baseUrl}/tasks/task/${taskId}/timelogs?page=${page}&pageSize=${pageSize}`
+    );
+  }
+
+  getProjectHistory(projectId: string | null | undefined, page: number, pageSize: number): Observable<ProjectHistoryApi> {
+    return this.http.get<ProjectHistoryApi>(
+      `${this.baseUrl}/projects/${projectId}/history?page=${page}&pageSize=${pageSize}&sortField=expired&sortDirection=DESC`
     );
   }
 

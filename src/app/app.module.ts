@@ -49,6 +49,7 @@ import {ProjectsPageComponent} from './projects/projects-page/projects-page.comp
 import {ProjectChartsComponent} from './projects/project-info/project-charts/project-charts.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {EditProjectComponent} from "./projects/edit-project/edit-project.component";
+import {ProjectHistoryListComponent} from "./projects/project-history/project-history-list-component";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {EditProjectComponent} from "./projects/edit-project/edit-project.compone
     TaskTimelogListComponent,
     ProjectsPageComponent,
     EditProjectComponent,
+    ProjectHistoryListComponent,
     ProjectChartsComponent
   ],
   imports: [

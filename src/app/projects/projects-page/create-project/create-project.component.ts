@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
-import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {retry, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Location} from '@angular/common';
 import {Person} from "../../../main/api-models";
 
 @Component({
@@ -23,7 +21,6 @@ export class CreateProjectComponent implements OnInit {
   SHORT_FORM_MAX_LENGTH = 6;
 
   constructor(private httpService: HttpService,
-              private location: Location,
               private formBuilder: FormBuilder,
               public snackBar: MatSnackBar) {
     this.formGroup = this.formBuilder.group({
@@ -33,10 +30,6 @@ export class CreateProjectComponent implements OnInit {
       'owner': [null, [Validators.required]],
       'description': [null, [Validators.maxLength(this.MAX_DESC_LENGTH)]],
     });
-  }
-
-  goBack() {
-    this.location.back();
   }
 
   ngOnInit(): void {
@@ -59,7 +52,7 @@ export class CreateProjectComponent implements OnInit {
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 400) {
-      if(error.error.code === "FIELD_VALIDATION") {
+      if (error.error.code === "FIELD_VALIDATION") {
         let formInput = this.formGroup.get(error.error.field);
         formInput?.setErrors({'incorrect': true});
 

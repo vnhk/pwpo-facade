@@ -24,7 +24,7 @@
     <br>
     <label class="attribute-label">Created:</label> {{secondaryAttributes.created | date: 'medium'}}
     <br>
-    <label class="attribute-label">Modified:</label> {{secondaryAttributes.modified | date: 'medium'}}
+    <label class="attribute-label">Modified:</label> {{secondaryAttributes.updated | date: 'medium'}}
   </span>
 
   <span buttons>
@@ -37,7 +37,10 @@
     <button mat-button routerLink="/project/{{primaryAttributes.id}}/add-user">
       <mat-icon>person_add</mat-icon>
     </button>
-    <button routerLink="/project/{{primaryAttributes.id}}/create-task" mat-button>
+    <button mat-button routerLink="/project/{{primaryAttributes.id}}/history">
+      <mat-icon>history</mat-icon>
+    </button>
+    <button mat-button routerLink="/project/{{primaryAttributes.id}}/create-task">
       <mat-icon>note_add</mat-icon>
     </button>
   </span>

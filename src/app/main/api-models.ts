@@ -32,7 +32,22 @@ export interface Project extends Item {
   owner?: Person;
   createdBy?: Person;
   created?: Date;
-  modified?: Date;
+  updated?: Date;
+}
+
+export interface ProjectHistoryApi extends ItemApi {
+  items: ProjectHistory[];
+}
+
+export interface ProjectHistory extends Item {
+  name?: string;
+  summary?: string;
+  status?: string;
+  description?: string;
+  shortForm?: string;
+  owner?: string;
+  editor?: Person;
+  expired?: Date;
 }
 
 export interface TaskApi extends ItemApi {
@@ -81,7 +96,7 @@ export interface Task extends Item {
   estimation?: number;
   createdBy?: Person;
   created?: Date;
-  modified?: Date;
+  updated?: Date;
   project?: Project;
 }
 
