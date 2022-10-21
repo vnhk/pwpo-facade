@@ -4,7 +4,7 @@ import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
 import {
   ChartData,
-  DataEnumApi,
+  DataEnumApi, HistoryDiffApi,
   PersonApi,
   Project,
   ProjectApi,
@@ -89,6 +89,18 @@ export class HttpService {
   getProjectHistory(projectId: string | null | undefined, page: number, pageSize: number): Observable<ProjectHistoryApi> {
     return this.http.get<ProjectHistoryApi>(
       `${this.baseUrl}/projects/${projectId}/history?page=${page}&pageSize=${pageSize}&sortField=expired&sortDirection=DESC`
+    );
+  }
+
+  getProjectHistoryDetails(projectId: string | null | undefined, historyId: string | null | undefined): Observable<ProjectHistoryApi> {
+    return this.http.get<ProjectHistoryApi>(
+      `${this.baseUrl}/projects/${projectId}/history/${historyId}`
+    );
+  }
+
+  getProjectHistoryDiff(projectId: string | null | undefined, historyId: string | null | undefined): Observable<HistoryDiffApi> {
+    return this.http.get<HistoryDiffApi>(
+      `${this.baseUrl}/projects/${projectId}/history/${historyId}/compare`
     );
   }
 

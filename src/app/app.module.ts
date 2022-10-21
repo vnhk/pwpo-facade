@@ -50,6 +50,8 @@ import {ProjectChartsComponent} from './projects/project-info/project-charts/pro
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {EditProjectComponent} from "./projects/edit-project/edit-project.component";
 import {ProjectHistoryListComponent} from "./projects/project-history/project-history-list-component";
+import {ProjectHistoryDetailsComponent} from "./projects/project-history/project-history-details/project-history-details.component";
+import {ProjectHistoryDiffComponent} from "./projects/project-history/project-history-diff/project-history-diff.component";
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import {ProjectHistoryListComponent} from "./projects/project-history/project-hi
     ProjectsPageComponent,
     EditProjectComponent,
     ProjectHistoryListComponent,
+    ProjectHistoryDetailsComponent,
+    ProjectHistoryDiffComponent,
     ProjectChartsComponent
   ],
   imports: [

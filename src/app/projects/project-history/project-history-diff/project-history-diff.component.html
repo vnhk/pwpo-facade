@@ -1,0 +1,46 @@
+<button mat-button style="float: right">
+  <mat-icon (click)="goBack()">close</mat-icon>
+</button>
+<div style="margin: 10px; width: 10px; height: 10px"></div>
+<div>
+  <app-details>
+    <span avatar>
+      <span mat-card-avatar
+            style="float:left;background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); background-size: cover;">
+      </span>
+    </span>
+    <span title>
+     <ng-container *ngFor="let part of name">
+        <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
+      </ng-container>
+    </span>
+    <span subtitle>
+      #
+     <ng-container *ngFor="let part of shortForm">
+        <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
+      </ng-container>
+    </span>
+
+    <span content>
+      <label class="attribute-label">Summary:</label>
+      <br>
+      <ng-container *ngFor="let part of summary">
+        <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
+      </ng-container>
+      <br>
+      <br>
+
+      <label class="attribute-label">Description:</label>
+      <br>
+       <ng-container *ngFor="let part of description">
+        <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
+      </ng-container>
+      <br>
+      <br>
+      <label class="attribute-label">Owner:</label>
+      <ng-container *ngFor="let part of owner">
+        <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
+      </ng-container>
+    </span>
+  </app-details>
+</div>

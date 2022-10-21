@@ -1,0 +1,9 @@
+.diff-removed {
+  color: red;
+  font-weight: bold;
+}
+
+.diff-added {
+  color: green;
+  font-weight: bold;
+}

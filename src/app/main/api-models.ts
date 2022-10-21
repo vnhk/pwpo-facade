@@ -39,6 +39,26 @@ export interface ProjectHistoryApi extends ItemApi {
   items: ProjectHistory[];
 }
 
+export interface HistoryDiffApi extends ItemApi {
+  items: HistoryDiff[];
+}
+
+export interface HistoryDiff extends Item {
+  entityId?: number;
+  historyId?: number;
+  diff?: DiffAttribute[];
+}
+
+export interface DiffAttribute {
+  attribute: string;
+  diff: DiffWord[];
+}
+
+export interface DiffWord {
+  value: string;
+  type: string;
+}
+
 export interface ProjectHistory extends Item {
   name?: string;
   summary?: string;

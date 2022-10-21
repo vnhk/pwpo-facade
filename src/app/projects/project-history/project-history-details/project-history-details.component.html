@@ -1,0 +1,39 @@
+<button mat-button style="float: right">
+  <mat-icon (click)="goBack()">close</mat-icon>
+</button>
+<div style="margin: 10px; width: 10px; height: 10px"></div>
+<div>
+  <app-details>
+    <span avatar>
+      <div mat-card-avatar
+           style="float:left;background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); background-size: cover;">
+      </div>
+    </span>
+    <span title>{{projectHistory.name}}</span>
+    <br>
+    <span subtitle>#{{projectHistory.shortForm}}</span>
+    <span content>
+    <strong>Project version from {{projectHistory.expired}} created by {{projectHistory.editor?.fullName}}</strong>
+    <label class="attribute-label">Summary:</label>
+    <br>
+      {{projectHistory.summary}}
+
+      <br>
+    <br>
+
+    <label class="attribute-label">Description:</label>
+    <br>
+      {{projectHistory.description}}
+
+      <br>
+    <br>
+    <label class="attribute-label">Owner</label> {{projectHistory.owner}}
+  </span>
+
+    <span buttons>
+    <button mat-button routerLink="/projects/{{this.projectId}}/history/{{this.historyId}}/diff">
+      <mat-icon>compare_arrows</mat-icon>
+    </button>
+  </span>
+  </app-details>
+</div>
