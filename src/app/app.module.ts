@@ -52,6 +52,7 @@ import {EditProjectComponent} from "./projects/edit-project/edit-project.compone
 import {ProjectHistoryListComponent} from "./projects/project-history/project-history-list-component";
 import {ProjectHistoryDetailsComponent} from "./projects/project-history/project-history-details/project-history-details.component";
 import {ProjectHistoryDiffComponent} from "./projects/project-history/project-history-diff/project-history-diff.component";
+import { TodoComponent } from './mywork/todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {ProjectHistoryDiffComponent} from "./projects/project-history/project-hi
     ProjectHistoryListComponent,
     ProjectHistoryDetailsComponent,
     ProjectHistoryDiffComponent,
-    ProjectChartsComponent
+    ProjectChartsComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
