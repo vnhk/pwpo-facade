@@ -16,7 +16,7 @@ mat-card {
 }
 
 mat-divider {
-  background-color: #494D5F !important;
+  background-color: #3F4B59 !important;
 }
 
 mat-card-content {
@@ -30,7 +30,7 @@ mat-card-header.form-header {
 
 /*snackbar*/
 .success-bar {
-  background: #494D5F;
+  background: #3F4B59;
   color: #e5eaf5;
 }
 
@@ -38,14 +38,42 @@ mat-card-header.form-header {
   background: #fa625f;
   color: #e5eaf5;
 }
+
 /*snackbar*/
 
 .save-button {
-  background: #494D5F;
+  background: #3F4B59;
   color: #e5eaf5;
 }
 
 .reset-button {
   background: #feda6a;
-  color: #494D5F;
+  color: #3F4B59;
+}
+
+table[mat-table] {
+}
+
+mat-paginator {
+  font-size: 2vh !important;
+}
+
+.table-container {
+}
+
+.mat-cell {
+}
+
+.mat-header-cell {
+  font-size: 2vh;
+  font-weight: bold;
+}
+
+mat-card {
+}
+
+mat-card {
+}
+
+.mat-sidenav-content .content {
 }
