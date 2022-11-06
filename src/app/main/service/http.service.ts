@@ -22,10 +22,10 @@ import {
 })
 export class HttpService {
   private baseUrl = 'http://localhost:8080';
-  private projectClass = "com.pwpo.project.Project";
+  private projectClass = "com.pwpo.project.model.Project";
   private projectDTOPrimaryClass = "com.pwpo.project.dto.ProjectPrimaryResponseDTO";
   private projectDTOSecondaryClass = "com.pwpo.project.dto.ProjectSecondaryResponseDTO";
-  private taskClass = "com.pwpo.task.Task";
+  private taskClass = "com.pwpo.task.model.Task";
   private taskDTOPrimaryClass = "com.pwpo.task.dto.TaskPrimaryResponseDTO";
   private taskDTOSecondaryClass = "com.pwpo.task.dto.TaskSecondaryResponseDTO";
 
