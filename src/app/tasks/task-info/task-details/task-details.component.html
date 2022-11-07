@@ -1,7 +1,7 @@
 <app-details>
   <span avatar>
-    <div mat-card-avatar
-         [ngStyle]="{'background-image': 'url('+ avatar +')', 'background-size' : 'cover'}">
+    <div [ngStyle]="{'background-image': 'url('+ avatar +')', 'background-size' : 'cover'}"
+         mat-card-avatar>
     </div>
   </span>
   <span title>{{primaryAttributes.number}} - {{primaryAttributes.type}}
@@ -58,7 +58,7 @@
   </span>
 
   <span buttons>
-    <button mat-button>
+    <button mat-button routerLink="/tasks/{{primaryAttributes.id}}/edit">
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-button>
@@ -67,7 +67,7 @@
     <button mat-button routerLink='/tasks/{{primaryAttributes.id}}/details/timelog'>
       <mat-icon>access_time</mat-icon>
     </button>
-    <button mat-button>
+   <button mat-button routerLink="/tasks/{{primaryAttributes.id}}/history">
       <mat-icon>history</mat-icon>
     </button>
   </span>

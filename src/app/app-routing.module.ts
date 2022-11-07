@@ -12,6 +12,7 @@ import {EditProjectComponent} from "./projects/edit-project/edit-project.compone
 import {ProjectHistoryListComponent} from "./projects/project-history/project-history-list-component";
 import {ProjectHistoryDetailsComponent} from "./projects/project-history/project-history-details/project-history-details.component";
 import {ProjectHistoryDiffComponent} from "./projects/project-history/project-history-diff/project-history-diff.component";
+import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
 
 const routes: Routes = [
   {path: 'projects', component: ProjectsPageComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'projects/:id/create-task', component: CreateTaskComponent},
   {path: 'projects/:id/add-user', component: AddUserProjectComponent},
   {path: 'projects/:id/edit', component: EditProjectComponent},
+  {path: 'tasks/:id/edit', component: EditTaskComponent},
   {path: 'projects/:id/history', component: ProjectHistoryListComponent},
   {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent},
   {path: 'projects/:id/history/:hid/diff', component: ProjectHistoryDiffComponent},

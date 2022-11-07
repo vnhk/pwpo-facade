@@ -4,7 +4,8 @@ import {SortDirection} from "@angular/material/sort";
 import {HttpClient} from "@angular/common/http";
 import {
   ChartData,
-  DataEnumApi, HistoryDiffApi,
+  DataEnumApi,
+  HistoryDiffApi,
   PersonApi,
   Project,
   ProjectApi,
@@ -171,6 +172,13 @@ export class HttpService {
   editProject(value: string) {
     return this.http.put<Project>(
       `${this.baseUrl}/projects`,
+      value
+    );
+  }
+
+  editTask(value: string) {
+    return this.http.put<Task>(
+      `${this.baseUrl}/tasks`,
       value
     );
   }
