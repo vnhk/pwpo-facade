@@ -19,6 +19,7 @@ export class CreateProjectComponent implements OnInit {
   MAX_SUMMARY_LENGTH = 150;
   NAME_MAX_LENGTH = 35;
   SHORT_FORM_MAX_LENGTH = 6;
+  spin: boolean = false;
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
@@ -33,11 +34,16 @@ export class CreateProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpService.getAllUsers().subscribe(value => this.users = value.items);
+    this.spin = true;
+    this.httpService.getAllUsers().subscribe(value => {
+      this.users = value.items;
+      this.spin = false;
+    });
   }
 
   onSubmit() {
     if (this.formGroup.valid) {
+      this.spin = true;
       this.httpService.createProject(this.formGroup.value)
         .pipe(
           retry(3),
@@ -51,6 +57,8 @@ export class CreateProjectComponent implements OnInit {
   }
 
   private handleError(error: HttpErrorResponse) {
+    this.spin = false;
+
     if (error.status === 400) {
       if (error.error.code === "FIELD_VALIDATION") {
         let formInput = this.formGroup.get(error.error.field);
@@ -75,6 +83,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   private successCreation() {
+    this.spin = false;
     this.openBarWithMessage('Project created!', ['success-bar'], 15000);
     this.resetForm();
   }

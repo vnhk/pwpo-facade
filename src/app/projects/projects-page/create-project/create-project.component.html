@@ -4,6 +4,8 @@
       <mat-card-title>Project Form</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <mat-spinner [ngClass]="spin ? 'mat-spinner-enabled' : 'mat-spinner-disabled'"></mat-spinner>
+
       <div class="row">
         <div class="col-md-6">
           <mat-form-field appearance="fill" hintLabel="Max {{MAX_SUMMARY_LENGTH}} characters">
@@ -52,8 +54,8 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="!formGroup.valid" mat-raised-button class="save-button" type="submit">Save</button>
-      <button (click)="this.resetForm()" mat-raised-button class="reset-button" type="button">Reset</button>
+      <button [disabled]="!formGroup.valid" class="save-button" mat-raised-button type="submit">Save</button>
+      <button (click)="this.resetForm()" class="reset-button" mat-raised-button type="button">Reset</button>
     </mat-card-actions>
   </mat-card>
 </form>

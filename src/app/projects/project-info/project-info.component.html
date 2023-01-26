@@ -1,28 +1,32 @@
 <button mat-button style="float: right">
   <mat-icon (click)="goBack()">close</mat-icon>
 </button>
-<mat-tab-group>
-  <mat-tab label="Details">
-    <app-project-details></app-project-details>
-  </mat-tab>
-  <mat-tab label="Tasks">
-    <mat-card>
-      <mat-card-content>
-        <app-task-list criteria="projectId"></app-task-list>
-      </mat-card-content>
-    </mat-card>
-  </mat-tab>
-  <mat-tab label="Users and Roles">
-    <mat-card>
-      <mat-card-content>
-        <app-project-user-list></app-project-user-list>
-      </mat-card-content>
-    </mat-card>
-  </mat-tab>
-  <mat-tab label="Visualization">
-    <app-project-charts></app-project-charts>
-  </mat-tab>
-  <mat-tab label="Manage">
-    Visible for admin, manager, project owner
-  </mat-tab>
-</mat-tab-group>
+<div *ngIf="projectExists">
+  <mat-tab-group>
+    <mat-tab label="Details">
+      <app-project-details></app-project-details>
+    </mat-tab>
+    <mat-tab label="Tasks">
+      <mat-card>
+        <mat-card-content>
+          <app-task-list criteria="projectId"></app-task-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Users and Roles">
+      <mat-card>
+        <mat-card-content>
+          <app-project-user-list></app-project-user-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Visualization">
+      <app-project-charts></app-project-charts>
+    </mat-tab>
+    <mat-tab label="Manage">
+      Visible for admin, manager, project owner
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<mat-spinner [ngClass]="spin ? 'mat-spinner-enabled' : 'mat-spinner-disabled'"></mat-spinner>
+<app-message-bar [message]="message" [showError]="showError"></app-message-bar>

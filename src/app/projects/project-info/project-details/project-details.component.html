@@ -14,6 +14,8 @@
     <br>
     <br>
 
+    <mat-spinner [ngClass]="spin ? 'mat-spinner-enabled' : 'mat-spinner-disabled'"></mat-spinner>
+
     <label class="attribute-label">Description:</label>
     <br>
     {{secondaryAttributes.description}}

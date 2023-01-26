@@ -54,6 +54,7 @@ import {ProjectHistoryDetailsComponent} from "./projects/project-history/project
 import {ProjectHistoryDiffComponent} from "./projects/project-history/project-history-diff/project-history-diff.component";
 import {TodoComponent} from './mywork/todo/todo.component';
 import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
+import { MessageBarComponent } from './main/message-bar/message-bar.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
     ProjectHistoryDiffComponent,
     ProjectChartsComponent,
     EditTaskComponent,
-    TodoComponent
+    TodoComponent,
+    MessageBarComponent
   ],
   imports: [
     BrowserModule,

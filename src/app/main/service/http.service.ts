@@ -33,6 +33,12 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
+  doesProjectExist(id: string | null): Observable<Boolean> {
+    return this.http.get<Boolean>(
+      `${this.baseUrl}/projects/project/${id}/exists`
+    );
+  }
+
   getProjects(sort: string, order: SortDirection, page: number, pageSize: number): Observable<ProjectApi> {
     return this.http.get<ProjectApi>(
       `${this.baseUrl}/projects?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}&entityToFind=${this.projectClass}`
