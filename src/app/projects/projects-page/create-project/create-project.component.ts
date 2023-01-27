@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -6,6 +6,7 @@ import {retry, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Person} from "../../../main/api-models";
+import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
 
 @Component({
   selector: 'app-create-project',
@@ -20,6 +21,8 @@ export class CreateProjectComponent implements OnInit {
   NAME_MAX_LENGTH = 35;
   SHORT_FORM_MAX_LENGTH = 6;
   spin: boolean = false;
+  @ViewChild(MessageBarComponent)
+  messageBar: MessageBarComponent | undefined;
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
@@ -59,40 +62,19 @@ export class CreateProjectComponent implements OnInit {
   private handleError(error: HttpErrorResponse) {
     this.spin = false;
 
-    if (error.status === 400) {
-      if (error.error.code === "FIELD_VALIDATION") {
-        let formInput = this.formGroup.get(error.error.field);
-        formInput?.setErrors({'incorrect': true});
-
-        this.showErrorPopup((error.error.message));
-
-      } else if (error.error.code === "GENERAL_VALIDATION") {
-        this.showErrorPopup((error.error.message));
-      } else {
-        this.showErrorPopup('Project could not be created!');
-      }
-    } else {
-      console.log(`Backend returned code ${error.status}, body was: `, error.error);
-      this.showErrorPopup('Project could not be created!');
+    if (this.messageBar) {
+      this.messageBar.requestErrorMessage(error, this.formGroup, 'Project could not be created!');
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
-  }
 
-  private showErrorPopup(message: string) {
-    this.openBarWithMessage(message, ['error-bar'], 15000);
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
   private successCreation() {
     this.spin = false;
-    this.openBarWithMessage('Project created!', ['success-bar'], 15000);
+    if (this.messageBar) {
+      this.messageBar.success('Project created!');
+    }
     this.resetForm();
-  }
-
-  private openBarWithMessage(message: string, classes: string[], duration: number) {
-    this.snackBar.open(message, "Ok", {
-      duration: duration,
-      panelClass: classes
-    });
   }
 }
 
