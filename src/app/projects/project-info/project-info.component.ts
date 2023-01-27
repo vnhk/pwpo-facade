@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Location} from "@angular/common";
 import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
+import {MessageBarComponent} from "../../main/message-bar/message-bar.component";
 
 @Component({
   selector: 'app-project-info',
@@ -12,8 +13,8 @@ export class ProjectInfoComponent implements OnInit {
 
   projectExists: Boolean = false;
   spin: boolean = false;
-  message = "";
-  showError = false;
+  @ViewChild(MessageBarComponent)
+  messageBarComponent: MessageBarComponent | undefined;
 
   constructor(private location: Location,
               private httpService: HttpService,
@@ -48,8 +49,8 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   private error(message: string) {
-    this.message = message;
-    this.spin = false;
-    this.showError = true;
+    if (this.messageBarComponent) {
+      this.messageBarComponent.error(message);
+    }
   }
 }

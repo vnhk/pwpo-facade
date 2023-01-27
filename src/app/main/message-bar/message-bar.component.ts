@@ -8,24 +8,13 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class MessageBarComponent implements OnInit {
 
-  @Input()
-  message: string = "";
-  @Input()
-  showError: boolean | undefined;
-
   constructor(private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.message != "" && this.showError) {
-      this.error(this.message);
-    }
-  }
-
-  private error(message: string) {
+  public error(message: string) {
     this.openBarWithMessage(message, ['error-bar'], 15000);
   }
 

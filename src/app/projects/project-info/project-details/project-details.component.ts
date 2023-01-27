@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {Project} from "../../../main/api-models";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
 
 @Component({
@@ -14,10 +13,11 @@ export class ProjectDetailsComponent implements AfterViewInit {
   primaryAttributes: Project = {};
   secondaryAttributes: Project = {};
   spin: boolean = false;
+  @ViewChild(MessageBarComponent)
+  messageBarComponent: MessageBarComponent | undefined;
 
   constructor(private httpService: HttpService,
-              private route: ActivatedRoute,
-              private snackBar: MatSnackBar) {
+              private route: ActivatedRoute) {
   }
 
   ngAfterViewInit() {
@@ -26,16 +26,11 @@ export class ProjectDetailsComponent implements AfterViewInit {
     this.getAttributes(id);
   }
 
-  private openBarWithMessage(message: string, classes: string[], duration: number) {
-    this.snackBar.open(message, "Ok", {
-      duration: duration,
-      panelClass: classes
-    });
-  }
-
   private error(message: string) {
     this.spin = false;
-    this.openBarWithMessage(message, ['error-bar'], 15000);
+    if (this.messageBarComponent) {
+      this.messageBarComponent.error(message);
+    }
   }
 
   private getAttributes(id: string | null) {
