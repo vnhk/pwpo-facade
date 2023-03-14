@@ -32,9 +32,13 @@
         <mat-icon>info</mat-icon>
         <span>About</span>
       </button>
-      <button mat-button id="logout-button" class="menu-button">
+      <button *ngIf="logged()" mat-button id="logout-button" class="menu-button" (click)="logout()">
         <mat-icon>power_settings_new</mat-icon>
         <span>Logout</span>
+      </button>
+      <button *ngIf="!logged()" mat-button id="login" class="menu-button" routerLink="/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
       </button>
     </div>
   </mat-sidenav>

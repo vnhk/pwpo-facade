@@ -13,21 +13,24 @@ import {ProjectHistoryListComponent} from "./projects/project-history/project-hi
 import {ProjectHistoryDetailsComponent} from "./projects/project-history/project-history-details/project-history-details.component";
 import {ProjectHistoryDiffComponent} from "./projects/project-history/project-history-diff/project-history-diff.component";
 import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
+import {LoginComponent} from "./main/login/login.component";
+import {SignedInGuard} from "./main/session/signed-in.guard";
 
 const routes: Routes = [
-  {path: 'projects', component: ProjectsPageComponent},
-  {path: 'my-work', component: MyWorkComponent},
-  {path: 'projects/:id/create-task', component: CreateTaskComponent},
-  {path: 'projects/:id/add-user', component: AddUserProjectComponent},
-  {path: 'projects/:id/edit', component: EditProjectComponent},
-  {path: 'tasks/:id/edit', component: EditTaskComponent},
-  {path: 'projects/:id/history', component: ProjectHistoryListComponent},
-  {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent},
-  {path: 'projects/:id/history/:hid/diff', component: ProjectHistoryDiffComponent},
-  {path: 'projects/details/:id', component: ProjectInfoComponent},
-  {path: 'tasks/:id/details', component: TaskInfoComponent},
-  {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent},
-  {path: 'tasks', component: TaskListComponent}
+  {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard]},
+  {path: 'my-work', component: MyWorkComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/create-task', component: CreateTaskComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/add-user', component: AddUserProjectComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/edit', component: EditProjectComponent, canActivate: [SignedInGuard]},
+  {path: 'tasks/:id/edit', component: EditTaskComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/history', component: ProjectHistoryListComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/history/:hid/diff', component: ProjectHistoryDiffComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/details/:id', component: ProjectInfoComponent, canActivate: [SignedInGuard]},
+  {path: 'tasks/:id/details', component: TaskInfoComponent, canActivate: [SignedInGuard]},
+  {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent, canActivate: [SignedInGuard]},
+  {path: 'tasks', component: TaskListComponent, canActivate: [SignedInGuard]},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

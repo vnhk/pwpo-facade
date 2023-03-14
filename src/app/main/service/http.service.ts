@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {
   ChartData,
   DataEnumApi,
@@ -30,6 +30,10 @@ export class HttpService {
   private taskDTOPrimaryClass = "com.pwpo.task.dto.TaskPrimaryResponseDTO";
   private taskDTOSecondaryClass = "com.pwpo.task.dto.TaskSecondaryResponseDTO";
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(private http: HttpClient) {
   }
 
@@ -41,7 +45,8 @@ export class HttpService {
 
   getProjects(sort: string, order: SortDirection, page: number, pageSize: number): Observable<ProjectApi> {
     return this.http.get<ProjectApi>(
-      `${this.baseUrl}/projects?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}&entityToFind=${this.projectClass}`
+      `${this.baseUrl}/projects?sortDirection=${order.toUpperCase()}&sortField=${sort}&page=${page}&pageSize=${pageSize}&entityToFind=${this.projectClass}`,
+      this.httpOptions
     );
   }
 

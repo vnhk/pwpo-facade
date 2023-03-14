@@ -13,7 +13,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {TaskListComponent} from './tasks/task-list/task-list.component';
 import {ProjectInfoComponent} from './projects/project-info/project-info.component';
@@ -55,6 +55,8 @@ import {ProjectHistoryDiffComponent} from "./projects/project-history/project-hi
 import {TodoComponent} from './mywork/todo/todo.component';
 import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
 import { MessageBarComponent } from './main/message-bar/message-bar.component';
+import { LoginComponent } from './main/login/login.component';
+import {AuthInterceptorService} from "./main/session/auth-interceptor-service";
 
 @NgModule({
   declarations: [
@@ -83,7 +85,8 @@ import { MessageBarComponent } from './main/message-bar/message-bar.component';
     ProjectChartsComponent,
     EditTaskComponent,
     TodoComponent,
-    MessageBarComponent
+    MessageBarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +120,13 @@ import { MessageBarComponent } from './main/message-bar/message-bar.component';
     MatProgressBarModule,
     NgxChartsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 

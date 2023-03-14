@@ -1,6 +1,8 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
+import {AuthService} from "../session/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +17,7 @@ export class LayoutComponent {
   @ViewChild("menu-toolbar-left-icon")
   leftButton!: ElementRef;
 
-  constructor(private observer: BreakpointObserver) {
+  constructor(private observer: BreakpointObserver, private authService: AuthService, private router: Router) {
   }
 
   ngAfterViewInit(): void {
@@ -37,6 +39,15 @@ export class LayoutComponent {
     } else {
       this.sidenav.open();
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl("/login");
+  }
+
+  logged(): boolean {
+    return this.authService.isSignedIn();
   }
 
 }

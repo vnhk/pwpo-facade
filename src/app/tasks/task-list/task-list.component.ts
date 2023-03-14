@@ -4,7 +4,7 @@ import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
-import {SessionService} from "../../main/session/session.service";
+import {AuthService} from "../../main/session/auth.service";
 import {HttpService} from "../../main/service/http.service";
 import {DataEnum, DataEnumApi, TaskListDisplayOption} from "../../main/api-models";
 
@@ -61,7 +61,7 @@ export class TaskListComponent implements AfterViewInit {
 
   public constructor(private httpService: HttpService,
                      private route: ActivatedRoute,
-                     private session: SessionService) {
+                     private session: AuthService) {
 
   }
 
