@@ -17,8 +17,8 @@
       </span>
       <span *ngIf="logged()">
           <button mat-button>
-            <mat-icon>assessment</mat-icon>
-            <span>PlanSoftApp</span>
+            <mat-icon>perm_identity</mat-icon>
+            <span>{{authService.getLoggedUser().username}}</span>
           </button>
       </span>
       <mat-divider></mat-divider>
@@ -30,10 +30,6 @@
           <button class="menu-button" mat-button routerLink="/projects">
             <mat-icon>list</mat-icon>
             <span>Projects</span>
-          </button>
-          <button class="menu-button" mat-button>
-            <mat-icon>perm_identity</mat-icon>
-            <span>Profile</span>
           </button>
           <button class="menu-button" mat-button>
             <mat-icon>info</mat-icon>

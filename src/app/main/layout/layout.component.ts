@@ -17,7 +17,7 @@ export class LayoutComponent {
   @ViewChild("menu-toolbar-left-icon")
   leftButton!: ElementRef;
 
-  constructor(private observer: BreakpointObserver, private authService: AuthService, private router: Router) {
+  constructor(private observer: BreakpointObserver, public authService: AuthService, private router: Router) {
   }
 
   ngAfterViewInit(): void {

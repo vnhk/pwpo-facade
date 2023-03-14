@@ -21,7 +21,8 @@ export class AuthService {
   }
 
   public getLoggedUser(): User {
-    return {username: "joedoe", fullName: "Joe Doe"};
+    let item = localStorage.getItem("username");
+    return {username: item == null ? "" : item, fullName: ""};
   }
 
   public setSession(authResult: any) {
