@@ -2,7 +2,7 @@
   <mat-tab label="Projects">
     <app-project-list></app-project-list>
   </mat-tab>
-  <mat-tab label="Form">
+  <mat-tab *ngIf="authService.isManager()" label="Form">
     <app-create-project></app-create-project>
   </mat-tab>
 </mat-tab-group>

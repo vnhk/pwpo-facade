@@ -3,6 +3,7 @@ import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {Project} from "../../../main/api-models";
 import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
+import {AuthService} from "../../../main/session/auth.service";
 
 @Component({
   selector: 'app-project-details',
@@ -17,7 +18,8 @@ export class ProjectDetailsComponent implements AfterViewInit {
   messageBarComponent: MessageBarComponent | undefined;
 
   constructor(private httpService: HttpService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public authService: AuthService) {
   }
 
   ngAfterViewInit() {

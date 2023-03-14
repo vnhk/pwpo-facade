@@ -28,11 +28,15 @@ export class AuthService {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
     localStorage.setItem('id_token', authResult.token);
+    localStorage.setItem('roles', authResult.roles);
+    localStorage.setItem('username', authResult.username);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
   }
 
   logout() {
     localStorage.removeItem("id_token");
+    localStorage.removeItem("roles");
+    localStorage.removeItem("username");
     localStorage.removeItem("expires_at");
   }
 
@@ -51,5 +55,14 @@ export class AuthService {
       return moment(expiresAt);
     }
     return null;
+  }
+
+  isManager() {
+    let roles = localStorage.getItem("roles");
+    if (roles) {
+      return roles.includes("ROLE_MANAGER");
+    }
+
+    return false;
   }
 }

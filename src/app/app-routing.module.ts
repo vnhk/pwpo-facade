@@ -15,13 +15,14 @@ import {ProjectHistoryDiffComponent} from "./projects/project-history/project-hi
 import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
 import {LoginComponent} from "./main/login/login.component";
 import {SignedInGuard} from "./main/session/signed-in.guard";
+import {IsManagerGuard} from "./main/session/is-manager.guard";
 
 const routes: Routes = [
   {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard]},
   {path: 'my-work', component: MyWorkComponent, canActivate: [SignedInGuard]},
   {path: 'projects/:id/create-task', component: CreateTaskComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/add-user', component: AddUserProjectComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/edit', component: EditProjectComponent, canActivate: [SignedInGuard]},
+  {path: 'projects/:id/add-user', component: AddUserProjectComponent, canActivate: [SignedInGuard, IsManagerGuard]},
+  {path: 'projects/:id/edit', component: EditProjectComponent, canActivate: [SignedInGuard, IsManagerGuard]},
   {path: 'tasks/:id/edit', component: EditTaskComponent, canActivate: [SignedInGuard]},
   {path: 'projects/:id/history', component: ProjectHistoryListComponent, canActivate: [SignedInGuard]},
   {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent, canActivate: [SignedInGuard]},

@@ -30,13 +30,10 @@
   </span>
 
   <span buttons>
-    <button mat-button routerLink="/projects/{{primaryAttributes.id}}/edit">
+    <button *ngIf="authService.isManager()" mat-button routerLink="/projects/{{primaryAttributes.id}}/edit">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-button>
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-button routerLink="/projects/{{primaryAttributes.id}}/add-user">
+    <button *ngIf="authService.isManager()" mat-button routerLink="/projects/{{primaryAttributes.id}}/add-user">
       <mat-icon>person_add</mat-icon>
     </button>
     <button mat-button routerLink="/projects/{{primaryAttributes.id}}/history">

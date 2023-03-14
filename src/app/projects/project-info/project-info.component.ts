@@ -3,6 +3,7 @@ import {Location} from "@angular/common";
 import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {MessageBarComponent} from "../../main/message-bar/message-bar.component";
+import {AuthService} from "../../main/session/auth.service";
 
 @Component({
   selector: 'app-project-info',
