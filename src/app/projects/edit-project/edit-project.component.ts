@@ -61,7 +61,6 @@ export class EditProjectComponent implements OnInit {
     if (this.formGroup.valid) {
       this.httpService.editProject(this.formGroup.value)
         .pipe(
-          retry(3),
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }

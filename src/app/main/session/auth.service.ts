@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import * as moment from "moment";
+import {Router} from "@angular/router";
 
 export interface User {
   username: string;
@@ -13,7 +14,7 @@ export interface User {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(username: string, password: string) {
@@ -39,6 +40,7 @@ export class AuthService {
     localStorage.removeItem("roles");
     localStorage.removeItem("username");
     localStorage.removeItem("expires_at");
+    this.router.navigateByUrl("/login");
   }
 
   public isSignedIn() {

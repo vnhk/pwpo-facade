@@ -49,7 +49,6 @@ export class AddUserProjectComponent implements OnInit {
     if (this.formGroup.valid) {
       this.httpService.addUserToProject(this.formGroup.value, this.id)
         .pipe(
-          retry(3),
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }

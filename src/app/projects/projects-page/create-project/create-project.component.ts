@@ -49,7 +49,6 @@ export class CreateProjectComponent implements OnInit {
       this.spin = true;
       this.httpService.createProject(this.formGroup.value)
         .pipe(
-          retry(3),
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }

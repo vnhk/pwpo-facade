@@ -34,7 +34,6 @@ export class AddTaskTimelogComponent implements OnInit {
     if (this.formGroup.valid) {
       this.httpService.logTime(this.formGroup.value, this.id)
         .pipe(
-          retry(3),
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }

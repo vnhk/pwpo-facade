@@ -43,7 +43,6 @@ export class LayoutComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl("/login");
   }
 
   logged(): boolean {

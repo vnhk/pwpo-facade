@@ -65,7 +65,6 @@ export class CreateTaskComponent implements OnInit {
       this.formGroup.value.dueDate = new Date(twelveClock);
       this.httpService.createTask(this.formGroup.value)
         .pipe(
-          retry(3),
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }

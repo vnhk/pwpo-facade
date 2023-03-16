@@ -76,7 +76,6 @@ export class EditTaskComponent implements OnInit {
       console.log(this.formGroup.value);
       this.httpService.editTask(this.formGroup.value)
         .pipe(
-          retry(1),
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }
