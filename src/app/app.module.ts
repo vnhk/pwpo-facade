@@ -57,6 +57,7 @@ import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
 import { MessageBarComponent } from './main/message-bar/message-bar.component';
 import { LoginComponent } from './main/login/login.component';
 import {AuthInterceptorService} from "./main/session/auth-interceptor-service";
+import { SearchComponent } from './search/search/search.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import {AuthInterceptorService} from "./main/session/auth-interceptor-service";
     EditTaskComponent,
     TodoComponent,
     MessageBarComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

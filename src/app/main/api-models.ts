@@ -135,3 +135,23 @@ export interface TaskListDisplayOption {
   checked: boolean;
   subOptions: TaskListDisplayOption[];
 }
+
+export class SearchCriteria {
+  id: string | undefined;
+  type: string | undefined;
+  attr: string | undefined;
+  operator: string | undefined;
+  value: string | undefined;
+}
+
+export class SearchGroup {
+  id: string | undefined;
+  queries: string[] = [];
+  operator: string | undefined
+}
+
+export class SearchRequest {
+  resultType: string | undefined;
+  groups: SearchGroup[] = [];
+  criteria: SearchCriteria[] = [];
+}

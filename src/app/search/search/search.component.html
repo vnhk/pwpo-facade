@@ -1,0 +1,98 @@
+<mat-card>
+  <mat-card-content style="width: 100%">
+    <mat-form-field appearance="fill">
+      <mat-label>I want to find:</mat-label>
+      <mat-select [(value)]="search.resultType">
+        <mat-option value="project">Project</mat-option>
+        <mat-option value="user">User</mat-option>
+        <mat-option value="task">Task</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    {{search | json}}
+    With Criteria:
+    <hr>
+    <div *ngFor="let criteria of search.criteria">
+      {{criteria.id}}:
+      <div *ngIf="search.resultType === 'project'" class="criteria row">
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Select type</mat-label>
+            <mat-select [(value)]="criteria.type">
+              <mat-option value="project">Project</mat-option>
+              <mat-option value="user">User in project</mat-option>
+              <mat-option value="task">Task in project</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Select attribute</mat-label>
+            <mat-select [(value)]="criteria.attr">
+              <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="name">Name
+              </mat-option>
+              <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="description">
+                Description
+              </mat-option>
+              <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
+              <mat-option *ngIf="criteria.type === 'user'" value="secondName">Second name</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Select operator</mat-label>
+            <mat-select [(value)]="criteria.operator">
+              <mat-option value="equals">equals</mat-option>
+              <mat-option value="contains">contains</mat-option>
+              <mat-option value="notEquals">do not equal</mat-option>
+              <mat-option value="notContains">do not contain</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Value</mat-label>
+            <input [(ngModel)]="criteria.value" matInput type="text">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <button (click)="addCriteria()" mat-button="plus">+</button>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Select operator</mat-label>
+          <mat-select [(value)]="resultOperator">
+            <mat-option value="AND">AND</mat-option>
+            <mat-option value="OR">OR</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--          <div class="col-md-4">-->
+      <!--            <mat-checkbox *ngFor="let query of availableQueriesForGrouping"-->
+      <!--                          class="preferences-parent-checkbox"-->
+      <!--                          color="primary">-->
+      <!--              {{query}}-->
+      <!--            </mat-checkbox>-->
+      <!--          </div>-->
+      Type queries separated by comma to create a group.
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Value</mat-label>
+        <input [(ngModel)]="groupValue" matInput type="text">
+      </mat-form-field>
+    </div>
+    <button (click)="saveGroup()" mat-button="primary">Save</button>
+    <hr>
+    Groups: {{search.groups | json}}
+    Available Groups: {{availableQueriesForGrouping | json}}
+    <hr>
+    <button (click)="performSearch()" mat-button="primary">Search</button>
+  </mat-card-content>
+</mat-card>

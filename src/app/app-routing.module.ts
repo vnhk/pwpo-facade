@@ -16,6 +16,7 @@ import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
 import {LoginComponent} from "./main/login/login.component";
 import {SignedInGuard} from "./main/session/signed-in.guard";
 import {IsManagerGuard} from "./main/session/is-manager.guard";
+import {SearchComponent} from "./search/search/search.component";
 
 const routes: Routes = [
   {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard]},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'tasks/:id/details', component: TaskInfoComponent, canActivate: [SignedInGuard]},
   {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent, canActivate: [SignedInGuard]},
   {path: 'tasks', component: TaskListComponent, canActivate: [SignedInGuard]},
+  {path: 'search', component: SearchComponent, canActivate: [SignedInGuard]},
   {path: 'login', component: LoginComponent}
 ];
 

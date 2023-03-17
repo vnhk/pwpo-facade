@@ -6,10 +6,12 @@ import {
   ChartData,
   DataEnumApi,
   HistoryDiffApi,
+  Item,
   PersonApi,
   Project,
   ProjectApi,
   ProjectHistoryApi,
+  SearchRequest,
   Task,
   TaskApi,
   TaskListDisplayOption,
@@ -31,7 +33,7 @@ export class HttpService {
   private taskDTOSecondaryClass = "com.pwpo.task.dto.TaskSecondaryResponseDTO";
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   constructor(private http: HttpClient) {
@@ -241,6 +243,13 @@ export class HttpService {
   getProjectSumTimeChartData(id: string | null): Observable<ChartData[]> {
     return this.http.get<ChartData[]>(
       `${this.baseUrl}/projects/project/${id}/visualization/sum-time`
+    );
+  }
+
+  search(search: SearchRequest) {
+    return this.http.post<Item>(
+      `${this.baseUrl}/search`,
+      search
     );
   }
 }
