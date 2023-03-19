@@ -54,10 +54,11 @@ import {ProjectHistoryDetailsComponent} from "./projects/project-history/project
 import {ProjectHistoryDiffComponent} from "./projects/project-history/project-history-diff/project-history-diff.component";
 import {TodoComponent} from './mywork/todo/todo.component';
 import {EditTaskComponent} from "./tasks/edit-task/edit-task.component";
-import { MessageBarComponent } from './main/message-bar/message-bar.component';
-import { LoginComponent } from './main/login/login.component';
+import {MessageBarComponent} from './main/message-bar/message-bar.component';
+import {LoginComponent} from './main/login/login.component';
 import {AuthInterceptorService} from "./main/session/auth-interceptor-service";
-import { SearchComponent } from './search/search/search.component';
+import {SearchComponent} from './search/search/search.component';
+import {AdminPageComponent} from './admin/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { SearchComponent } from './search/search/search.component';
     TodoComponent,
     MessageBarComponent,
     LoginComponent,
-    SearchComponent
+    SearchComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,

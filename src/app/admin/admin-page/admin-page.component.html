@@ -1,0 +1,57 @@
+<mat-tab-group>
+  <mat-tab label="Create new user account">
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Main role</mat-label>
+              <!--                <mat-select formControlName="role">-->
+              <mat-select>
+                <mat-option *ngFor="let role of roles"
+                            [value]="role">{{role}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Username</mat-label>
+              <!--                <input formControlName="username" matInput>-->
+              <input matInput>
+              <mat-hint>Password will be generated automatically.</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <button mat-button>Create</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Manage roles">
+
+  </mat-tab>
+  <mat-tab label="Not activated accounts">
+    <mat-card>
+      <mat-card-content>
+        <table [dataSource]="notActivatedUsers" class="mat-elevation-z8" mat-table style="width: 100%">
+          <mat-text-column name="nick"></mat-text-column>
+          <mat-text-column name="email"></mat-text-column>
+          <!--          regenerate password action-->
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Manage Users">
+    <mat-card>
+      <mat-card-content>
+        the same but all users
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
+

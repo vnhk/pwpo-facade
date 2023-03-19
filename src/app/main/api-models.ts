@@ -15,6 +15,7 @@ export interface PersonApi extends ItemApi {
 
 export interface Person extends Item {
   fullName?: string;
+  email?: string;
   nick?: string;
   projectRole?: string;
 }

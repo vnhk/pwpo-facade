@@ -68,4 +68,13 @@ export class AuthService {
 
     return false;
   }
+
+  isAdmin() {
+    let roles = localStorage.getItem("roles");
+    if (roles) {
+      return roles.includes("ROLE_ADMIN");
+    }
+
+    return false;
+  }
 }
