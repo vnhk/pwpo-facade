@@ -6,7 +6,7 @@ import {
   ChartData,
   DataEnumApi,
   HistoryDiffApi,
-  Item,
+  Item, Person,
   PersonApi,
   Project,
   ProjectApi,
@@ -198,6 +198,13 @@ export class HttpService {
   editTask(value: string) {
     return this.http.put<Task>(
       `${this.baseUrl}/tasks`,
+      value
+    );
+  }
+
+  editUser(value: string) {
+    return this.http.put<Task>(
+      `${this.baseUrl}/admin/users`,
       value
     );
   }

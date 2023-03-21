@@ -38,10 +38,11 @@
         <table [dataSource]="notActivatedUsers" class="mat-elevation-z8" mat-table style="width: 100%">
           <mat-text-column name="nick"></mat-text-column>
           <mat-text-column name="email"></mat-text-column>
+          <mat-text-column name="roles"></mat-text-column>
           <!--          regenerate password action-->
 
           <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+          <tr (click)="openActionModal(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
         </table>
       </mat-card-content>
     </mat-card>

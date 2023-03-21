@@ -59,6 +59,8 @@ import {LoginComponent} from './main/login/login.component';
 import {AuthInterceptorService} from "./main/session/auth-interceptor-service";
 import {SearchComponent} from './search/search/search.component';
 import {AdminPageComponent} from './admin/admin-page/admin-page.component';
+import {UserManageOptionModalComponent} from './admin/user-manage-option-modal/user-manage-option-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import {AdminPageComponent} from './admin/admin-page/admin-page.component';
     MessageBarComponent,
     LoginComponent,
     SearchComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    UserManageOptionModalComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +124,7 @@ import {AdminPageComponent} from './admin/admin-page/admin-page.component';
     MatSnackBarModule,
     MatExpansionModule,
     MatListModule,
+    MatDialogModule,
     MatProgressBarModule,
     NgxChartsModule
   ],
