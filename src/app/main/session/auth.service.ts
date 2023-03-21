@@ -6,7 +6,6 @@ import {Router} from "@angular/router";
 
 export interface User {
   username: string;
-  fullName: string;
 }
 
 @Injectable({
@@ -23,7 +22,7 @@ export class AuthService {
 
   public getLoggedUser(): User {
     let item = localStorage.getItem("username");
-    return {username: item == null ? "" : item, fullName: ""};
+    return {username: item == null ? "" : item};
   }
 
   public setSession(authResult: any) {

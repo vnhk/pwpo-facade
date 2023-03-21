@@ -51,7 +51,7 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.httpService.getUsersWithAccessToTheProject(this.id, "fullName", "asc", 1, 5000)
+    this.httpService.getUsersWithAccessToTheProject(this.id, "firstName", "asc", 1, 5000)
       .subscribe(value => this.addedToProject = value.items);
     this.httpService.getEnumByName("com.pwpo.common.enums.Priority").subscribe(value => this.priority = value.items);
     this.httpService.getEnumByName("com.pwpo.task.enums.TaskType").subscribe(value => this.taskType = value.items);

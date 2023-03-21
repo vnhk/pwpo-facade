@@ -119,7 +119,7 @@
 
       <ng-container matColumnDef="assignee">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Assignee</th>
-        <td *matCellDef="let row" mat-cell>{{row.assignee?.fullName}}</td>
+        <td *matCellDef="let row" mat-cell>{{row.assignee?.firstName}} {{row.assignee?.lastName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="dueDate">

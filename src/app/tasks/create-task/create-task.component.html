@@ -42,7 +42,7 @@
             <mat-label>Assignee</mat-label>
             <mat-select formControlName="assignee">
               <mat-option *ngFor="let user of addedToProject"
-                          [value]="user.id">{{user.fullName}}</mat-option>
+                          [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -63,21 +63,22 @@
         <div class="col-md-2">
           <mat-form-field appearance="fill" hintLabel="Max 3600h">
             <mat-label>Estimation (hours)</mat-label>
-            <input formControlName="estimationInHours" matInput type="number" #estimationInHours>
+            <input #estimationInHours formControlName="estimationInHours" matInput type="number">
           </mat-form-field>
         </div>
 
         <div class="col-md-2">
           <mat-form-field appearance="fill" hintLabel="Max 60m">
             <mat-label>Estimation (minutes)</mat-label>
-            <input formControlName="estimationInMinutes" matInput type="number" #estimationInMinutes>
+            <input #estimationInMinutes formControlName="estimationInMinutes" matInput type="number">
           </mat-form-field>
         </div>
 
         <div class="col-md-2">
           <mat-form-field appearance="fill">
             <mat-label>Estimation result in minutes</mat-label>
-            <input matInput value="{{parseInt(estimationInMinutes.value) + parseInt(estimationInHours.value) * 60}}" disabled>
+            <input disabled matInput
+                   value="{{parseInt(estimationInMinutes.value) + parseInt(estimationInHours.value) * 60}}">
           </mat-form-field>
         </div>
 
@@ -86,7 +87,7 @@
             <mat-label>Owner</mat-label>
             <mat-select formControlName="owner" required>
               <mat-option *ngFor="let user of addedToProject"
-                          [value]="user.id">{{user.fullName}}</mat-option>
+                          [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -104,8 +105,8 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="!formGroup.valid" mat-raised-button class="save-button" type="submit">Save</button>
-      <button (click)="this.resetForm()" mat-raised-button class="reset-button" type="button">Reset</button>
+      <button [disabled]="!formGroup.valid" class="save-button" mat-raised-button type="submit">Save</button>
+      <button (click)="this.resetForm()" class="reset-button" mat-raised-button type="button">Reset</button>
     </mat-card-actions>
   </mat-card>
 </form>

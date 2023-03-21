@@ -14,10 +14,12 @@ export interface PersonApi extends ItemApi {
 }
 
 export interface Person extends Item {
-  fullName?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   nick?: string;
   projectRole?: string;
+  roles?: string[];
 }
 
 export interface ProjectApi extends ItemApi {

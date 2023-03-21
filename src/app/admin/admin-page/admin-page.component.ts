@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Person} from "../../main/api-models";
+import {HttpService} from "../../main/service/http.service";
 
 @Component({
   selector: 'app-admin-page',
@@ -8,14 +9,18 @@ import {Person} from "../../main/api-models";
 })
 export class AdminPageComponent implements OnInit {
   roles = ["ROLE_ADMIN", "ROLE_USER", "ROLE_MANAGER"];
-  displayedColumns= ["nick", "email"];
+  displayedColumns = ["nick", "email"];
   notActivatedUsers: Person[] = [];
+  allUsers: Person[] = [];
 
-  constructor() {
+  constructor(private http: HttpService) {
   }
 
   ngOnInit(): void {
-    this.notActivatedUsers.push({email:"test@test.pl", nick:"testNick"})
+    this.http.getAllUsersWithRoles().subscribe(value => {
+      this.allUsers = value.items;
+      this.notActivatedUsers = this.allUsers.filter(v => v.roles?.includes("ROLE_NOT_ACTIVATED"))
+    })
   }
 
 }

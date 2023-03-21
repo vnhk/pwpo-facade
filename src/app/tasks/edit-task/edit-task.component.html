@@ -42,7 +42,7 @@
             <mat-label>Assignee</mat-label>
             <mat-select formControlName="assignee">
               <mat-option *ngFor="let user of addedToProject"
-                          [value]="user.id">{{user.fullName}}</mat-option>
+                          [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -87,7 +87,7 @@
             <mat-label>Owner</mat-label>
             <mat-select formControlName="owner" required>
               <mat-option *ngFor="let user of addedToProject"
-                          [value]="user.id">{{user.fullName}}</mat-option>
+                          [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

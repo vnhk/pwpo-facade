@@ -13,7 +13,7 @@
             <mat-label>User</mat-label>
             <mat-select formControlName="user">
               <mat-option *ngFor="let user of notAddedUsers"
-                          [value]="user.id">{{user.fullName}}</mat-option>
+                          [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -29,8 +29,8 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="!formGroup.valid" mat-raised-button class="save-button" type="submit">Save</button>
-      <button (click)="this.resetForm()" mat-raised-button class="reset-button" type="button">Reset</button>
+      <button [disabled]="!formGroup.valid" class="save-button" mat-raised-button type="submit">Save</button>
+      <button (click)="this.resetForm()" class="reset-button" mat-raised-button type="button">Reset</button>
     </mat-card-actions>
   </mat-card>
 </form>

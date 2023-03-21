@@ -94,6 +94,12 @@ export class HttpService {
     );
   }
 
+  getAllUsersWithRoles(): Observable<PersonApi> {
+    return this.http.get<PersonApi>(
+      `${this.baseUrl}/admin/users`
+    );
+  }
+
   getTimelogs(taskId: string | null | undefined, page: number, pageSize: number): Observable<TimeLogApi> {
     return this.http.get<TimeLogApi>(
       `${this.baseUrl}/tasks/task/${taskId}/timelogs?page=${page}&pageSize=${pageSize}`
