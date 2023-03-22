@@ -23,6 +23,7 @@ import {IsAdminGuard} from "./main/session/is-admin.guard";
 const routes: Routes = [
   {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard]},
   {path: 'my-work', component: MyWorkComponent, canActivate: [SignedInGuard]},
+  {path: '', component: MyWorkComponent, canActivate: [SignedInGuard]},
   {path: 'projects/:id/create-task', component: CreateTaskComponent, canActivate: [SignedInGuard]},
   {path: 'projects/:id/add-user', component: AddUserProjectComponent, canActivate: [SignedInGuard, IsManagerGuard]},
   {path: 'projects/:id/edit', component: EditProjectComponent, canActivate: [SignedInGuard, IsManagerGuard]},

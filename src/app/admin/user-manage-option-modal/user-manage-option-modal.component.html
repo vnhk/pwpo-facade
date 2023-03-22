@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Manage User Account</h1>
+<h1 mat-dialog-title>Manage <strong>{{data.nick}}</strong> Account</h1>
 <form (ngSubmit)="onSubmitEditUser()" [formGroup]="formGroup" class="form-container">
   <div mat-dialog-content>
     <div *ngIf="edit">
@@ -25,12 +25,20 @@
   </div>
 </form>
 <div mat-dialog-actions>
-  <button *ngIf="!edit && !disabledUser"  (click)="disableUser()" mat-button tabindex="-1">Disable</button>
-  <button *ngIf="!edit && disabledUser" (click)="enableUser()" mat-button tabindex="-1">Enable</button>
-  <button *ngIf="!edit" mat-button tabindex="-1" (click)="resetPassword()">Reset password</button>
-  <button *ngIf="!edit" mat-button tabindex="-1">Manage roles</button>
-  <button (click)="edit=true" *ngIf="!edit" mat-button tabindex="-1">Edit</button>
-  <button (click)="onSubmitEditUser()" *ngIf="edit" mat-button tabindex="-1">Save</button>
-  <button mat-button mat-dialog-close tabindex="-1">Close</button>
+  <button (click)="disableUser()" *ngIf="!edit && !disabledUser" class="red-button" mat-raised-button tabindex="-1">
+    Disable
+  </button>
+  <button (click)="enableUser()" *ngIf="!edit && disabledUser" class="yellow-button" mat-raised-button tabindex="-1">
+    Enable
+  </button>
+  <button (click)="resetPassword()" *ngIf="!edit" class="grey-button" mat-raised-button tabindex="-1">
+    Reset password
+  </button>
+  <button *ngIf="!edit" class="grey-button" mat-button mat-raised-button tabindex="-1">Manage roles</button>
+  <button (click)="edit=true" *ngIf="!edit" class="grey-button" mat-raised-button tabindex="-1">Edit</button>
+  <button (click)="onSubmitEditUser()" *ngIf="edit" class="grey-button" mat-raised-button tabindex="-1">
+    Save
+  </button>
+  <button class="grey-button" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
 
 </div>

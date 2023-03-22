@@ -41,12 +41,17 @@ mat-card-header.form-header {
 
 /*snackbar*/
 
-.save-button {
+.red-button {
+  background: #fa625f;
+  color: #e5eaf5;
+}
+
+.grey-button {
   background: #3F4B59;
   color: #e5eaf5;
 }
 
-.reset-button {
+.yellow-button {
   background: #feda6a;
   color: #3F4B59;
 }
