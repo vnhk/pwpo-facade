@@ -13,6 +13,12 @@ export interface PersonApi extends ItemApi {
   items: Person[];
 }
 
+
+export class AuthResponse {
+  username: string | undefined;
+  password: string | undefined;
+}
+
 export interface Person extends Item {
   firstName?: string;
   lastName?: string;

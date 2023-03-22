@@ -3,10 +3,11 @@ import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {
+  AuthResponse,
   ChartData,
   DataEnumApi,
   HistoryDiffApi,
-  Item, Person,
+  Item,
   PersonApi,
   Project,
   ProjectApi,
@@ -263,6 +264,27 @@ export class HttpService {
     return this.http.post<Item>(
       `${this.baseUrl}/search`,
       search
+    );
+  }
+
+  disableAccount(id: number | undefined) {
+    return this.http.post<Item>(
+      `${this.baseUrl}/admin/users/disable/${id}`,
+      null
+    );
+  }
+
+  enableAccount(id: number | undefined) {
+    return this.http.post<Item>(
+      `${this.baseUrl}/admin/users/enable/${id}`,
+      null
+    );
+  }
+
+  resetPassword(nick: string | undefined) {
+    return this.http.post<AuthResponse>(
+      `${this.baseUrl}/auth/reset-password`,
+      {nick: nick}
     );
   }
 }

@@ -25,10 +25,12 @@
   </div>
 </form>
 <div mat-dialog-actions>
-  <button *ngIf="!edit" tabindex="-1" mat-button>Delete</button>
-  <button *ngIf="!edit" tabindex="-1" mat-button>Reset password</button>
-  <button (click)="edit=true" *ngIf="!edit" tabindex="-1" mat-button>Edit</button>
-  <button (click)="onSubmitEditUser()" *ngIf="edit" tabindex="-1" mat-button>Save</button>
-  <button mat-button tabindex="-1" mat-dialog-close>Close</button>
+  <button *ngIf="!edit && !disabledUser"  (click)="disableUser()" mat-button tabindex="-1">Disable</button>
+  <button *ngIf="!edit && disabledUser" (click)="enableUser()" mat-button tabindex="-1">Enable</button>
+  <button *ngIf="!edit" mat-button tabindex="-1" (click)="resetPassword()">Reset password</button>
+  <button *ngIf="!edit" mat-button tabindex="-1">Manage roles</button>
+  <button (click)="edit=true" *ngIf="!edit" mat-button tabindex="-1">Edit</button>
+  <button (click)="onSubmitEditUser()" *ngIf="edit" mat-button tabindex="-1">Save</button>
+  <button mat-button mat-dialog-close tabindex="-1">Close</button>
 
 </div>

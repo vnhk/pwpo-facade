@@ -15,12 +15,18 @@ import {throwError} from "rxjs";
 })
 export class UserManageOptionModalComponent implements OnInit {
   edit = false;
+  disabledUser = false;
   formGroup: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Person,
               private formBuilder: FormBuilder,
               public snackBar: MatSnackBar,
               private httpService: HttpService) {
+
+    if (data.roles) {
+      this.disabledUser = data.roles?.includes("ROLE_DISABLED");
+    }
+
     this.formGroup = this.formBuilder.group({
       'id': [null, [Validators.required]],
       'firstName': [null, [Validators.required, Validators.maxLength(50)]],
@@ -81,5 +87,53 @@ export class UserManageOptionModalComponent implements OnInit {
       duration: duration,
       panelClass: classes
     });
+  }
+
+  disableUser() {
+    if (confirm("Are you sure you want to disable this account?")) {
+      this.httpService.disableAccount(this.data.id)
+        .pipe(
+          catchError(err => {
+            return this.handleErrorSimple(err, "Cannot disable user!");
+          })
+        ).subscribe(() => {
+        this.openBarWithMessage('User account disabled!', ['success-bar'], 15000);
+        this.disabledUser = true;
+      });
+    }
+  }
+
+  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+
+  enableUser() {
+    if (confirm("Are you sure you want to enable this account?")) {
+      this.httpService.enableAccount(this.data.id)
+        .pipe(
+          catchError(err => {
+            return this.handleErrorSimple(err, "Cannot enable user account!");
+          })
+        ).subscribe(() => {
+        this.openBarWithMessage('User account enabled!', ['success-bar'], 15000);
+        this.disabledUser = false;
+      });
+    }
+  }
+
+  resetPassword() {
+    if (confirm("Are you sure you want to reset password for this account?")) {
+      this.httpService.resetPassword(this.data.nick)
+        .pipe(
+          catchError(err => {
+            return this.handleErrorSimple(err, "Cannot reset password!");
+          })
+        ).subscribe((val) => {
+        this.openBarWithMessage('Password regenerated: ' + val.password, ['success-bar'], 40000);
+        this.disabledUser = false;
+      });
+    }
   }
 }
