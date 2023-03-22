@@ -19,25 +19,28 @@ import {IsManagerGuard} from "./main/session/is-manager.guard";
 import {SearchComponent} from "./search/search/search.component";
 import {AdminPageComponent} from "./admin/admin-page/admin-page.component";
 import {IsAdminGuard} from "./main/session/is-admin.guard";
+import {ProfileComponent} from "./profile/profile/profile.component";
+import {HasActivatedAccountGuard} from "./main/session/has-activated-account.guard";
 
 const routes: Routes = [
-  {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard]},
-  {path: 'my-work', component: MyWorkComponent, canActivate: [SignedInGuard]},
-  {path: '', component: MyWorkComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/create-task', component: CreateTaskComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/add-user', component: AddUserProjectComponent, canActivate: [SignedInGuard, IsManagerGuard]},
-  {path: 'projects/:id/edit', component: EditProjectComponent, canActivate: [SignedInGuard, IsManagerGuard]},
-  {path: 'tasks/:id/edit', component: EditTaskComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/history', component: ProjectHistoryListComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/:id/history/:hid/diff', component: ProjectHistoryDiffComponent, canActivate: [SignedInGuard]},
-  {path: 'projects/details/:id', component: ProjectInfoComponent, canActivate: [SignedInGuard]},
-  {path: 'tasks/:id/details', component: TaskInfoComponent, canActivate: [SignedInGuard]},
-  {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent, canActivate: [SignedInGuard]},
-  {path: 'tasks', component: TaskListComponent, canActivate: [SignedInGuard]},
-  {path: 'search', component: SearchComponent, canActivate: [SignedInGuard]},
-  {path: 'admin', component: AdminPageComponent, canActivate: [SignedInGuard, IsAdminGuard]},
-  {path: 'login', component: LoginComponent}
+  {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'my-work', component: MyWorkComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: '', component: MyWorkComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'projects/:id/create-task', component: CreateTaskComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'projects/:id/add-user', component: AddUserProjectComponent, canActivate: [SignedInGuard, IsManagerGuard, HasActivatedAccountGuard]},
+  {path: 'projects/:id/edit', component: EditProjectComponent, canActivate: [SignedInGuard, IsManagerGuard, HasActivatedAccountGuard]},
+  {path: 'tasks/:id/edit', component: EditTaskComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'projects/:id/history', component: ProjectHistoryListComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'projects/:id/history/:hid/diff', component: ProjectHistoryDiffComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'projects/details/:id', component: ProjectInfoComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'tasks/:id/details', component: TaskInfoComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'tasks', component: TaskListComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'search', component: SearchComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'admin', component: AdminPageComponent, canActivate: [SignedInGuard, IsAdminGuard, HasActivatedAccountGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [SignedInGuard]}
 ];
 
 @NgModule({

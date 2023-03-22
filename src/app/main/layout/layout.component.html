@@ -23,25 +23,21 @@
       </span>
       <mat-divider></mat-divider>
       <span *ngIf="logged()">
-          <button class="menu-button" mat-button routerLink="/my-work">
+          <button class="menu-button" mat-button routerLink="/my-work" [disabled]="authService.hasNotActivatedAccount()">
             <mat-icon>work</mat-icon>
             <span>My work</span>
           </button>
-          <button class="menu-button" mat-button routerLink="/projects">
+          <button class="menu-button" mat-button routerLink="/projects" [disabled]="authService.hasNotActivatedAccount()">
             <mat-icon>list</mat-icon>
             <span>Projects</span>
           </button>
-          <button class="menu-button" mat-button routerLink="/search">
+          <button class="menu-button" mat-button routerLink="/search" [disabled]="authService.hasNotActivatedAccount()">
             <mat-icon>search</mat-icon>
             <span>Search</span>
           </button>
           <button *ngIf="authService.isAdmin()" class="menu-button" mat-button routerLink="/admin">
             <mat-icon>settings</mat-icon>
             <span>Admin panel</span>
-          </button>
-          <button class="menu-button" mat-button>
-            <mat-icon>info</mat-icon>
-            <span>About</span>
           </button>
           <button (click)="logout()" class="menu-button" id="logout-button" mat-button>
             <mat-icon>power_settings_new</mat-icon>

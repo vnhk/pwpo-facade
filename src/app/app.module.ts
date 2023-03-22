@@ -61,6 +61,7 @@ import {SearchComponent} from './search/search/search.component';
 import {AdminPageComponent} from './admin/admin-page/admin-page.component';
 import {UserManageOptionModalComponent} from './admin/user-manage-option-modal/user-manage-option-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { ProfileComponent } from './profile/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     LoginComponent,
     SearchComponent,
     AdminPageComponent,
-    UserManageOptionModalComponent
+    UserManageOptionModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

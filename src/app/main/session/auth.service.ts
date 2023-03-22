@@ -68,6 +68,15 @@ export class AuthService {
     return false;
   }
 
+  hasNotActivatedAccount() {
+    let roles = localStorage.getItem("roles");
+    if (roles) {
+      return roles.includes("ROLE_NOT_ACTIVATED");
+    }
+
+    return false;
+  }
+
   isAdmin() {
     let roles = localStorage.getItem("roles");
     if (roles) {
