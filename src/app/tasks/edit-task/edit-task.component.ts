@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {retry, throwError} from "rxjs";
+import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
@@ -16,8 +16,8 @@ import {HttpService} from "../../main/service/http.service";
 })
 export class EditTaskComponent implements OnInit {
   formGroup: FormGroup;
-  priority: DataEnum[] | undefined;
-  taskType: DataEnum[] | undefined;
+  priority: DataEnum[] = [];
+  taskType: DataEnum[] = [];
   addedToProject: Person[] | undefined;
   status: DataEnum[] = [];
   defaultStatus: DataEnum | undefined;
@@ -110,7 +110,7 @@ export class EditTaskComponent implements OnInit {
 
   private successCreation() {
     this.openBarWithMessage('Task edited!', ['success-bar'], 15000);
-    this.resetForm();
+    this.goBack();
   }
 
   private openBarWithMessage(message: string, classes: string[], duration: number) {
@@ -123,9 +123,15 @@ export class EditTaskComponent implements OnInit {
   private setPrimary(task: Task) {
     this.taskPrimary = task;
     this.defaultStatus = this.status.filter(s => s.displayName == this.taskPrimary.status)[0];
-    this.defaultType = this.status.filter(s => s.displayName == this.taskPrimary.type)[0];
-    this.defaultPriority = this.status.filter(s => s.displayName == this.taskPrimary.priority)[0];
-    this.buildDefaultPrimaryValues();
+    this.defaultType = this.taskType.filter(s => s.displayName == this.taskPrimary.type)[0];
+    this.defaultPriority = this.priority.filter(s => s.displayName == this.taskPrimary.priority)[0];
+
+    this.httpService.getUsersWithAccessToTheProject("" + (task.project?.id), "nick", "asc", 1, 5000).subscribe(
+      value => {
+        this.addedToProject = value.items;
+        this.buildDefaultPrimaryValues();
+      }
+    );
   }
 
   private setSecondary(task: Task) {
@@ -148,9 +154,18 @@ export class EditTaskComponent implements OnInit {
   }
 
   private buildDefaultSecondaryValues() {
+    let x = this.taskSecondary.estimation;
+    let hours = 0;
+    let minutes = 0;
+    if (x != undefined) {
+      minutes = x % 60;
+      hours = (x - minutes) / 60;
+    }
+
     this.formGroup.patchValue({
       description: this.taskSecondary.description,
-      estimation: this.taskSecondary.estimation
+      estimationInHours: hours,
+      estimationInMinutes: minutes,
     });
   }
 

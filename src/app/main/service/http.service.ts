@@ -287,4 +287,18 @@ export class HttpService {
       {nick: nick}
     );
   }
+
+  assignTask(id: string | null | undefined) {
+    return this.http.put(
+      `${this.baseUrl}/tasks/${id}/assign`,
+      null
+    );
+  }
+
+  changeStatus(value: any) {
+    return this.http.put(
+      `${this.baseUrl}/tasks/status`,
+      value
+    );
+  }
 }

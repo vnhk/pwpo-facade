@@ -62,6 +62,7 @@ import {AdminPageComponent} from './admin/admin-page/admin-page.component';
 import {UserManageOptionModalComponent} from './admin/user-manage-option-modal/user-manage-option-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ProfileComponent } from './profile/profile/profile.component';
+import {MatTooltip, MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
     NgSelectModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatTooltipModule,
     MatListModule,
     MatDialogModule,
     MatProgressBarModule,

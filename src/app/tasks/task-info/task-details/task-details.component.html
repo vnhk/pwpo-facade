@@ -17,7 +17,18 @@
          <strong
            [ngClass]="{'dueDateExceeded': dueDateExceeded, 'dueDateComingUp': dueDateComingUp}"> {{primaryAttributes.dueDate | date: 'dd MMMM yyyy'}}</strong>
         <br>
-        <label class="attribute-label">Status:</label> {{primaryAttributes.status}}
+        <br>
+        <label class="attribute-label">Status: </label>
+        <span *ngIf="!statusChangeOperation"> {{primaryAttributes.status}}</span>
+        <span *ngIf="statusChangeOperation" style="margin-left: 10px">
+          <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select (selectionChange)="changeStatus($event.value)" required>
+              <mat-option *ngFor="let s of status"
+                          [value]="s.internalName">{{s.displayName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
       </div>
       <div class="col-md-1">
 
@@ -48,7 +59,15 @@
 
       </div>
       <div class="col-md-3">
-         <label class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}}
+         <label
+           class="attribute-label">Assignee:</label> {{primaryAttributes.assignee?.firstName}} {{primaryAttributes.assignee?.lastName}}
+        <br>
+         <label
+           class="attribute-label">Owner:</label> {{primaryAttributes.owner?.firstName}} {{primaryAttributes.owner?.lastName}}
+        <br>
+        <br>
+         <label
+           class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}}
         <br>
          <label class="attribute-label">Created:</label> {{secondaryAttributes.created | date: 'medium'}}
         <br>
@@ -58,17 +77,20 @@
   </span>
 
   <span buttons>
-    <button mat-button routerLink="/tasks/{{primaryAttributes.id}}/edit">
+    <button mat-button matTooltip="Edit task" routerLink="/tasks/{{primaryAttributes.id}}/edit">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-button>
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-button routerLink='/tasks/{{primaryAttributes.id}}/details/timelog'>
+    <button mat-button matTooltip="Log time" routerLink='/tasks/{{primaryAttributes.id}}/details/timelog'>
       <mat-icon>access_time</mat-icon>
     </button>
-   <button mat-button routerLink="/tasks/{{primaryAttributes.id}}/history">
+   <button mat-button matTooltip="Task history" routerLink="/tasks/{{primaryAttributes.id}}/history">
       <mat-icon>history</mat-icon>
+    </button>
+    <button (click)="assignTask()" *ngIf="!currentUserAssigned" mat-button matTooltip="Assign task to me">
+      <mat-icon>assignment_returned</mat-icon>
+    </button>
+    <button (click)="showChangeStatusForm()" mat-button matTooltip="Change status">
+      <mat-icon>swap_horizontal_circle</mat-icon>
     </button>
   </span>
 </app-details>

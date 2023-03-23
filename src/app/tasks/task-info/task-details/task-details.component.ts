@@ -1,8 +1,11 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {Task} from "../../../main/api-models";
-import {map} from "rxjs/operators";
+import {DataEnum, Task} from "../../../main/api-models";
+import {catchError, map} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
+import {throwError} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-task-details',
@@ -29,13 +32,33 @@ export class TaskDetailsComponent implements AfterViewInit {
     ["Feature", "assets/tasks/icons/Feature.png"],
     ["Task", "assets/tasks/icons/Task.png"]
   ]);
+  currentUserAssigned = true;
+  status: DataEnum[] = [];
+  statusChangeOperation = false;
 
   constructor(private httpService: HttpService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public snackBar: MatSnackBar) {
   }
 
   ngAfterViewInit() {
     this.id = this.route.snapshot.paramMap.get("id");
+
+    this.httpService.getEnumByName("com.pwpo.common.enums.Status").subscribe((value) => this.status = value.items);
+
+    this.loadPrimary();
+
+    this.httpService.getTaskSecondaryById(this.id).subscribe(value => {
+      this.secondaryAttributes = value.items[0];
+      this.afterSecondaryLoaded();
+    });
+  }
+
+  private loadPrimary() {
+    if (!this.id) {
+      return;
+    }
+
     this.httpService.getTaskPrimaryById(this.id)
       .pipe(
         map((data) => {
@@ -46,11 +69,7 @@ export class TaskDetailsComponent implements AfterViewInit {
       this.primaryAttributes = value.items[0];
       this.afterPrimaryLoaded();
       this.setAvatarSrc();
-    });
-
-    this.httpService.getTaskSecondaryById(this.id).subscribe(value => {
-      this.secondaryAttributes = value.items[0];
-      this.afterSecondaryLoaded();
+      this.checkIfAssigned();
     });
   }
 
@@ -108,5 +127,58 @@ export class TaskDetailsComponent implements AfterViewInit {
     }
 
     return text;
+  }
+
+  assignTask() {
+    this.httpService.assignTask(this.id)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      ).subscribe(() => {
+      this.successCreation("Task assigned")
+      this.loadPrimary();
+    });
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    this.showErrorPopup('Could not perform operation. Contact with administrator!');
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  private showErrorPopup(message: string) {
+    this.openBarWithMessage(message, ['error-bar'], 15000);
+  }
+
+  private successCreation(msg: string) {
+    this.openBarWithMessage(msg, ['success-bar'], 15000);
+  }
+
+  private openBarWithMessage(message: string, classes: string[], duration: number) {
+    this.snackBar.open(message, "Ok", {
+      duration: duration,
+      panelClass: classes
+    });
+  }
+
+  private checkIfAssigned() {
+    let user = localStorage.getItem("username");
+    if (user) {
+      this.currentUserAssigned = user === this.primaryAttributes.assignee?.nick;
+    }
+  }
+
+  showChangeStatusForm() {
+    this.statusChangeOperation = true;
+  }
+
+  changeStatus(status: string) {
+    this.httpService.changeStatus({id: this.id, status: status})
+      .pipe(
+        catchError(this.handleError.bind(this))
+      ).subscribe(() => {
+      this.successCreation("Status changed")
+      this.loadPrimary();
+      this.statusChangeOperation = false;
+    });
   }
 }
