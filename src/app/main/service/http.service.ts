@@ -8,6 +8,7 @@ import {
   DataEnumApi,
   HistoryDiffApi,
   Item,
+  Person,
   PersonApi,
   Project,
   ProjectApi,
@@ -299,6 +300,19 @@ export class HttpService {
     return this.http.put(
       `${this.baseUrl}/tasks/status`,
       value
+    );
+  }
+
+  changePassword(value: any) {
+    return this.http.post(
+      `${this.baseUrl}/auth/change-password`,
+      value
+    );
+  }
+
+  getLoggedUserDetails() {
+    return this.http.get<Person>(
+      `${this.baseUrl}/users/logged/details`
     );
   }
 }

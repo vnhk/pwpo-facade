@@ -9,10 +9,10 @@
 
   <div class="table-container">
     <table mat-table [dataSource]="data" class="http-table"
-           matSort matSortActive="fullName" matSortDisableClear matSortDirection="desc">
+           matSort matSortActive="nick" matSortDisableClear matSortDirection="desc">
 
       <ng-container matColumnDef="fullName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+        <th mat-header-cell *matHeaderCellDef>User</th>
         <td mat-cell *matCellDef="let row">
           <a routerLink='/user/details/{{row.id}}'>{{row.firstName}} {{row.lastName}}</a>
         </td>

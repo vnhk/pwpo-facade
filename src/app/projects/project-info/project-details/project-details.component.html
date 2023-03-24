@@ -22,7 +22,11 @@
 
     <br>
     <br>
-    <label class="attribute-label">Created By:</label> {{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}}
+    <label class="attribute-label">Created By:</label>
+     <span
+       matTooltip="{{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}} ({{secondaryAttributes.createdBy?.nick}})">
+       {{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}}
+     </span>
     <br>
     <label class="attribute-label">Created:</label> {{secondaryAttributes.created | date: 'medium'}}
     <br>

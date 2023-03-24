@@ -1,5 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../../main/session/auth.service";
+import {MatAccordion} from "@angular/material/expansion";
+import {HttpService} from "../../main/service/http.service";
+import {Person} from "../../main/api-models";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HttpErrorResponse} from "@angular/common/http";
+import {throwError} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-profile',
@@ -8,11 +16,75 @@ import {AuthService} from "../../main/session/auth.service";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
+  @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
+  user: Person | undefined;
+  changePasswordForm: FormGroup;
+  passwordsDoNotMatch = false;
 
+  constructor(public authService: AuthService, private httpService: HttpService, private formBuilder: FormBuilder,
+              public snackBar: MatSnackBar,) {
+    this.changePasswordForm = this.formBuilder.group({
+      'oldPassword': [null, [Validators.minLength(3), Validators.maxLength(50)]],
+      'newPassword': [null, [Validators.minLength(3), Validators.maxLength(50)]],
+      'newPasswordRepeated': [null, [Validators.minLength(3), Validators.maxLength(50)]],
+    });
   }
 
   ngOnInit(): void {
+    this.getLoggedUserDetails();
   }
+
+  private getLoggedUserDetails() {
+    this.httpService.getLoggedUserDetails()
+      .subscribe(value => this.user = value);
+  }
+
+  changePassword() {
+    if (this.changePasswordForm.valid) {
+
+      if (this.changePasswordForm.value.newPasswordRepeated !== this.changePasswordForm.value.newPassword) {
+        this.passwordsDoNotMatch = true;
+        return;
+      }
+      this.httpService.changePassword(this.changePasswordForm.value)
+        .pipe(
+          catchError(this.handleChangePasswordError.bind(this))
+        ).subscribe(() => {
+        this.success("Password changed successfully!");
+        this.authService.logout();
+      })
+    }
+  }
+
+  private handleChangePasswordError(error: HttpErrorResponse) {
+    if (error.status == 400) {
+      this.showErrorPopup(error.error[0].message);
+    } else {
+      this.showErrorPopup("Could not change password. Contact with administrator.");
+    }
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  private showErrorPopup(message: string) {
+    this.openBarWithMessage(message, ['error-bar'], 15000);
+  }
+
+  private success(msg: string) {
+    this.openBarWithMessage(msg, ['success-bar'], 15000);
+  }
+
+  private openBarWithMessage(message: string, classes: string[], duration: number) {
+    this.snackBar.open(message, "Ok", {
+      duration: duration,
+      panelClass: classes
+    });
+  }
+
+  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
 
 }

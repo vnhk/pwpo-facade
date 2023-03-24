@@ -89,6 +89,12 @@ export class UserManageOptionModalComponent implements OnInit {
     });
   }
 
+  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+
   disableUser() {
     if (confirm("Are you sure you want to disable this account?")) {
       this.httpService.disableAccount(this.data.id)
@@ -101,11 +107,6 @@ export class UserManageOptionModalComponent implements OnInit {
         this.disabledUser = true;
       });
     }
-  }
-
-  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
-
-    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
 

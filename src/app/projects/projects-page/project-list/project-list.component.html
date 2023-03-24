@@ -1,32 +1,32 @@
 <mat-card>
   <div class="main-table-container mat-elevation-z8">
-    <div class="table-loading-shade"
-         *ngIf="isLoadingResults || isRateLimitReached">
+    <div *ngIf="isLoadingResults || isRateLimitReached"
+         class="table-loading-shade">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      <div *ngIf="isRateLimitReached" class="example-rate-limit-reached">
         Wait...
       </div>
     </div>
 
     <div class="table-container">
-      <table mat-table [dataSource]="data" class="http-table"
-             matSort matSortActive="status" matSortDisableClear matSortDirection="desc">
+      <table [dataSource]="data" class="http-table" mat-table
+             matSort matSortActive="status" matSortDirection="desc" matSortDisableClear>
 
         <ng-container matColumnDef="shortForm">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
-          <td mat-cell *matCellDef="let row">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>#</th>
+          <td *matCellDef="let row" mat-cell>
             <a routerLink='/projects/details/{{row.id}}'>{{row.shortForm}}</a>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-          <td mat-cell *matCellDef="let row">{{row.name}}</td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
+          <td *matCellDef="let row" mat-cell>{{row.name}}</td>
         </ng-container>
 
         <ng-container matColumnDef="summary">
-          <th mat-header-cell *matHeaderCellDef>Summary</th>
-          <td mat-cell *matCellDef="let row">
+          <th *matHeaderCellDef mat-header-cell>Summary</th>
+          <td *matCellDef="let row" mat-cell>
             <span *ngIf="row.summary.length > MAX_SUMMARY_LENGTH; then substrSummary else origSummary"></span>
             <ng-template #origSummary>{{row.summary}}</ng-template>
             <ng-template #substrSummary>{{row.summary.substring(0, MAX_SUMMARY_LENGTH) + '...'}}</ng-template>
@@ -34,19 +34,21 @@
         </ng-container>
 
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
             Status
           </th>
-          <td mat-cell *matCellDef="let row">{{row.status}}</td>
+          <td *matCellDef="let row" mat-cell>{{row.status}}</td>
         </ng-container>
 
         <ng-container matColumnDef="owner">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
-          <td mat-cell *matCellDef="let row">{{row.owner?.firstName}} {{row.owner?.lastName}}</td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Owner</th>
+          <td *matCellDef="let row" mat-cell
+              matTooltip="{{row.owner?.firstName}} {{row.owner?.lastName}} ({{row.owner?.nick}})">
+            {{row.owner?.firstName}} {{row.owner?.lastName}}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
       </table>
     </div>
 

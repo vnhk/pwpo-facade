@@ -16,7 +16,7 @@
           </button>
       </span>
       <span *ngIf="logged()">
-          <button mat-button>
+          <button mat-button routerLink="/profile">
             <mat-icon>perm_identity</mat-icon>
             <span>{{authService.getLoggedUser().username}}</span>
           </button>

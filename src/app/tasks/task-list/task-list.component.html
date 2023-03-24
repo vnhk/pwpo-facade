@@ -1,5 +1,5 @@
-<mat-expansion-panel (opened)="panelOpenState = true"
-                     (closed)="panelOpenState = false" class="main-table-container mat-elevation-z8">
+<mat-expansion-panel (closed)="panelOpenState = false"
+                     (opened)="panelOpenState = true" class="main-table-container mat-elevation-z8">
   <mat-expansion-panel-header>
     <mat-panel-title>
       Preferences
@@ -12,17 +12,17 @@
     <!--STATUS-->
     <span id="status-preferences">
       <span class="preferences-list-section">
-        <mat-checkbox class="preferences-parent-checkbox" [checked]="allChecked[STATUS_INDEX]" color="primary"
-                      [indeterminate]="someChecked(STATUS_INDEX)"
-                      (change)="setAll(STATUS_INDEX, $event.checked)">
+        <mat-checkbox (change)="setAll(STATUS_INDEX, $event.checked)" [checked]="allChecked[STATUS_INDEX]" [indeterminate]="someChecked(STATUS_INDEX)"
+                      class="preferences-parent-checkbox"
+                      color="primary">
         </mat-checkbox>
         {{searchOptions[STATUS_INDEX].name}}
       </span>
       <span class="preferences-list-section">
         <ul>
           <li *ngFor="let subOptions of searchOptions[STATUS_INDEX].subOptions">
-            <mat-checkbox [(ngModel)]="subOptions.checked" color="warn"
-                          (ngModelChange)="updateAllChecked(STATUS_INDEX)">
+            <mat-checkbox (ngModelChange)="updateAllChecked(STATUS_INDEX)" [(ngModel)]="subOptions.checked"
+                          color="warn">
               {{subOptions.name}}
             </mat-checkbox>
           </li>
@@ -32,17 +32,17 @@
     <!--PRIORITY-->
     <span id="priority-preferences">
       <span class="preferences-list-section">
-        <mat-checkbox class="preferences-parent-checkbox" [checked]="allChecked[PRIORITY_INDEX]" color="primary"
-                      [indeterminate]="someChecked(PRIORITY_INDEX)"
-                      (change)="setAll(PRIORITY_INDEX, $event.checked)">
+        <mat-checkbox (change)="setAll(PRIORITY_INDEX, $event.checked)" [checked]="allChecked[PRIORITY_INDEX]" [indeterminate]="someChecked(PRIORITY_INDEX)"
+                      class="preferences-parent-checkbox"
+                      color="primary">
         </mat-checkbox>
         {{searchOptions[PRIORITY_INDEX].name}}
       </span>
       <span class="preferences-list-section">
         <ul>
           <li *ngFor="let subOptions of searchOptions[PRIORITY_INDEX].subOptions">
-            <mat-checkbox [(ngModel)]="subOptions.checked" color="warn"
-                          (ngModelChange)="updateAllChecked(PRIORITY_INDEX)">
+            <mat-checkbox (ngModelChange)="updateAllChecked(PRIORITY_INDEX)" [(ngModel)]="subOptions.checked"
+                          color="warn">
               {{subOptions.name}}
             </mat-checkbox>
           </li>
@@ -52,17 +52,17 @@
     <!--TASK_TYPE-->
     <span id="task-type-preferences">
       <span class="preferences-list-section">
-        <mat-checkbox class="preferences-parent-checkbox" [checked]="allChecked[TASKS_TYPE_INDEX]" color="primary"
-                      [indeterminate]="someChecked(TASKS_TYPE_INDEX)"
-                      (change)="setAll(TASKS_TYPE_INDEX, $event.checked)">
+        <mat-checkbox (change)="setAll(TASKS_TYPE_INDEX, $event.checked)" [checked]="allChecked[TASKS_TYPE_INDEX]" [indeterminate]="someChecked(TASKS_TYPE_INDEX)"
+                      class="preferences-parent-checkbox"
+                      color="primary">
         </mat-checkbox>
         {{searchOptions[TASKS_TYPE_INDEX].name}}
       </span>
       <span class="preferences-list-section">
         <ul>
           <li *ngFor="let subOptions of searchOptions[TASKS_TYPE_INDEX].subOptions">
-            <mat-checkbox [(ngModel)]="subOptions.checked" color="warn"
-                          (ngModelChange)="updateAllChecked(TASKS_TYPE_INDEX)">
+            <mat-checkbox (ngModelChange)="updateAllChecked(TASKS_TYPE_INDEX)" [(ngModel)]="subOptions.checked"
+                          color="warn">
               {{subOptions.name}}
             </mat-checkbox>
           </li>
@@ -70,7 +70,7 @@
       </span>
     </span>
   </section>
-  <button mat-button class="grey-button" (click)="savePreferencesAndRefreshTable()">Save</button>
+  <button (click)="savePreferencesAndRefreshTable()" class="grey-button" mat-button>Save</button>
 
 </mat-expansion-panel>
 
@@ -105,7 +105,7 @@
 
       <ng-container matColumnDef="summary">
         <th *matHeaderCellDef mat-header-cell>Summary</th>
-        <td mat-cell *matCellDef="let row">
+        <td *matCellDef="let row" mat-cell>
           <span *ngIf="row.summary.length > MAX_SUMMARY_LENGTH; then substrSummary else origSummary"></span>
           <ng-template #origSummary>{{row.summary}}</ng-template>
           <ng-template #substrSummary>{{row.summary.substring(0, MAX_SUMMARY_LENGTH) + '...'}}</ng-template>
@@ -119,7 +119,8 @@
 
       <ng-container matColumnDef="assignee">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Assignee</th>
-        <td *matCellDef="let row" mat-cell>{{row.assignee?.firstName}} {{row.assignee?.lastName}}</td>
+        <td *matCellDef="let row" mat-cell
+            matTooltip="{{row.assignee?.firstName}} {{row.assignee?.lastName}} ({{row.assignee?.nick}})">{{row.assignee?.firstName}} {{row.assignee?.lastName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="dueDate">

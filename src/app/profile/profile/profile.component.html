@@ -1,5 +1,93 @@
-PROFILE:
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{user?.firstName}} {{user?.lastName}} ({{user?.nick}})</mat-card-title>
+    <mat-card-subtitle>  {{user?.email}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
 
-<div *ngIf="authService.hasNotActivatedAccount()">
-    Your account is not activated. Please change the password to activate your account.
-</div>
+    <div *ngIf="authService.hasNotActivatedAccount()" class="not-activated-account">
+      Your account is not activated. Please change the password to activate your account.
+    </div>
+
+    <br>
+    <br>
+
+    <mat-accordion class="headers-align" multi>
+      <mat-expansion-panel [disabled]="authService.hasNotActivatedAccount()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Personal data
+          </mat-panel-title>
+          <mat-panel-description>
+            <span></span>
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="next-form-element">
+          <mat-label>Last name</mat-label>
+          <input matInput>
+        </mat-form-field>
+
+        <button class="grey-button next-form-element" mat-raised-button>Save</button>
+
+      </mat-expansion-panel>
+      <mat-expansion-panel [disabled]="authService.hasNotActivatedAccount()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Contact data
+          </mat-panel-title>
+          <mat-panel-description>
+            <span></span>
+            <mat-icon>phone</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email">
+        </mat-form-field>
+        <button class="grey-button next-form-element" mat-raised-button>Save</button>
+
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Change password
+          </mat-panel-title>
+          <mat-panel-description>
+            <span></span>
+            <mat-icon>key</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form (ngSubmit)="changePassword()" [formGroup]="changePasswordForm" class="form-container">
+
+          <mat-form-field appearance="fill">
+            <mat-label>Old password</mat-label>
+            <input formControlName="oldPassword" matInput type="password">
+          </mat-form-field>
+          <hr>
+          <mat-form-field appearance="fill">
+            <mat-label>New password</mat-label>
+            <input formControlName="newPassword" matInput type="password">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Repeat password</mat-label>
+            <input formControlName="newPasswordRepeated" matInput type="password">
+          </mat-form-field>
+          <button class="grey-button next-form-element" type="submit" mat-raised-button>Save</button>
+          <span *ngIf="passwordsDoNotMatch" class="passwords-not-match"><br>Passwords do not match!</span>
+
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-card-content>
+</mat-card>
+
