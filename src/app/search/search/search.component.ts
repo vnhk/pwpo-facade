@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -17,11 +17,14 @@ export class SearchComponent implements OnInit {
               public snackBar: MatSnackBar) {
   }
 
+  @ViewChild('simpleGrouping') simpleGrouping!: any;
+  @ViewChild('advancedGrouping') advancedGrouping!: any;
+
   criteriaAmount = 0;
   groupAmount = 0;
   resultOperator = "";
   queryChecked = [false];
-  availableQueriesForGrouping = ["C1"];
+  availableQueriesForGrouping: String[] = [];
   groupValue = "";
   search = new SearchRequest();
 
@@ -62,8 +65,7 @@ export class SearchComponent implements OnInit {
     // G2 = G1 OR C4
     // G1 = C1 AND C2 AND C3
 
-    if (this.availableQueriesForGrouping.length != 1) {
-      console.log("To many groups! Cannot perform search!");
+    if (this.searchAvailable()) {
       alert("Invalid query!");
       return;
     }
@@ -94,5 +96,27 @@ export class SearchComponent implements OnInit {
       duration: duration,
       panelClass: classes
     });
+  }
+
+  searchAvailable() {
+    if (this.search.resultType == "" || this.search.resultType == undefined) {
+      return false;
+    }
+
+    if (this.availableQueriesForGrouping.length == 0) {
+      return true;
+    }
+
+    if (this.availableQueriesForGrouping.length == 1) {
+      return true;
+    }
+
+    if (this.simpleGrouping?.checked) {
+      if (this.availableQueriesForGrouping.length > 1) {
+        return this.resultOperator != null && this.resultOperator != "";
+      }
+    }
+
+    return false;
   }
 }

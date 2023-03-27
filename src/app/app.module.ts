@@ -61,8 +61,9 @@ import {SearchComponent} from './search/search/search.component';
 import {AdminPageComponent} from './admin/admin-page/admin-page.component';
 import {UserManageOptionModalComponent} from './admin/user-manage-option-modal/user-manage-option-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { ProfileComponent } from './profile/profile/profile.component';
-import {MatTooltip, MatTooltipModule} from "@angular/material/tooltip";
+import {ProfileComponent} from './profile/profile/profile.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import {MatTooltip, MatTooltipModule} from "@angular/material/tooltip";
     MatExpansionModule,
     MatTooltipModule,
     MatListModule,
+    MatButtonToggleModule,
     MatDialogModule,
     MatProgressBarModule,
     NgxChartsModule

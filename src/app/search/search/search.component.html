@@ -18,7 +18,7 @@
         <div class="col-md-3">
           <mat-form-field appearance="fill">
             <mat-label>Select type</mat-label>
-            <mat-select [(value)]="criteria.type">
+            <mat-select [(value)]="criteria.type" required>
               <mat-option value="project">Project</mat-option>
               <mat-option value="user">User in project</mat-option>
               <mat-option value="task">Task in project</mat-option>
@@ -29,7 +29,7 @@
         <div class="col-md-3">
           <mat-form-field appearance="fill">
             <mat-label>Select attribute</mat-label>
-            <mat-select [(value)]="criteria.attr">
+            <mat-select required [(value)]="criteria.attr">
               <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="name">Name
               </mat-option>
               <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="description">
@@ -44,7 +44,7 @@
         <div class="col-md-3">
           <mat-form-field appearance="fill">
             <mat-label>Select operator</mat-label>
-            <mat-select [(value)]="criteria.operator">
+            <mat-select [(value)]="criteria.operator" required>
               <mat-option value="equals">equals</mat-option>
               <mat-option value="contains">contains</mat-option>
               <mat-option value="notEquals">do not equal</mat-option>
@@ -63,36 +63,63 @@
     </div>
     <button (click)="addCriteria()" mat-button="plus">+</button>
     <hr>
+    <br>
+    <mat-button-toggle-group *ngIf="availableQueriesForGrouping.length > 1" aria-label="Grouping Type"
+                             name="groupingType">
+      <mat-button-toggle #simpleGrouping value="simpleGrouping">Simple Grouping</mat-button-toggle>
+      <mat-button-toggle #advancedGrouping value="advancedGrouping">Advanced Grouping</mat-button-toggle>
+    </mat-button-toggle-group>
+    <br>
+    <br>
+    <div *ngIf="simpleGrouping?.checked">
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Select the operator</mat-label>
+            <mat-select [(value)]="resultOperator" matTooltip="Select the operator that combines all criteria">
+              <mat-option value="AND">AND</mat-option>
+              <mat-option value="OR">OR</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
 
-    <div class="row">
-      <div class="col-md-4">
+    <div *ngIf="advancedGrouping?.checked">
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Select operator</mat-label>
+            <mat-select [(value)]="resultOperator">
+              <mat-option value="AND">AND</mat-option>
+              <mat-option value="OR">OR</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!--          <div class="col-md-4">-->
+        <!--            <mat-checkbox *ngFor="let query of availableQueriesForGrouping"-->
+        <!--                          class="preferences-parent-checkbox"-->
+        <!--                          color="primary">-->
+        <!--              {{query}}-->
+        <!--            </mat-checkbox>-->
+        <!--          </div>-->
+        Type queries separated by comma to create a group.
+        <br>
         <mat-form-field appearance="fill">
-          <mat-label>Select operator</mat-label>
-          <mat-select [(value)]="resultOperator">
-            <mat-option value="AND">AND</mat-option>
-            <mat-option value="OR">OR</mat-option>
-          </mat-select>
+          <mat-label>Value</mat-label>
+          <input [(ngModel)]="groupValue" matInput type="text">
         </mat-form-field>
       </div>
-      <!--          <div class="col-md-4">-->
-      <!--            <mat-checkbox *ngFor="let query of availableQueriesForGrouping"-->
-      <!--                          class="preferences-parent-checkbox"-->
-      <!--                          color="primary">-->
-      <!--              {{query}}-->
-      <!--            </mat-checkbox>-->
-      <!--          </div>-->
-      Type queries separated by comma to create a group.
-      <br>
-      <mat-form-field appearance="fill">
-        <mat-label>Value</mat-label>
-        <input [(ngModel)]="groupValue" matInput type="text">
-      </mat-form-field>
+      <button (click)="saveGroup()" mat-button="primary">Save</button>
+      <hr>
+      Groups: {{search.groups | json}}
+      Available Groups: {{availableQueriesForGrouping | json}}
     </div>
-    <button (click)="saveGroup()" mat-button="primary">Save</button>
+
     <hr>
-    Groups: {{search.groups | json}}
-    Available Groups: {{availableQueriesForGrouping | json}}
-    <hr>
-    <button (click)="performSearch()" mat-button="primary">Search</button>
+    <button (click)="performSearch()" [disabled]="!searchAvailable()" class="grey-button"
+            mat-raised-button>Search
+    </button>
+
   </mat-card-content>
 </mat-card>
