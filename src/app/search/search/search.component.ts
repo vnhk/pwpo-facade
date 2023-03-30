@@ -97,6 +97,14 @@ export class SearchComponent implements OnInit {
       return;
     }
 
+    if(this.search.criteria.length == 1) {
+      this.search.groups.push({
+        id: "G1",
+        queries: this.availableQueriesForGrouping,
+        operator: this.resultOperator
+      });
+    }
+
     if (this.simpleGrouping?.checked) {
       this.search.groups = [];
       this.search.groups.push({
