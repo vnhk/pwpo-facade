@@ -21,8 +21,8 @@
               <mat-label>Select type</mat-label>
               <mat-select [(value)]="criteria.type" [disabled]="searchPerformed" required>
                 <mat-option value="project">Project</mat-option>
-                <mat-option value="user">User in project</mat-option>
-                <mat-option value="task">Task in project</mat-option>
+                <mat-option value="[addedToProjects]">User in project</mat-option>
+                <mat-option value="[tasks]">Task in project</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -31,36 +31,36 @@
             <mat-form-field appearance="fill">
               <mat-label>Select attribute</mat-label>
               <mat-select [(value)]="criteria.attr" [disabled]="searchPerformed" required>
-                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="name">
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === '[tasks]'" value="name">
                   Name
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="summary">
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === '[tasks]'" value="summary">
                   Summary
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="description">
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === '[tasks]'" value="description">
                   Description
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="status">
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === '[tasks]'" value="status">
                   Status
                 </mat-option>
                 <mat-option *ngIf="criteria.type === 'project'" value="shortForm">
                   Short form
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="owner.nick">
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === '[tasks]'" value="owner.nick">
                   Owner nick
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'task'" value="number">
+                <mat-option *ngIf="criteria.type === '[tasks]'" value="number">
                   Number
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'task'" value="taskType">
+                <mat-option *ngIf="criteria.type === '[tasks]'" value="taskType">
                   Type
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'task'" value="assignee.nick">
+                <mat-option *ngIf="criteria.type === '[tasks]'" value="assignee.nick">
                   Assignee nick
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
-                <mat-option *ngIf="criteria.type === 'user'" value="secondName">Second name</mat-option>
-                <mat-option *ngIf="criteria.type === 'user'" value="nick">Nick</mat-option>
+                <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="firstName">First name</mat-option>
+                <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="secondName">Second name</mat-option>
+                <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="nick">Nick</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
