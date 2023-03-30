@@ -8,6 +8,7 @@ import {
   DataEnumApi,
   HistoryDiffApi,
   Item,
+  ItemApi,
   Person,
   PersonApi,
   Project,
@@ -261,8 +262,8 @@ export class HttpService {
     );
   }
 
-  search(search: SearchRequest) {
-    return this.http.post<Item>(
+  search(search: SearchRequest): Observable<ItemApi> {
+    return this.http.post<ItemApi>(
       `${this.baseUrl}/search`,
       search
     );

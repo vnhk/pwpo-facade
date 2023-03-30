@@ -2,124 +2,357 @@
   <mat-card-content style="width: 100%">
     <mat-form-field appearance="fill">
       <mat-label>I want to find:</mat-label>
-      <mat-select [(value)]="search.resultType">
+      <mat-select [(value)]="search.resultType" [disabled]="searchPerformed">
         <mat-option value="project">Project</mat-option>
         <mat-option value="user">User</mat-option>
         <mat-option value="task">Task</mat-option>
       </mat-select>
     </mat-form-field>
     <br>
-    {{search | json}}
-    With Criteria:
-    <hr>
-    <div *ngFor="let criteria of search.criteria">
-      {{criteria.id}}:
-      <div *ngIf="search.resultType === 'project'" class="criteria row">
-        <div class="col-md-3">
-          <mat-form-field appearance="fill">
-            <mat-label>Select type</mat-label>
-            <mat-select [(value)]="criteria.type" required>
-              <mat-option value="project">Project</mat-option>
-              <mat-option value="user">User in project</mat-option>
-              <mat-option value="task">Task in project</mat-option>
-            </mat-select>
-          </mat-form-field>
+
+    <div *ngIf="search.resultType && search.resultType != ''">
+      With Criteria:
+      <hr>
+      <div *ngFor="let criteria of search.criteria">
+        {{criteria.id}}:
+        <div *ngIf="search.resultType === 'project'" class="criteria row">
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select type</mat-label>
+              <mat-select [(value)]="criteria.type" [disabled]="searchPerformed" required>
+                <mat-option value="project">Project</mat-option>
+                <mat-option value="user">User in project</mat-option>
+                <mat-option value="task">Task in project</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select attribute</mat-label>
+              <mat-select [(value)]="criteria.attr" [disabled]="searchPerformed" required>
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="name">
+                  Name
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="summary">
+                  Summary
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="description">
+                  Description
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="status">
+                  Status
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project'" value="shortForm">
+                  Short form
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="owner.nick">
+                  Owner nick
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="number">
+                  Number
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="taskType">
+                  Type
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="assignee.nick">
+                  Assignee nick
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
+                <mat-option *ngIf="criteria.type === 'user'" value="secondName">Second name</mat-option>
+                <mat-option *ngIf="criteria.type === 'user'" value="nick">Nick</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select operator</mat-label>
+              <mat-select [(value)]="criteria.operator" [disabled]="searchPerformed" required>
+                <mat-option value="equals">equals</mat-option>
+                <mat-option value="contains">contains</mat-option>
+                <mat-option value="notEquals">do not equal</mat-option>
+                <mat-option value="notContains">do not contain</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Value</mat-label>
+              <input [(ngModel)]="criteria.value" [disabled]="searchPerformed" matInput type="text">
+            </mat-form-field>
+          </div>
         </div>
 
-        <div class="col-md-3">
-          <mat-form-field appearance="fill">
-            <mat-label>Select attribute</mat-label>
-            <mat-select required [(value)]="criteria.attr">
-              <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="name">Name
-              </mat-option>
-              <mat-option *ngIf="criteria.type === 'project' || criteria.type === 'task'" value="description">
-                Description
-              </mat-option>
-              <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
-              <mat-option *ngIf="criteria.type === 'user'" value="secondName">Second name</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div *ngIf="search.resultType === 'task'" class="criteria row">
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select type</mat-label>
+              <mat-select [(value)]="criteria.type" [disabled]="searchPerformed" required>
+                <mat-option value="task">Task</mat-option>
+                <mat-option value="assignee">Assignee</mat-option>
+                <mat-option value="owner">Owner</mat-option>
+                <mat-option value="project">Project</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select attribute</mat-label>
+              <mat-select [(value)]="criteria.attr" [disabled]="searchPerformed" required>
+                <mat-option *ngIf="criteria.type === 'task'" value="summary">
+                  Summary
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="description">
+                  Description
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="status">
+                  Status
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project'" value="project.shortForm">
+                  Short form
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'project'" value="project.owner.nick">
+                  Owner nick
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="number">
+                  Number
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'task'" value="taskType">
+                  Type
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'assignee' || criteria.type === 'owner'" value="nick">Nick
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'assignee' || criteria.type === 'owner'" value="firstName">First
+                  name
+                </mat-option>
+                <mat-option *ngIf="criteria.type === 'assignee' || criteria.type === 'owner'" value="lastName">Last
+                  name
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select operator</mat-label>
+              <mat-select [(value)]="criteria.operator" [disabled]="searchPerformed" required>
+                <mat-option value="equals">equals</mat-option>
+                <mat-option value="contains">contains</mat-option>
+                <mat-option value="notEquals">do not equal</mat-option>
+                <mat-option value="notContains">do not contain</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Value</mat-label>
+              <input [(ngModel)]="criteria.value" [disabled]="searchPerformed" matInput type="text">
+            </mat-form-field>
+          </div>
         </div>
 
-        <div class="col-md-3">
-          <mat-form-field appearance="fill">
-            <mat-label>Select operator</mat-label>
-            <mat-select [(value)]="criteria.operator" required>
-              <mat-option value="equals">equals</mat-option>
-              <mat-option value="contains">contains</mat-option>
-              <mat-option value="notEquals">do not equal</mat-option>
-              <mat-option value="notContains">do not contain</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div *ngIf="search.resultType === 'user'" class="criteria row">
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select type</mat-label>
+              <mat-select [(value)]="criteria.type" [disabled]="searchPerformed" required>
+                <mat-option value="user">User</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select attribute</mat-label>
+              <mat-select [(value)]="criteria.attr" [disabled]="searchPerformed" required>
+                <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
+                <mat-option *ngIf="criteria.type === 'user'" value="secondName">Second name</mat-option>
+                <mat-option *ngIf="criteria.type === 'user'" value="nick">Nick</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Select operator</mat-label>
+              <mat-select [(value)]="criteria.operator" [disabled]="searchPerformed" required>
+                <mat-option value="equals">equals</mat-option>
+                <mat-option value="contains">contains</mat-option>
+                <mat-option value="notEquals">do not equal</mat-option>
+                <mat-option value="notContains">do not contain</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Value</mat-label>
+              <input [(ngModel)]="criteria.value" [disabled]="searchPerformed" matInput type="text">
+            </mat-form-field>
+          </div>
         </div>
 
-        <div class="col-md-3">
+      </div>
+      <button (click)="addCriteria()" [disabled]="searchPerformed" mat-raised-button>Add new criteria</button>
+      <hr>
+      <br>
+      <mat-button-toggle-group *ngIf="availableQueriesForGrouping.length > 1" [disabled]="searchPerformed"
+                               aria-label="Grouping Type" name="groupingType">
+        <mat-button-toggle #simpleGrouping value="simpleGrouping">Simple Grouping</mat-button-toggle>
+        <mat-button-toggle #advancedGrouping value="advancedGrouping">Advanced Grouping</mat-button-toggle>
+      </mat-button-toggle-group>
+      <br>
+      <br>
+      <div *ngIf="simpleGrouping?.checked">
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="fill">
+              <mat-label>Select the operator</mat-label>
+              <mat-select [(value)]="resultOperator" [disabled]="searchPerformed"
+                          matTooltip="Select the operator that combines all criteria">
+                <mat-option value="AND">AND</mat-option>
+                <mat-option value="OR">OR</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="advancedGrouping?.checked">
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="fill">
+              <mat-label>Select operator</mat-label>
+              <mat-select [(value)]="resultOperator" [disabled]="searchPerformed">
+                <mat-option value="AND">AND</mat-option>
+                <mat-option value="OR">OR</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--          <div class="col-md-4">-->
+          <!--            <mat-checkbox *ngFor="let query of availableQueriesForGrouping"-->
+          <!--                          class="preferences-parent-checkbox"-->
+          <!--                          color="primary">-->
+          <!--              {{query}}-->
+          <!--            </mat-checkbox>-->
+          <!--          </div>-->
+          Type queries separated by comma to create a group.
+          <br>
           <mat-form-field appearance="fill">
             <mat-label>Value</mat-label>
-            <input [(ngModel)]="criteria.value" matInput type="text">
+            <input [(ngModel)]="groupValue" [disabled]="searchPerformed" matInput type="text">
           </mat-form-field>
         </div>
-      </div>
-    </div>
-    <button (click)="addCriteria()" mat-button="plus">+</button>
-    <hr>
-    <br>
-    <mat-button-toggle-group *ngIf="availableQueriesForGrouping.length > 1" aria-label="Grouping Type"
-                             name="groupingType">
-      <mat-button-toggle #simpleGrouping value="simpleGrouping">Simple Grouping</mat-button-toggle>
-      <mat-button-toggle #advancedGrouping value="advancedGrouping">Advanced Grouping</mat-button-toggle>
-    </mat-button-toggle-group>
-    <br>
-    <br>
-    <div *ngIf="simpleGrouping?.checked">
-      <div class="row">
-        <div class="col-md-4">
-          <mat-form-field appearance="fill">
-            <mat-label>Select the operator</mat-label>
-            <mat-select [(value)]="resultOperator" matTooltip="Select the operator that combines all criteria">
-              <mat-option value="AND">AND</mat-option>
-              <mat-option value="OR">OR</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+        <button (click)="saveGroup()" [disabled]="searchPerformed" mat-button="primary">Save</button>
+        <hr>
+        Groups: {{search.groups | json}}
+        Available Groups: {{availableQueriesForGrouping | json}}
       </div>
     </div>
 
-    <div *ngIf="advancedGrouping?.checked">
-      <div class="row">
-        <div class="col-md-4">
-          <mat-form-field appearance="fill">
-            <mat-label>Select operator</mat-label>
-            <mat-select [(value)]="resultOperator">
-              <mat-option value="AND">AND</mat-option>
-              <mat-option value="OR">OR</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <!--          <div class="col-md-4">-->
-        <!--            <mat-checkbox *ngFor="let query of availableQueriesForGrouping"-->
-        <!--                          class="preferences-parent-checkbox"-->
-        <!--                          color="primary">-->
-        <!--              {{query}}-->
-        <!--            </mat-checkbox>-->
-        <!--          </div>-->
-        Type queries separated by comma to create a group.
-        <br>
-        <mat-form-field appearance="fill">
-          <mat-label>Value</mat-label>
-          <input [(ngModel)]="groupValue" matInput type="text">
-        </mat-form-field>
-      </div>
-      <button (click)="saveGroup()" mat-button="primary">Save</button>
-      <hr>
-      Groups: {{search.groups | json}}
-      Available Groups: {{availableQueriesForGrouping | json}}
-    </div>
-
     <hr>
-    <button (click)="performSearch()" [disabled]="!searchAvailable()" class="grey-button"
-            mat-raised-button>Search
+    <button (click)="performSearch()" *ngIf="!searchPerformed" [disabled]="!searchAvailable()"
+            class="grey-button" mat-raised-button>Search
     </button>
 
+    <br>
+    <br>
+    <button (click)="newSearch()" *ngIf="search.resultType && search.resultType != ''"
+            class="yellow-button" mat-raised-button>New query
+    </button>
+
+    <div *ngIf="searchPerformed">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input #input (keyup)="applyFilter($event)" matInput>
+      </mat-form-field>
+
+      <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+
+        <ng-container matColumnDef="shortForm">
+          <th *matHeaderCellDef mat-header-cell> Short Form</th>
+          <td *matCellDef="let element" mat-cell>
+            <a routerLink='/projects/details/{{element.id}}'>{{element.shortForm}}</a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell> Name</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="summary">
+          <th *matHeaderCellDef mat-header-cell> Summary</th>
+          <td *matCellDef="let element" mat-cell> {{element.summary}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="owner">
+          <th *matHeaderCellDef mat-header-cell> Owner</th>
+          <td *matCellDef="let element" mat-cell> {{element.owner.firstName}} {{element.owner.lastName}}
+            ({{element.owner.nick}})
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef mat-header-cell> Status</th>
+          <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th *matHeaderCellDef mat-header-cell> Type</th>
+          <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="number">
+          <th *matHeaderCellDef mat-header-cell>Number</th>
+          <td *matCellDef="let element" mat-cell>
+            <a routerLink='/tasks/{{element.id}}/details'>{{element.number}}</a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="assignee">
+          <th *matHeaderCellDef mat-header-cell>Assignee</th>
+          <td *matCellDef="let element" mat-cell> {{element.assignee.firstName}} {{element.assignee.lastName}}
+            ({{element.assignee.nick}})
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+          <th *matHeaderCellDef mat-header-cell>Due date</th>
+          <td *matCellDef="let element" mat-cell> {{element.dueDate}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="priority">
+          <th *matHeaderCellDef mat-header-cell>Priority</th>
+          <td *matCellDef="let element" mat-cell> {{element.priority}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <th *matHeaderCellDef mat-header-cell>First name</th>
+          <td *matCellDef="let element" mat-cell> {{element.firstName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th *matHeaderCellDef mat-header-cell>Last name</th>
+          <td *matCellDef="let element" mat-cell> {{element.lastName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nick">
+          <th *matHeaderCellDef mat-header-cell>Nick</th>
+          <td *matCellDef="let element" mat-cell> {{element.nick}}</td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+        <tr *matNoDataRow class="mat-row">
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    </div>
   </mat-card-content>
 </mat-card>

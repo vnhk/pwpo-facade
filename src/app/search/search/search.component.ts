@@ -4,7 +4,8 @@ import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {SearchRequest} from "../../main/api-models";
+import {Item, SearchRequest} from "../../main/api-models";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-search',
@@ -24,9 +25,35 @@ export class SearchComponent implements OnInit {
   groupAmount = 0;
   resultOperator = "";
   queryChecked = [false];
-  availableQueriesForGrouping: String[] = [];
+  availableQueriesForGrouping: string[] = [];
   groupValue = "";
   search = new SearchRequest();
+  searchPerformed = false;
+
+  projectDisplayedColumns: string[] = ['shortForm', 'name', 'summary', 'owner', 'status'];
+  taskDisplayedColumns: string[] = ['type', 'number', 'status', 'assignee', 'dueDate', 'priority'];
+  userDisplayedColumns: string[] = ['firstName', 'lastName', 'nick'];
+  displayedColumns: string[] = [];
+
+  dataSource: MatTableDataSource<Item> = new MatTableDataSource();
+
+
+  newSearch() {
+    this.dataSource = new MatTableDataSource();
+    this.criteriaAmount = 0;
+    this.groupAmount = 0;
+    this.resultOperator = "";
+    this.queryChecked = [false];
+    this.availableQueriesForGrouping = [];
+    this.groupValue = "";
+    this.search = new SearchRequest();
+    this.searchPerformed = false;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit(): void {
   }
@@ -65,15 +92,36 @@ export class SearchComponent implements OnInit {
     // G2 = G1 OR C4
     // G1 = C1 AND C2 AND C3
 
-    if (this.searchAvailable()) {
+    if (!this.searchAvailable()) {
       alert("Invalid query!");
       return;
+    }
+
+    if (this.simpleGrouping?.checked) {
+      this.search.groups = [];
+      this.search.groups.push({
+        id: "G1",
+        queries: this.availableQueriesForGrouping,
+        operator: this.resultOperator
+      });
     }
 
     this.httpService.search(this.search)
       .pipe(
         catchError(this.handleError.bind(this))
-      ).subscribe(() => console.log("Search performed without error"));
+      ).subscribe(res => {
+      if (this.search.resultType == 'project') {
+        this.displayedColumns = this.projectDisplayedColumns;
+      }
+      if (this.search.resultType == 'task') {
+        this.displayedColumns = this.taskDisplayedColumns;
+      }
+      if (this.search.resultType == 'user') {
+        this.displayedColumns = this.userDisplayedColumns;
+      }
+      this.dataSource = new MatTableDataSource(res.items);
+      this.searchPerformed = true;
+    });
   }
 
   private handleError(error: HttpErrorResponse) {
