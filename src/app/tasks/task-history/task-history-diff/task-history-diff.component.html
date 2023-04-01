@@ -26,7 +26,7 @@
         <br>
          <label class="attribute-label">Due Date:</label>
         <ng-container *ngFor="let part of dueDate">
-        <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
+        <span [class]="getDiffClass(part.type)"> {{part.value | date: 'dd MMMM yyyy'}}</span>
         </ng-container>
         <br>
         <br>
