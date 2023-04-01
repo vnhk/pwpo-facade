@@ -16,7 +16,7 @@ import {
   ProjectHistoryApi,
   SearchRequest,
   Task,
-  TaskApi,
+  TaskApi, TaskHistoryApi,
   TaskListDisplayOption,
   TimeLogApi,
   TimeLogRequest,
@@ -124,6 +124,24 @@ export class HttpService {
   getProjectHistoryDiff(projectId: string | null | undefined, historyId: string | null | undefined): Observable<HistoryDiffApi> {
     return this.http.get<HistoryDiffApi>(
       `${this.baseUrl}/projects/${projectId}/history/${historyId}/compare`
+    );
+  }
+
+  getTaskHistory(taskId: string | null | undefined, page: number, pageSize: number): Observable<TaskHistoryApi> {
+    return this.http.get<TaskHistoryApi>(
+      `${this.baseUrl}/tasks/${taskId}/history?page=${page}&pageSize=${pageSize}&sortField=expired&sortDirection=DESC`
+    );
+  }
+
+  getTaskHistoryDetails(taskId: string | null | undefined, historyId: string | null | undefined): Observable<TaskHistoryApi> {
+    return this.http.get<TaskHistoryApi>(
+      `${this.baseUrl}/tasks/${taskId}/history/${historyId}`
+    );
+  }
+
+  getTaskHistoryDiff(taskId: string | null | undefined, historyId: string | null | undefined): Observable<HistoryDiffApi> {
+    return this.http.get<HistoryDiffApi>(
+      `${this.baseUrl}/tasks/${taskId}/history/${historyId}/compare`
     );
   }
 

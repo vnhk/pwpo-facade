@@ -64,6 +64,9 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ProfileComponent} from './profile/profile/profile.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {TaskHistoryDiffComponent} from "./tasks/task-history/task-history-diff/task-history-diff.component";
+import {TaskHistoryDetailsComponent} from "./tasks/task-history/task-history-details/task-history-details.component";
+import {TaskHistoryListComponent} from "./tasks/task-history/task-history-list-component";
 
 @NgModule({
   declarations: [
@@ -97,7 +100,10 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     SearchComponent,
     AdminPageComponent,
     UserManageOptionModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    TaskHistoryDiffComponent,
+    TaskHistoryDetailsComponent,
+    TaskHistoryListComponent
   ],
   imports: [
     BrowserModule,

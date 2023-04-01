@@ -48,6 +48,10 @@ export interface ProjectHistoryApi extends ItemApi {
   items: ProjectHistory[];
 }
 
+export interface TaskHistoryApi extends ItemApi {
+  items: TaskHistory[];
+}
+
 export interface HistoryDiffApi extends ItemApi {
   items: HistoryDiff[];
 }
@@ -78,6 +82,21 @@ export interface ProjectHistory extends Item {
   editor?: Person;
   expired?: Date;
 }
+
+export interface TaskHistory extends Item {
+  type?: string;
+  assignee?: string;
+  status?: string;
+  dueDate?: string;
+  priority?: string;
+  summary?: string;
+  description?: string;
+  owner?: string;
+  estimation?: string;
+  expired?: Date;
+  editor?: Person;
+}
+
 
 export interface TaskApi extends ItemApi {
   items: Task[];

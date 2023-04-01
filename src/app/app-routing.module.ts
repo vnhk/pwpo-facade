@@ -21,6 +21,9 @@ import {AdminPageComponent} from "./admin/admin-page/admin-page.component";
 import {IsAdminGuard} from "./main/session/is-admin.guard";
 import {ProfileComponent} from "./profile/profile/profile.component";
 import {HasActivatedAccountGuard} from "./main/session/has-activated-account.guard";
+import {TaskHistoryDiffComponent} from "./tasks/task-history/task-history-diff/task-history-diff.component";
+import {TaskHistoryDetailsComponent} from "./tasks/task-history/task-history-details/task-history-details.component";
+import {TaskHistoryListComponent} from "./tasks/task-history/task-history-list-component";
 
 const routes: Routes = [
   {path: 'projects', component: ProjectsPageComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
@@ -33,6 +36,9 @@ const routes: Routes = [
   {path: 'projects/:id/history', component: ProjectHistoryListComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
   {path: 'projects/:id/history/:hid', component: ProjectHistoryDetailsComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
   {path: 'projects/:id/history/:hid/diff', component: ProjectHistoryDiffComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'tasks/:id/history', component: TaskHistoryListComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'tasks/:id/history/:hid', component: TaskHistoryDetailsComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
+  {path: 'tasks/:id/history/:hid/diff', component: TaskHistoryDiffComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
   {path: 'projects/details/:id', component: ProjectInfoComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
   {path: 'tasks/:id/details', component: TaskInfoComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},
   {path: 'tasks/:id/details/timelog', component: TaskTimelogComponent, canActivate: [SignedInGuard, HasActivatedAccountGuard]},

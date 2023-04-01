@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header class="form-header">
+    <mat-card-title>History:</mat-card-title>
+    <button mat-button>
+      <mat-icon (click)="goBack()">close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-list role="list">
+    <mat-card *ngFor="let history of taskHistories" role="listitem">
+      Edited at <a
+      routerLink='/tasks/{{taskId}}/history/{{history.id}}'>{{history.expired | date: 'HH:mm:SS, dd MMMM yyyy'}}</a> by
+      {{history.editor?.firstName}} {{history.editor?.lastName}}<a routerLink='/user/details/{{history.editor?.id}}'>({{history.editor?.nick}})</a>
+    </mat-card>
+  </mat-list>
+
+  <mat-paginator (page)="pageChanged($event)"
+                 [length]="length"
+                 [pageSize]="pageSize"
+                 aria-label="Select page">
+  </mat-paginator>
+
+</mat-card>
