@@ -16,12 +16,14 @@ import {
   ProjectHistoryApi,
   SearchRequest,
   Task,
-  TaskApi, TaskHistoryApi,
+  TaskApi,
+  TaskHistoryApi,
   TaskListDisplayOption,
   TimeLogApi,
   TimeLogRequest,
   UserProject
 } from "../api-models";
+import {GoalRiskApi} from "../../projects/project-info/project-goals-risks/project-goals-risks.component";
 
 @Injectable({
   providedIn: 'root'
@@ -136,6 +138,12 @@ export class HttpService {
   getTaskHistoryDetails(taskId: string | null | undefined, historyId: string | null | undefined): Observable<TaskHistoryApi> {
     return this.http.get<TaskHistoryApi>(
       `${this.baseUrl}/tasks/${taskId}/history/${historyId}`
+    );
+  }
+
+  getAllGoalsAndRisks(projectId: string | null | undefined): Observable<GoalRiskApi> {
+    return this.http.get<GoalRiskApi>(
+      `${this.baseUrl}/projects/${projectId}/goals-and-risks?sortDirection=DESC`
     );
   }
 
