@@ -6,7 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 
 export interface GoalRisk {
   id: number;
-  value: string;
+  content: string;
   priority: number;
   type: string;
 }
@@ -25,7 +25,7 @@ export class ProjectGoalsRisksComponent implements OnInit {
 
   goals: GoalRisk[] = [];
   risks: GoalRisk[] = [];
-  displayedColumns: string[] = ['value', 'priority'];
+  displayedColumns: string[] = ['content', 'priority'];
   dataSourceGoals: MatTableDataSource<GoalRisk> = new MatTableDataSource();
   dataSourceRisks: MatTableDataSource<GoalRisk> = new MatTableDataSource();
 

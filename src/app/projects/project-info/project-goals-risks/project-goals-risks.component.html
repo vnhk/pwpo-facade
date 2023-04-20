@@ -5,7 +5,7 @@
 
 <table [dataSource]="dataSourceGoals" class="mat-elevation-z8" mat-table>
 
-  <ng-container matColumnDef="value">
+  <ng-container matColumnDef="content">
     <th *matHeaderCellDef mat-header-cell> Goal</th>
     <td *matCellDef="let element" mat-cell> {{element.value}} </td>
   </ng-container>
@@ -32,7 +32,7 @@
 
 <table [dataSource]="dataSourceRisks" class="mat-elevation-z8" mat-table>
 
-  <ng-container matColumnDef="value">
+  <ng-container matColumnDef="content">
     <th *matHeaderCellDef mat-header-cell> Risk</th>
     <td *matCellDef="let element" mat-cell> {{element.value}} </td>
   </ng-container>
