@@ -68,6 +68,7 @@ import {TaskHistoryDiffComponent} from "./tasks/task-history/task-history-diff/t
 import {TaskHistoryDetailsComponent} from "./tasks/task-history/task-history-details/task-history-details.component";
 import {TaskHistoryListComponent} from "./tasks/task-history/task-history-list-component";
 import { ProjectGoalsRisksComponent } from './projects/project-info/project-goals-risks/project-goals-risks.component';
+import { AttachmentsComponent } from './main/attachments/attachments.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { ProjectGoalsRisksComponent } from './projects/project-info/project-goal
     TaskHistoryDiffComponent,
     TaskHistoryDetailsComponent,
     TaskHistoryListComponent,
-    ProjectGoalsRisksComponent
+    ProjectGoalsRisksComponent,
+    AttachmentsComponent
   ],
   imports: [
     BrowserModule,

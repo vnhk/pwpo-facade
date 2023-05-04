@@ -102,6 +102,15 @@ export interface TaskApi extends ItemApi {
   items: Task[];
 }
 
+export interface AttachmentsApi extends ItemApi {
+  items: Attachment[];
+}
+
+export interface Attachment extends Item {
+  id: number;
+  name: string;
+}
+
 export interface UserProject {
   user: number;
   projectRole: string;

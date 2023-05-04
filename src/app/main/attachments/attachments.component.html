@@ -1,0 +1,68 @@
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Attachments ({{fileInfos.length}})
+      </mat-panel-title>
+      <mat-panel-description>
+        <span></span>
+        <mat-icon>attach_file</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="container">
+      <div>
+        <mat-toolbar *ngIf="currentFile" class="progress-bar">
+          <mat-progress-bar [value]="progress" color="accent"></mat-progress-bar>
+          <span class="progress">{{ progress }}%</span>
+          <br>
+        </mat-toolbar>
+
+        <mat-form-field>
+          <div>
+            <mat-toolbar>
+              <input [value]="fileName" matInput/>
+
+              <button
+                (click)="upload()"
+                [disabled]="!currentFile"
+                color="primary"
+                mat-flat-button>
+                Upload
+              </button>
+            </mat-toolbar>
+
+            <input
+              (change)="selectFile($event)"
+              id="fileInput"
+              name="fileInput"
+              type="file"
+            />
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="message" class="message">
+        {{ message }}
+      </div>
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>List of Files</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let file of fileInfos; let i = index" role="listitem">
+              <p (click)="download(i)">{{ file.name }}</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
