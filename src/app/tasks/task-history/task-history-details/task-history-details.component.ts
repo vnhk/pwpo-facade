@@ -1,7 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {ProjectHistory, TaskHistory} from "../../../main/api-models";
+import {TaskHistory} from "../../../main/api-models";
 import {Location} from "@angular/common";
 
 @Component({

@@ -3,7 +3,7 @@
 </button>
 <div style="margin: 10px; width: 10px; height: 10px"></div>
 <div>
-  <app-details>
+  <app-details [isHistoryDetails]="true">
     <span avatar>
       <div mat-card-avatar
            style="float:left;background-image: url('assets/project-icon.png'); background-size: cover;">
@@ -17,6 +17,13 @@
     <label class="attribute-label">Summary:</label>
     <br>
       {{projectHistory.summary}}
+
+      <br>
+    <br>
+
+    <label class="attribute-label">Status:</label>
+    <br>
+      {{projectHistory.status}}
 
       <br>
     <br>

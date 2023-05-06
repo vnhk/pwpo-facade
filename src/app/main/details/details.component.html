@@ -13,7 +13,7 @@
     <ng-content select="[content]"></ng-content>
   </mat-card-content>
   <hr>
-  <app-attachments></app-attachments>
+  <app-attachments *ngIf="!isHistoryDetails"></app-attachments>
   <hr>
   <section>
     <div class="details-button-row">

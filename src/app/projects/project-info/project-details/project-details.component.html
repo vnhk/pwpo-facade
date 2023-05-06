@@ -1,4 +1,4 @@
-<app-details>
+<app-details [isHistoryDetails]="false">
   <span avatar>
     <div mat-card-avatar
          style="float:left;background-image: url('assets/project-icon.png'); background-size: cover;">
@@ -10,6 +10,13 @@
     <label class="attribute-label">Summary:</label>
     <br>
     {{primaryAttributes.summary}}
+
+    <br>
+    <br>
+
+    <label class="attribute-label">Status:</label>
+    <br>
+    {{primaryAttributes.status}}
 
     <br>
     <br>
@@ -26,6 +33,12 @@
      <span
        matTooltip="{{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}} ({{secondaryAttributes.createdBy?.nick}})">
        {{secondaryAttributes.createdBy?.firstName}} {{secondaryAttributes.createdBy?.lastName}}
+     </span>
+     <br>
+     <label class="attribute-label">Owner:</label>
+     <span
+       matTooltip="{{primaryAttributes.owner?.firstName}} {{primaryAttributes.owner?.lastName}} ({{primaryAttributes.owner?.nick}})">
+       {{primaryAttributes.owner?.firstName}} {{primaryAttributes.owner?.lastName}}
      </span>
     <br>
     <label class="attribute-label">Created:</label> {{secondaryAttributes.created | date: 'medium'}}

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-details',
@@ -6,6 +6,8 @@ import {AfterViewInit, Component} from '@angular/core';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements AfterViewInit {
+  @Input()
+  isHistoryDetails: boolean = true;
   constructor() {
 
   }

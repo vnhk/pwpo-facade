@@ -4,12 +4,7 @@
 <div style="margin: 10px; width: 10px; height: 10px"></div>
 <div>
 
-  <app-details>
-    <!--  <span avatar>-->
-    <!--    <div [ngStyle]="{'background-image': 'url('+ avatar +')', 'background-size' : 'cover'}"-->
-    <!--         mat-card-avatar>-->
-    <!--    </div>-->
-    <!--  </span>-->
+  <app-details [isHistoryDetails]="true">
     <span title>
        <ng-container *ngFor="let part of type">
         <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
