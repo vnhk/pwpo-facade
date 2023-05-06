@@ -87,4 +87,13 @@ export class AttachmentsComponent implements OnInit {
       saveAs(blob, attachment.name);
     });
   }
+
+  remove(attachmentIndex: number) {
+    let attachment = this.fileInfos[attachmentIndex];
+    let holderId = <string>this.route.snapshot.paramMap.get("id");
+    this.uploadService.remove(holderId, attachment.id).subscribe(value => {
+        this.getFilesInfo(holderId)
+      }
+    );
+  }
 }

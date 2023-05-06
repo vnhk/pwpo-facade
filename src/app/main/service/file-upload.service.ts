@@ -34,4 +34,8 @@ export class FileUploadService {
     return this.http.get(`${this.baseUrl}/attachments/${holderId}/attachment/${attachmentId}/download`,
       {responseType: 'blob'});
   }
+
+  remove(holderId: string, attachmentId: number) {
+    return this.http.delete(`${this.baseUrl}/attachments/${holderId}/attachment/${attachmentId}`);
+  }
 }
