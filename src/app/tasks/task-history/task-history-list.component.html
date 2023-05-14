@@ -9,7 +9,7 @@
     <mat-card *ngFor="let history of taskHistories" role="listitem">
       Edited at <a
       routerLink='/tasks/{{taskId}}/history/{{history.id}}'>{{history.expired | date: 'HH:mm:SS, dd MMMM yyyy'}}</a> by
-      {{history.editor?.firstName}} {{history.editor?.lastName}}<a routerLink='/user/details/{{history.editor?.id}}'>({{history.editor?.nick}})</a>
+      {{history.editor?.firstName}} {{history.editor?.lastName}} ({{history.editor?.nick}})
     </mat-card>
   </mat-list>
 
