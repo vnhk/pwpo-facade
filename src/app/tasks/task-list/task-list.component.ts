@@ -171,17 +171,14 @@ export class TaskListComponent implements AfterViewInit {
 
   getData(projectId: string | null) {
     let query = "";
+    console.log(this.criteria);
 
     if (this.criteria === 'projectId') {
       query = this.getQuery(`(project.id EQUALS_OPERATION ${projectId})`);
-    }
-
-    if (this.criteria === 'assignee') {
+    } else if (this.criteria === 'assignee') {
       let user = this.session.getLoggedUser().username;
       query = this.getQuery(`(assignee.nick EQUALS_OPERATION ${user})`);
-    }
-
-    if (this.criteria === 'owner') {
+    } else if (this.criteria === 'owner') {
       let user = this.session.getLoggedUser().username;
       query = this.getQuery(`(owner.nick EQUALS_OPERATION ${user})`);
     }

@@ -38,7 +38,6 @@ export class ProjectUserListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          console.log(this.sort, this.sort.active, this.sort.direction, this.paginator, this.paginator.pageIndex);
           return this.httpService.getUsersWithAccessToTheProject(this.id,
             this.sort.active,
             this.sort.direction,

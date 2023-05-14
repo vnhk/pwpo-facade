@@ -97,3 +97,14 @@ mat-card {
 .mat-spinner-disabled {
   display: none !important;
 }
+
+td a {
+  text-decoration: none !important;
+  color: #010142;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.table-container td {
+  font-size: 15px;
+}
