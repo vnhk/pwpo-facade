@@ -11,7 +11,7 @@
     </mat-expansion-panel-header>
 
     <div class="container">
-      <div>
+      <div class="upload-file-container" *ngIf="uploadFileAccessGranted">
         <mat-toolbar *ngIf="currentFile" class="progress-bar">
           <mat-progress-bar [value]="progress" color="accent"></mat-progress-bar>
           <span class="progress">{{ progress }}%</span>
@@ -55,8 +55,12 @@
                   {{ file.name }}
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <button (click)="download(i)" class="yellow-button" mat-raised-button type="button">Download</button>
-              <button (click)="remove(i)"  class="red-button" mat-raised-button style="margin: 10px;" type="button">Remove</button>
+              <button *ngIf="downloadFileAccessGranted" (click)="download(i)" class="yellow-button" mat-raised-button
+                      type="button">Download
+              </button>
+              <button *ngIf="removeFileAccessGranted" (click)="remove(i)" class="red-button" mat-raised-button
+                      style="margin: 10px;" type="button">Remove
+              </button>
             </mat-expansion-panel>
           </mat-accordion>
           <hr>

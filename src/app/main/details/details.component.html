@@ -13,7 +13,10 @@
     <ng-content select="[content]"></ng-content>
   </mat-card-content>
   <hr>
-  <app-attachments *ngIf="!isHistoryDetails"></app-attachments>
+  <app-attachments *ngIf="!isHistoryDetails" [uploadFileAccessGranted]="uploadFileAccessGranted"
+                   [removeFileAccessGranted]="removeFileAccessGranted"
+                   [downloadFileAccessGranted]="downloadFileAccessGranted">
+  </app-attachments>
   <hr>
   <section>
     <div class="details-button-row">

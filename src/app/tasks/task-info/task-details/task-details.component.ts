@@ -36,6 +36,10 @@ export class TaskDetailsComponent implements AfterViewInit {
   status: DataEnum[] = [];
   statusChangeOperation = false;
 
+  uploadFileAccessGranted = true;
+  downloadFileAccessGranted = true;
+  removeFileAccessGranted = true;
+
   constructor(private httpService: HttpService,
               private route: ActivatedRoute,
               public snackBar: MatSnackBar) {

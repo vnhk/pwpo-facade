@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FileUploadService} from "../service/file-upload.service";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
@@ -18,6 +18,13 @@ export class AttachmentsComponent implements OnInit {
 
   fileName = 'Select File';
   fileInfos: Attachment[] = [];
+
+  @Input()
+  uploadFileAccessGranted = false;
+  @Input()
+  downloadFileAccessGranted = false;
+  @Input()
+  removeFileAccessGranted = false;
 
   constructor(private uploadService: FileUploadService, private route: ActivatedRoute) {
   }
@@ -42,6 +49,9 @@ export class AttachmentsComponent implements OnInit {
   }
 
   upload(): void {
+    if (!this.uploadFileAccessGranted) {
+      return;
+    }
     let holderId = <string>this.route.snapshot.paramMap.get("id");
     this.progress = 0;
     this.message = "";
@@ -81,6 +91,9 @@ export class AttachmentsComponent implements OnInit {
   }
 
   download(attachmentIndex: number) {
+    if (!this.downloadFileAccessGranted) {
+      return;
+    }
     let attachment = this.fileInfos[attachmentIndex];
     let holderId = <string>this.route.snapshot.paramMap.get("id");
     this.uploadService.download(holderId, attachment.id).subscribe(blob => {
@@ -89,6 +102,10 @@ export class AttachmentsComponent implements OnInit {
   }
 
   remove(attachmentIndex: number) {
+    if (!this.removeFileAccessGranted) {
+      return;
+    }
+
     let attachment = this.fileInfos[attachmentIndex];
     let holderId = <string>this.route.snapshot.paramMap.get("id");
     this.uploadService.remove(holderId, attachment.id).subscribe(value => {

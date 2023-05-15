@@ -1,4 +1,6 @@
-<app-details [isHistoryDetails]="false">
+<app-details [isHistoryDetails]="false" [uploadFileAccessGranted]="uploadFileAccessGranted"
+             [removeFileAccessGranted]="removeFileAccessGranted"
+             [downloadFileAccessGranted]="downloadFileAccessGranted">
   <span avatar>
     <div [ngStyle]="{'background-image': 'url('+ avatar +')', 'background-size' : 'cover'}"
          mat-card-avatar>

@@ -7,7 +7,14 @@ import {AfterViewInit, Component, Input} from '@angular/core';
 })
 export class DetailsComponent implements AfterViewInit {
   @Input()
-  isHistoryDetails: boolean = true;
+  isHistoryDetails = true;
+  @Input()
+  uploadFileAccessGranted = false;
+  @Input()
+  downloadFileAccessGranted = false;
+  @Input()
+  removeFileAccessGranted = false;
+
   constructor() {
 
   }

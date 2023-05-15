@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {Project} from "../../../main/api-models";
@@ -17,9 +17,17 @@ export class ProjectDetailsComponent implements AfterViewInit {
   @ViewChild(MessageBarComponent)
   messageBarComponent: MessageBarComponent | undefined;
 
+  uploadFileAccessGranted = false;
+  downloadFileAccessGranted = true;
+  removeFileAccessGranted = false;
+
   constructor(private httpService: HttpService,
               private route: ActivatedRoute,
               public authService: AuthService) {
+    if(authService.isManager()) {
+      this.removeFileAccessGranted = true;
+      this.uploadFileAccessGranted = true;
+    }
   }
 
   ngAfterViewInit() {
