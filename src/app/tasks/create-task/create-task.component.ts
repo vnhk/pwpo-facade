@@ -66,7 +66,7 @@ export class CreateTaskComponent implements OnInit {
       this.httpService.createTask(this.formGroup.value)
         .pipe(
           catchError(this.handleError.bind(this))
-        ).subscribe(() => this.successCreation());
+        ).subscribe((value) => this.successCreation(value));
     }
   }
 
@@ -93,8 +93,8 @@ export class CreateTaskComponent implements OnInit {
     this.openBarWithMessage(message, ['error-bar'], 15000);
   }
 
-  private successCreation() {
-    this.openBarWithMessage('Task created!', ['success-bar'], 15000);
+  private successCreation(value: any) {
+    this.openBarWithMessage(`${value.items[0].number} task created!`, ['success-bar'], 15000);
     this.resetForm();
   }
 
