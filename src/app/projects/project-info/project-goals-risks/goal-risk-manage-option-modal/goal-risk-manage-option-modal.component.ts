@@ -99,13 +99,15 @@ export class GoalRiskManageOptionModalComponent implements OnInit {
 
   deleteGoalRisk() {
     if (confirm("Are you sure you want to delete this " + this.typeDisplay + "?")) {
-      this.httpService.deleteGoalRisk(this.projectId, this.modalData.data)
+      console.log(this.modalData.data);
+      this.httpService.deleteGoalRisk(this.projectId, this.modalData.data?.id)
         .pipe(
           catchError(err => {
             return this.handleErrorSimple(err, `The ${this.typeDisplay} cannot be deleted!`);
           })
         ).subscribe(() => {
         this.openBarWithMessage('Delete performed successfully!', ['success-bar'], 15000);
+        this.dialogRef.close();
       });
     }
   }

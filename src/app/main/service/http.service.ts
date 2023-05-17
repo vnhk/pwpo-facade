@@ -350,10 +350,9 @@ export class HttpService {
     );
   }
 
-  deleteGoalRisk(projectId: string | null | undefined, value: any) {
+  deleteGoalRisk(projectId: string | null | undefined, id: any) {
     return this.http.delete(
-      `${this.baseUrl}/projects/${projectId}/goals-and-risks`,
-      value
+      `${this.baseUrl}/projects/${projectId}/goals-and-risks/${id}`
     );
   }
 }
