@@ -31,6 +31,8 @@ export interface GoalRiskApi extends ItemApi {
   styleUrls: ['./project-goals-risks.component.css']
 })
 export class ProjectGoalsRisksComponent implements OnInit {
+  editRisks = false;
+  editGoals = false;
 
   goals: GoalRisk[] = [];
   risks: GoalRisk[] = [];
@@ -48,7 +50,7 @@ export class ProjectGoalsRisksComponent implements OnInit {
     this.dataSourceRisks.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute, public dialog: MatDialog, private authService: AuthService) {
+  constructor(private httpService: HttpService, private route: ActivatedRoute, public dialog: MatDialog, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -102,5 +104,21 @@ export class ProjectGoalsRisksComponent implements OnInit {
         this.getGoalsAndRisks();
       });
     }
+  }
+
+  showEditRisks() {
+    this.editRisks = true;
+  }
+
+  showEditGoals() {
+    this.editGoals = true;
+  }
+
+  hideEditRisks() {
+    this.editRisks = false;
+  }
+
+  hideEditGoals() {
+    this.editGoals = false;
   }
 }

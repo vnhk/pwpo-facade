@@ -1,7 +1,16 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input #inputGoals (keyup)="applyGoalsFilter($event)" matInput>
-</mat-form-field>
+<div class="row">
+  <mat-form-field class="col-6">
+    <mat-label>Filter</mat-label>
+    <input #inputGoals (keyup)="applyGoalsFilter($event)" matInput>
+  </mat-form-field>
+  <span class="col-5"></span>
+  <button (click)="showEditGoals()" *ngIf="authService.isManager() && !editGoals" mat-button class="col-1">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button (click)="hideEditGoals()" *ngIf="authService.isManager() && editGoals" mat-button class="col-1">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 
 <table [dataSource]="dataSourceGoals" class="mat-elevation-z8" mat-table>
 
@@ -16,7 +25,8 @@
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr (click)="openActionModal(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr [ngClass]="['mat-row', editGoals ? 'edit-row': '']" (click)="editGoals && openActionModal(row)"
+      *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
   <tr *matNoDataRow class="mat-row">
     <td *ngIf="inputGoals.value != ''" class="mat-cell" colspan="4">No data matching the filter "{{inputGoals.value}}"
@@ -24,16 +34,26 @@
   </tr>
 
 </table>
-<div (click)="openActionModalForNotExisting('GOAL')" class="mat-elevation-z8 add-new-element">
+<div *ngIf="editGoals" (click)="openActionModalForNotExisting('GOAL')" class="mat-elevation-z8 add-new-element">
   +
 </div>
 
 <hr>
 
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input #inputRisks (keyup)="applyRisksFilter($event)" matInput>
-</mat-form-field>
+<div class="row">
+  <mat-form-field class="col-6">
+    <mat-label>Filter</mat-label>
+    <input #inputRisks (keyup)="applyRisksFilter($event)" matInput>
+  </mat-form-field>
+  <span class="col-5"></span>
+  <button (click)="showEditRisks()" *ngIf="authService.isManager() && !editRisks" mat-button class="col-1">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button (click)="hideEditRisks()" *ngIf="authService.isManager() && editRisks" mat-button class="col-1">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
 
 <table [dataSource]="dataSourceRisks" class="mat-elevation-z8" mat-table>
 
@@ -48,7 +68,8 @@
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr (click)="openActionModal(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr [ngClass]="['mat-row', editRisks ? 'edit-row': '']" (click)="editRisks && openActionModal(row)"
+      *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
   <tr *matNoDataRow class="mat-row">
     <td *ngIf="inputRisks.value != ''" class="mat-cell" colspan="4">No data matching the filter "{{inputRisks.value}}"
@@ -56,6 +77,6 @@
   </tr>
 
 </table>
-<div (click)="openActionModalForNotExisting('RISK')" class="mat-elevation-z8 add-new-element">
+<div *ngIf="editRisks" (click)="openActionModalForNotExisting('RISK')" class="mat-elevation-z8 add-new-element">
   +
 </div>
