@@ -69,6 +69,9 @@ import {TaskHistoryDetailsComponent} from "./tasks/task-history/task-history-det
 import {TaskHistoryListComponent} from "./tasks/task-history/task-history-list-component";
 import { ProjectGoalsRisksComponent } from './projects/project-info/project-goals-risks/project-goals-risks.component';
 import { AttachmentsComponent } from './main/attachments/attachments.component';
+import {
+  GoalRiskManageOptionModalComponent
+} from "./projects/project-info/project-goals-risks/goal-risk-manage-option-modal/goal-risk-manage-option-modal.component";
 
 @NgModule({
   declarations: [
@@ -107,7 +110,8 @@ import { AttachmentsComponent } from './main/attachments/attachments.component';
     TaskHistoryDetailsComponent,
     TaskHistoryListComponent,
     ProjectGoalsRisksComponent,
-    AttachmentsComponent
+    AttachmentsComponent,
+    GoalRiskManageOptionModalComponent
   ],
   imports: [
     BrowserModule,

@@ -3,18 +3,27 @@ import {MatTableDataSource} from "@angular/material/table";
 import {HttpService} from "../../../main/service/http.service";
 import {ItemApi} from "../../../main/api-models";
 import {ActivatedRoute} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  GoalRiskManageOptionModalComponent
+} from "./goal-risk-manage-option-modal/goal-risk-manage-option-modal.component";
+import {AuthService} from "../../../main/session/auth.service";
 
-export interface GoalRisk {
-  id: number;
-  content: string;
-  priority: number;
-  type: string;
+export class GoalRisk {
+  id: number | undefined;
+  content: string | undefined;
+  priority: number | undefined;
+  type: string | undefined;
+}
+
+export class GoalRiskModal {
+  projectId: string | null | undefined;
+  data: GoalRisk | undefined;
 }
 
 export interface GoalRiskApi extends ItemApi {
   items: GoalRisk[];
 }
-
 
 @Component({
   selector: 'app-project-goals-risks',
@@ -39,12 +48,15 @@ export class ProjectGoalsRisksComponent implements OnInit {
     this.dataSourceRisks.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute) {
+  constructor(private httpService: HttpService, private route: ActivatedRoute, public dialog: MatDialog, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get("id");
+    this.getGoalsAndRisks();
+  }
 
+  private getGoalsAndRisks() {
+    let id = this.route.snapshot.paramMap.get("id");
     this.httpService.getAllGoalsAndRisks(id).subscribe(
       value => {
         this.goals = value.items.filter(v => v.type == "GOAL");
@@ -56,4 +68,39 @@ export class ProjectGoalsRisksComponent implements OnInit {
     );
   }
 
+  openActionModal(row: GoalRisk) {
+    if (this.authService.isManager()) {
+      let id = this.route.snapshot.paramMap.get("id");
+      let modalData = new GoalRiskModal();
+      modalData.projectId = id;
+      modalData.data = row;
+      let matDialogRef = this.dialog.open(GoalRiskManageOptionModalComponent,
+        {
+          data: modalData,
+        });
+
+      matDialogRef.afterClosed().subscribe(() => {
+        this.getGoalsAndRisks();
+      });
+    }
+  }
+
+  openActionModalForNotExisting(type: string) {
+    let newGoalRisk = new GoalRisk();
+    newGoalRisk.type = type;
+    let id = this.route.snapshot.paramMap.get("id");
+    let modalData = new GoalRiskModal();
+    modalData.projectId = id;
+    modalData.data = newGoalRisk;
+    if (this.authService.isManager()) {
+      let matDialogRef = this.dialog.open(GoalRiskManageOptionModalComponent,
+        {
+          data: modalData,
+        });
+
+      matDialogRef.afterClosed().subscribe(() => {
+        this.getGoalsAndRisks();
+      });
+    }
+  }
 }

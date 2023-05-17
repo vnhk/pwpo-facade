@@ -342,4 +342,18 @@ export class HttpService {
       `${this.baseUrl}/users/logged/details`
     );
   }
+
+  saveGoalRisk(projectId: string | null | undefined, value: any) {
+    return this.http.post(
+      `${this.baseUrl}/projects/${projectId}/goals-and-risks`,
+      value
+    );
+  }
+
+  deleteGoalRisk(projectId: string | null | undefined, value: any) {
+    return this.http.delete(
+      `${this.baseUrl}/projects/${projectId}/goals-and-risks`,
+      value
+    );
+  }
 }

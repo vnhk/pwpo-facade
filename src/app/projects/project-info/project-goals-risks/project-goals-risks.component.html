@@ -7,21 +7,26 @@
 
   <ng-container matColumnDef="content">
     <th *matHeaderCellDef mat-header-cell> Goal</th>
-    <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+    <td *matCellDef="let element" mat-cell> {{element.content}} </td>
   </ng-container>
 
   <ng-container matColumnDef="priority">
-    <th *matHeaderCellDef mat-header-cell> Priority</th>
-    <td *matCellDef="let element" mat-cell> {{element.priority}} </td>
+    <th *matHeaderCellDef mat-header-cell class="priority"> Priority</th>
+    <td *matCellDef="let element" mat-cell class="priority"> {{element.priority}} </td>
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr (click)="openActionModal(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
   <tr *matNoDataRow class="mat-row">
-    <td class="mat-cell" colspan="4">No data matching the filter "{{inputGoals.value}}"</td>
+    <td *ngIf="inputGoals.value != ''" class="mat-cell" colspan="4">No data matching the filter "{{inputGoals.value}}"
+    </td>
   </tr>
+
 </table>
+<div (click)="openActionModalForNotExisting('GOAL')" class="mat-elevation-z8 add-new-element">
+  +
+</div>
 
 <hr>
 
@@ -34,18 +39,23 @@
 
   <ng-container matColumnDef="content">
     <th *matHeaderCellDef mat-header-cell> Risk</th>
-    <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+    <td *matCellDef="let element" mat-cell> {{element.content}} </td>
   </ng-container>
 
   <ng-container matColumnDef="priority">
-    <th *matHeaderCellDef mat-header-cell> Priority</th>
-    <td *matCellDef="let element" mat-cell> {{element.priority}} </td>
+    <th *matHeaderCellDef mat-header-cell class="priority"> Priority</th>
+    <td *matCellDef="let element" mat-cell class="priority"> {{element.priority}} </td>
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr (click)="openActionModal(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
   <tr *matNoDataRow class="mat-row">
-    <td class="mat-cell" colspan="4">No data matching the filter "{{inputRisks.value}}"</td>
+    <td *ngIf="inputRisks.value != ''" class="mat-cell" colspan="4">No data matching the filter "{{inputRisks.value}}"
+    </td>
   </tr>
+
 </table>
+<div (click)="openActionModalForNotExisting('RISK')" class="mat-elevation-z8 add-new-element">
+  +
+</div>
