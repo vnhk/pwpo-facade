@@ -358,7 +358,7 @@ export class HttpService {
 
   removeUserFromProject(projectId: string | null | undefined, id: any) {
     return this.http.delete(
-      `${this.baseUrl}/projects/${projectId}/users/${id}`
+      `${this.baseUrl}/projects/project/${projectId}/users/${id}`
     );
   }
 }
