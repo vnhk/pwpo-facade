@@ -1,0 +1,76 @@
+<div class="container-modal">
+  <h1 mat-dialog-title>Manage User</h1>
+  <form *ngIf="create" (ngSubmit)="onSubmitSave()" [formGroup]="formGroup" class="form-container">
+    <mat-card>
+      <mat-card-header class="form-header">
+        <mat-card-title>Add user to project:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>User</mat-label>
+              <mat-select formControlName="user">
+                <mat-option *ngFor="let user of notAddedUsers"
+                            [value]="user.id">{{user.firstName}} {{user.lastName}}  ({{user.nick}})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="projectRole">
+                <mat-option *ngFor="let role of roles"
+                            [value]="role.internalName">{{role.displayName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+  <form *ngIf="edit" (ngSubmit)="onSubmitSave()" [formGroup]="formGroup" class="form-container">
+    <mat-card>
+      <mat-card-header class="form-header">
+        <mat-card-title>Edit role:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>User</mat-label>
+              <mat-select formControlName="user" [disabled]="true">
+                <mat-option [value]="modalData.data?.id">{{modalData.data?.firstName}} {{modalData.data?.firstName}}
+                  ({{modalData.data?.nick}})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="projectRole">
+                <mat-option *ngFor="let role of roles"
+                            [value]="role.internalName">{{role.displayName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+
+  <div mat-dialog-actions>
+    <button [disabled]="!this.formGroup.valid" (click)="onSubmitSave()" class="grey-button"
+            mat-raised-button
+            tabindex="-1">
+      Save
+    </button>
+    <button (click)="delete()" *ngIf="!create" class="yellow-button" mat-raised-button tabindex="-1">
+      Remove from project
+    </button>
+    <button class="grey-button" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
+
+  </div>
+</div>

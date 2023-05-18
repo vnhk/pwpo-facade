@@ -355,4 +355,10 @@ export class HttpService {
       `${this.baseUrl}/projects/${projectId}/goals-and-risks/${id}`
     );
   }
+
+  removeUserFromProject(projectId: string | null | undefined, id: any) {
+    return this.http.delete(
+      `${this.baseUrl}/projects/${projectId}/users/${id}`
+    );
+  }
 }

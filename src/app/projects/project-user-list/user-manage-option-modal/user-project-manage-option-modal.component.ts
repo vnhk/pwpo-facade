@@ -5,53 +5,57 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
-import {GoalRisk, GoalRiskModal} from "../project-goals-risks.component";
-import {HttpService} from "../../../../main/service/http.service";
+import {HttpService} from "../../../main/service/http.service";
+import {PersonModal} from "../project-user-list.component";
+import {DataEnum, Person} from "../../../main/api-models";
 
 @Component({
-  selector: 'app-goal-risk-manage-option-modal',
-  templateUrl: './goal-risk-manage-option-modal.component.html',
-  styleUrls: ['./goal-risk-manage-option-modal.component.css']
+  selector: 'user-manage-risk-manage-option-modal',
+  templateUrl: './user-project-manage-option-modal.component.html',
+  styleUrls: ['./user-project-manage-option-modal.component.css']
 })
-export class GoalRiskManageOptionModalComponent implements OnInit {
-  save = false;
-  typeDisplay: string;
+export class UserProjectManageOptionModalComponent implements OnInit {
+  create = false;
+  edit = false;
   formGroup: FormGroup;
   projectId: string | null | undefined;
+  notAddedUsers: Person[] | undefined;
+  roles: DataEnum[] | undefined;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public modalData: GoalRiskModal,
+  constructor(@Inject(MAT_DIALOG_DATA) public modalData: PersonModal,
               private formBuilder: FormBuilder,
               public snackBar: MatSnackBar,
               private httpService: HttpService,
-              private dialogRef: MatDialogRef<GoalRiskManageOptionModalComponent>) {
-    this.typeDisplay = this.modalData.data?.type == "GOAL" ? "goal" : "risk";
+              private dialogRef: MatDialogRef<UserProjectManageOptionModalComponent>) {
     this.projectId = this.modalData.projectId;
 
-    this.save = this.modalData.data?.id == null;
-
     this.formGroup = this.formBuilder.group({
-      'id': [null],
-      'content': [null, [Validators.required, Validators.minLength(5), Validators.maxLength(150)]],
-      'priority': [null, [Validators.required, Validators.pattern("^[1-5]{1}$")]],
-      'type': [null, [Validators.required]]
+      'user': [null, [Validators.required]],
+      'projectRole': [null, [Validators.required]],
     });
+
+    if(this.modalData.data?.id == null) {
+      this.createUser();
+    } else {
+      this.editUser();
+    }
   }
 
   ngOnInit(): void {
-    this.formGroup.patchValue({
-      id: this.modalData.data?.id,
-      content: this.modalData.data?.content,
-      priority: this.modalData.data?.priority,
-      type: this.modalData.data?.type
-    });
+    this.getUsersNotAdded();
+    this.httpService.getEnumByName("com.pwpo.user.ProjectRole").subscribe(value => this.roles = value.items);
+  }
+
+  getUsersNotAdded() {
+    this.httpService.getUsersNotAddedToTheProject(this.projectId).subscribe(value => this.notAddedUsers = value.items);
   }
 
   onSubmitSave() {
     if (this.formGroup.valid) {
-      this.httpService.saveGoalRisk(this.projectId, this.formGroup.value)
+      this.httpService.addUserToProject(this.formGroup.value, this.projectId)
         .pipe(
           catchError(this.handleError.bind(this))
-        ).subscribe(() => this.successSave());
+        ).subscribe(() => this.successCreation());
     }
   }
 
@@ -79,9 +83,8 @@ export class GoalRiskManageOptionModalComponent implements OnInit {
     this.openBarWithMessage(message, ['error-bar'], 15000);
   }
 
-  private successSave() {
-    this.openBarWithMessage('Element saved!', ['success-bar'], 15000);
-    this.save = false;
+  private successCreation() {
+    this.openBarWithMessage('User has been successfully added!', ['success-bar'], 15000);
     this.dialogRef.close();
   }
 
@@ -97,22 +100,34 @@ export class GoalRiskManageOptionModalComponent implements OnInit {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  deleteGoalRisk() {
-    if (confirm("Are you sure you want to delete this " + this.typeDisplay + "?")) {
-
-      this.httpService.deleteGoalRisk(this.projectId, this.modalData.data?.id)
+  delete() {
+    if (confirm("Are you sure you want to remove this user ?")) {
+      this.httpService.removeUserFromProject(this.projectId, this.modalData.data?.id)
         .pipe(
           catchError(err => {
-            return this.handleErrorSimple(err, `The ${this.typeDisplay} cannot be deleted!`);
+            return this.handleErrorSimple(err, `The user cannot be removed!`);
           })
         ).subscribe(() => {
-        this.openBarWithMessage('Delete performed successfully!', ['success-bar'], 15000);
+        this.openBarWithMessage('User removed!', ['success-bar'], 15000);
         this.dialogRef.close();
       });
     }
   }
 
-  editGoalRisk() {
-    this.save = true;
+  editUser() {
+    this.create = false;
+    this.edit = true;
+
+    console.log(this.modalData.data?.projectRole);
+
+    this.formGroup.patchValue({
+      user: this.modalData.data?.id,
+      projectRole: null
+    });
+  }
+
+  createUser() {
+    this.edit = false;
+    this.create = true;
   }
 }

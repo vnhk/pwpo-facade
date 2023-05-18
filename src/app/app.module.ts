@@ -18,7 +18,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TaskListComponent} from './tasks/task-list/task-list.component';
 import {ProjectInfoComponent} from './projects/project-info/project-info.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import {MatCardModule} from "@angular/material/card";
+import {MatCardActions, MatCardModule} from "@angular/material/card";
 import {ProjectDetailsComponent} from './projects/project-info/project-details/project-details.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DetailsComponent} from "./main/details/details.component";
@@ -72,6 +72,9 @@ import { AttachmentsComponent } from './main/attachments/attachments.component';
 import {
   GoalRiskManageOptionModalComponent
 } from "./projects/project-info/project-goals-risks/goal-risk-manage-option-modal/goal-risk-manage-option-modal.component";
+import {
+  UserProjectManageOptionModalComponent
+} from "./projects/project-user-list/user-manage-option-modal/user-project-manage-option-modal.component";
 
 @NgModule({
   declarations: [
@@ -111,7 +114,8 @@ import {
     TaskHistoryListComponent,
     ProjectGoalsRisksComponent,
     AttachmentsComponent,
-    GoalRiskManageOptionModalComponent
+    GoalRiskManageOptionModalComponent,
+    UserProjectManageOptionModalComponent
   ],
   imports: [
     BrowserModule,

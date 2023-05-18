@@ -10,20 +10,3 @@ table {
 .priority {
   text-align: right;
 }
-
-.add-new-element {
-  margin-top: 5px;
-  text-align: center;
-  font-size: 25px;
-  padding: 15px;
-}
-
-.add-new-element:hover {
-  background-color: #c9c9c9;
-  cursor: pointer;
-}
-
-.edit-row:hover {
-  background-color: #c9c9c9;
-  cursor: pointer;
-}
