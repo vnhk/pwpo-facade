@@ -96,7 +96,8 @@ export class UserProjectManageOptionModalComponent implements OnInit {
   }
 
   private handleErrorSimple(error: HttpErrorResponse, msg: any) {
-
+    console.log(error.error);
+    this.showErrorPopup(error.error[0].message);
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
