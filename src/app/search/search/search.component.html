@@ -59,7 +59,7 @@
                   Assignee nick
                 </mat-option>
                 <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="firstName">First name</mat-option>
-                <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="secondName">Second name</mat-option>
+                <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="lastName">Last name</mat-option>
                 <mat-option *ngIf="criteria.type === '[addedToProjects]'" value="nick">Nick</mat-option>
               </mat-select>
             </mat-form-field>
@@ -170,7 +170,7 @@
               <mat-label>Select attribute</mat-label>
               <mat-select [(value)]="criteria.attr" [disabled]="searchPerformed" required>
                 <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
-                <mat-option *ngIf="criteria.type === 'user'" value="secondName">Second name</mat-option>
+                <mat-option *ngIf="criteria.type === 'user'" value="lastName">Last name</mat-option>
                 <mat-option *ngIf="criteria.type === 'user'" value="nick">Nick</mat-option>
               </mat-select>
             </mat-form-field>
