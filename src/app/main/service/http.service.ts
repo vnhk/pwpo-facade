@@ -239,12 +239,18 @@ export class HttpService {
   }
 
   editUser(value: string) {
-    return this.http.put<Task>(
+    return this.http.put(
       `${this.baseUrl}/admin/users`,
       value
     );
   }
 
+  editRoles(value: string) {
+    return this.http.put(
+      `${this.baseUrl}/admin/users/roles`,
+      value
+    );
+  }
   getTaskPrimaryById(id: string | null): Observable<TaskApi> {
     return this.http.get<TaskApi>(
       `${this.baseUrl}/tasks/task?id=${id}&dto=${this.taskDTOPrimaryClass}`

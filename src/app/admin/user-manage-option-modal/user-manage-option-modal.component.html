@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Manage <strong>{{data.nick}}</strong> Account</h1>
-<form (ngSubmit)="onSubmitEditUser()" [formGroup]="formGroup" class="form-container">
+<form (ngSubmit)="onSubmitEditUser()" [formGroup]="editDataFormGroup" class="form-container">
   <div mat-dialog-content>
-    <div *ngIf="edit">
+    <div *ngIf="editData">
       <div>
         <mat-form-field appearance="fill" hintLabel="Max 50 characters">
           <mat-label>First name</mat-label>
@@ -24,21 +24,57 @@
     </div>
   </div>
 </form>
+<form (ngSubmit)="onSubmitManageRoles()" [formGroup]="editRolesFormGroup" class="form-container">
+  <div mat-dialog-content>
+    <div *ngIf="editRoles">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>User</mat-label>
+          <mat-select [(ngModel)]="data.id" formControlName="id">
+            <mat-option [value]="data.id">{{data.firstName}} {{data.lastName}}
+              ({{data.nick}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Role</mat-label>
+          <mat-select [formControl]="roles" multiple>
+            <mat-select-trigger>
+              {{roles.value?.[0] || ''}}
+              <span *ngIf="(roles.value?.length || 0) > 1" class="example-additional-selection">
+                    (+{{(roles.value?.length || 0) - 1}} {{roles.value?.length === 2 ? 'other' : 'others'}})
+                  </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let role of rolesList" [value]="role">{{role}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>
+
 <div mat-dialog-actions>
-  <button (click)="disableUser()" *ngIf="!edit && !disabledUser" class="red-button" mat-raised-button tabindex="-1">
+  <button (click)="disableUser()" *ngIf="!editData && !editRoles && !disabledUser" class="red-button" mat-raised-button tabindex="-1">
     Disable
   </button>
-  <button (click)="enableUser()" *ngIf="!edit && disabledUser" class="yellow-button" mat-raised-button tabindex="-1">
+  <button (click)="enableUser()" *ngIf="!editData && !editRoles && disabledUser" class="yellow-button" mat-raised-button
+          tabindex="-1">
     Enable
   </button>
-  <button (click)="resetPassword()" *ngIf="!edit" class="grey-button" mat-raised-button tabindex="-1">
+  <button (click)="resetPassword()" *ngIf="!editData && !editRoles" class="grey-button" mat-raised-button tabindex="-1">
     Reset password
   </button>
-  <button *ngIf="!edit" class="grey-button" mat-button mat-raised-button tabindex="-1">Manage roles</button>
-  <button (click)="edit=true" *ngIf="!edit" class="grey-button" mat-raised-button tabindex="-1">Edit</button>
-  <button (click)="onSubmitEditUser()" *ngIf="edit" class="grey-button" mat-raised-button tabindex="-1">
+  <button *ngIf="!editData && !editRoles" (click)="editRoles=true" class="grey-button" mat-button mat-raised-button
+          tabindex="-1">Manage roles
+  </button>
+  <button (click)="editData=true" *ngIf="!editData && !editRoles" class="grey-button" mat-raised-button tabindex="-1">
+    Edit
+  </button>
+  <button (click)="onSubmitEditUser()" *ngIf="editData" class="grey-button" mat-raised-button tabindex="-1"></button>
+  <button (click)="onSubmitManageRoles()" *ngIf="editRoles" class="grey-button" mat-raised-button tabindex="-1">
     Save
   </button>
   <button class="grey-button" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
-
 </div>

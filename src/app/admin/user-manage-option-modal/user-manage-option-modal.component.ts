@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Person} from "../../main/api-models";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
 import {HttpService} from "../../main/service/http.service";
@@ -14,85 +14,71 @@ import {throwError} from "rxjs";
   styleUrls: ['./user-manage-option-modal.component.css']
 })
 export class UserManageOptionModalComponent implements OnInit {
-  edit = false;
+  editData = false;
   disabledUser = false;
-  formGroup: FormGroup;
+  editDataFormGroup: FormGroup;
+  editRolesFormGroup: FormGroup;
+  rolesList = ["ROLE_ADMIN", "ROLE_USER", "ROLE_MANAGER", "ROLE_DISABLED", "ROLE_NOT_ACTIVATED"];
+  editRoles = false;
+
+  roles = new FormControl([]);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Person,
               private formBuilder: FormBuilder,
               public snackBar: MatSnackBar,
               private httpService: HttpService) {
 
+    console.log(data);
     if (data.roles) {
       this.disabledUser = data.roles?.includes("ROLE_DISABLED");
+      // @ts-ignore
+      this.roles = new FormControl(data.roles);
     }
 
-    this.formGroup = this.formBuilder.group({
+    this.editDataFormGroup = this.formBuilder.group({
       'id': [null, [Validators.required]],
       'firstName': [null, [Validators.required, Validators.maxLength(50)]],
       'lastName': [null, [Validators.required, Validators.maxLength(50)]],
       'email': [null, [Validators.required, Validators.maxLength(50), Validators.email]]
     });
+
+    this.editRolesFormGroup = this.formBuilder.group({
+      'id': [null, [Validators.required]],
+      'roles': [null, [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
-    this.formGroup.patchValue({
+    this.editDataFormGroup.patchValue({
       id: this.data.id,
       firstName: this.data.firstName,
       lastName: this.data.lastName,
       email: this.data.email,
     });
+
+    this.editRolesFormGroup = this.formBuilder.group({
+      'id': [null, [Validators.required]],
+      'roles': this.roles
+    });
   }
 
   onSubmitEditUser() {
-    if (this.formGroup.valid) {
-      this.httpService.editUser(this.formGroup.value)
+    if (this.editDataFormGroup.valid) {
+      this.httpService.editUser(this.editDataFormGroup.value)
         .pipe(
           catchError(this.handleError.bind(this))
         ).subscribe(() => this.successCreation());
     }
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 400) {
-      if (error.error[0].code === "FIELD_VALIDATION") {
-        let formInput = this.formGroup.get(error.error[0].field);
-        formInput?.setErrors({'incorrect': true});
-
-        this.showErrorPopup((error.error[0].message));
-
-      } else if (error.error[0].code === "GENERAL_VALIDATION") {
-        this.showErrorPopup((error.error[0].message));
-      } else {
-        this.showErrorPopup('User could not be edited!');
-      }
-    } else {
-      this.showErrorPopup('User could not be edited!');
+  onSubmitManageRoles() {
+    if (this.editRolesFormGroup.valid) {
+      this.httpService.editRoles(this.editRolesFormGroup.value)
+        .pipe(
+          catchError(this.handleError.bind(this))
+        ).subscribe(() => this.successCreation());
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
-
-  private showErrorPopup(message: string) {
-    this.openBarWithMessage(message, ['error-bar'], 15000);
-  }
-
-  private successCreation() {
-    this.openBarWithMessage('User edited!', ['success-bar'], 15000);
-    this.edit = false;
-  }
-
-  private openBarWithMessage(message: string, classes: string[], duration: number) {
-    this.snackBar.open(message, "Ok", {
-      duration: duration,
-      panelClass: classes
-    });
-  }
-
-  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
-
-    return throwError(() => new Error('Something bad happened; please try again later.'));
-  }
-
 
   disableUser() {
     if (confirm("Are you sure you want to disable this account?")) {
@@ -107,7 +93,6 @@ export class UserManageOptionModalComponent implements OnInit {
       });
     }
   }
-
 
   enableUser() {
     if (confirm("Are you sure you want to enable this account?")) {
@@ -135,5 +120,46 @@ export class UserManageOptionModalComponent implements OnInit {
         this.disabledUser = false;
       });
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 400) {
+      if (error.error[0].code === "FIELD_VALIDATION") {
+        let formInput = this.editDataFormGroup.get(error.error[0].field);
+        formInput?.setErrors({'incorrect': true});
+
+        this.showErrorPopup((error.error[0].message));
+
+      } else if (error.error[0].code === "GENERAL_VALIDATION") {
+        this.showErrorPopup((error.error[0].message));
+      } else {
+        this.showErrorPopup('User could not be edited!');
+      }
+    } else {
+      this.showErrorPopup('User could not be edited!');
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  private showErrorPopup(message: string) {
+    this.openBarWithMessage(message, ['error-bar'], 15000);
+  }
+
+  private successCreation() {
+    this.openBarWithMessage('User edited!', ['success-bar'], 15000);
+    this.editData = false;
+    this.editRoles = false;
+  }
+
+  private openBarWithMessage(message: string, classes: string[], duration: number) {
+    this.snackBar.open(message, "Ok", {
+      duration: duration,
+      panelClass: classes
+    });
+  }
+
+  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
