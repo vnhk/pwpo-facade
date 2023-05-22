@@ -55,19 +55,18 @@ export class UserManageOptionModalComponent implements OnInit {
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 400) {
-      if (error.error.code === "FIELD_VALIDATION") {
-        let formInput = this.formGroup.get(error.error.field);
+      if (error.error[0].code === "FIELD_VALIDATION") {
+        let formInput = this.formGroup.get(error.error[0].field);
         formInput?.setErrors({'incorrect': true});
 
-        this.showErrorPopup((error.error.message));
+        this.showErrorPopup((error.error[0].message));
 
-      } else if (error.error.code === "GENERAL_VALIDATION") {
-        this.showErrorPopup((error.error.message));
+      } else if (error.error[0].code === "GENERAL_VALIDATION") {
+        this.showErrorPopup((error.error[0].message));
       } else {
         this.showErrorPopup('User could not be edited!');
       }
     } else {
-      console.log(`Backend returned code ${error.status}, body was: `, error.error);
       this.showErrorPopup('User could not be edited!');
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));

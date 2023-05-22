@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {SortDirection} from "@angular/material/sort";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {
+  AuthRequest,
   AuthResponse,
   ChartData,
   DataEnumApi,
@@ -29,6 +30,9 @@ import {GoalRiskApi} from "../../projects/project-info/project-goals-risks/proje
   providedIn: 'root'
 })
 export class HttpService {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
   private baseUrl = 'http://localhost:8081';
   private projectClass = "com.pwpo.project.model.Project";
   private projectDTOPrimaryClass = "com.pwpo.project.dto.ProjectPrimaryResponseDTO";
@@ -36,10 +40,6 @@ export class HttpService {
   private taskClass = "com.pwpo.task.model.Task";
   private taskDTOPrimaryClass = "com.pwpo.task.dto.TaskPrimaryResponseDTO";
   private taskDTOSecondaryClass = "com.pwpo.task.dto.TaskSecondaryResponseDTO";
-
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
 
   constructor(private http: HttpClient) {
   }
@@ -206,6 +206,13 @@ export class HttpService {
   createTask(value: string) {
     return this.http.post<Task>(
       `${this.baseUrl}/tasks`,
+      value
+    );
+  }
+
+  createUser(value: string) {
+    return this.http.post<AuthRequest>(
+      `${this.baseUrl}/auth/register`,
       value
     );
   }

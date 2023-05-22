@@ -19,6 +19,15 @@ export class AuthResponse {
   password: string | undefined;
 }
 
+export class AuthRequest {
+  username: string | undefined;
+  password: string | undefined;
+  email: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  role: string | undefined;
+}
+
 export interface Person extends Item {
   firstName?: string;
   lastName?: string;

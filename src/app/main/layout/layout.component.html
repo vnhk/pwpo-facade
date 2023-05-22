@@ -35,7 +35,7 @@
             <mat-icon>search</mat-icon>
             <span>Search</span>
           </button>
-          <button *ngIf="authService.isAdmin()" class="menu-button" mat-button routerLink="/admin">
+          <button *ngIf="authService.isAdmin()" class="menu-button" mat-button routerLink="/admin" [disabled]="authService.hasNotActivatedAccount()">
             <mat-icon>settings</mat-icon>
             <span>Admin panel</span>
           </button>
