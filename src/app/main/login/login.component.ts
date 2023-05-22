@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../session/auth.service";
@@ -44,7 +44,7 @@ export class LoginComponent {
   }
 
   private handleError(error: HttpErrorResponse) {
-    if(error.status === 401) {
+    if (error.status === 401) {
       this.showErrorPopup(error.error.message);
     } else {
       this.showErrorPopup("Cannot login. Contact with administrator.");

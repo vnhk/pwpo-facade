@@ -1,14 +1,27 @@
-<form [formGroup]="form">
-  <mat-form-field appearance="fill">
-    <mat-label>Username</mat-label>
-    <input formControlName="username" matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Password</mat-label>
-    <input formControlName="password" matInput type="password">
-  </mat-form-field>
-  <div class="form-buttons">
-    <button (click)="login()" class="grey-button" mat-raised-button>Login</button>
-  </div>
-</form>
+<div class="row">
+  <span class="col-4"></span>
+  <span class="col-4">
+        <mat-card class="login-card mat-elevation-z16">
+          <mat-card-content>
+                <mat-icon>account_box</mat-icon>
+          <form [formGroup]="form">
+            <mat-form-field appearance="fill">
+              <mat-label>Username</mat-label>
+              <input formControlName="username" matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input formControlName="password" matInput type="password">
+            </mat-form-field>
+              <div class="form-buttons">
+                <button (click)="login()" class="grey-button" mat-raised-button>Login</button>
+              </div>
+          </form>
+          </mat-card-content>
+          </mat-card>
+      </span>
+  <span class="col-4"></span>
+</div>
+
+
