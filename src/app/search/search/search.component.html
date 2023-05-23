@@ -294,8 +294,8 @@
 
         <ng-container matColumnDef="owner">
           <th *matHeaderCellDef mat-header-cell> Owner</th>
-          <td *matCellDef="let element" mat-cell> {{element.owner.firstName}} {{element.owner.lastName}}
-            ({{element.owner.nick}})
+          <td *matCellDef="let element" mat-cell> {{element.owner?.firstName}} {{element.owner?.lastName}}
+            <span *ngIf="element.owner"> ({{element.owner?.nick}}) </span>
           </td>
         </ng-container>
 
@@ -318,8 +318,8 @@
 
         <ng-container matColumnDef="assignee">
           <th *matHeaderCellDef mat-header-cell>Assignee</th>
-          <td *matCellDef="let element" mat-cell> {{element.assignee.firstName}} {{element.assignee.lastName}}
-            ({{element.assignee.nick}})
+          <td *matCellDef="let element" mat-cell> {{element.assignee?.firstName}} {{element.assignee?.lastName}}
+            <span *ngIf="element.assignee"> ({{element.assignee?.nick}}) </span>
           </td>
         </ng-container>
 
