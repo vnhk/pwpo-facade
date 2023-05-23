@@ -124,7 +124,7 @@ export class SearchComponent implements OnInit {
       if (this.search.resultType == 'task') {
         this.displayedColumns = this.taskDisplayedColumns;
       }
-      if (this.search.resultType == 'user') {
+      if (this.search.resultType == 'userAccount') {
         this.displayedColumns = this.userDisplayedColumns;
       }
       this.dataSource = new MatTableDataSource(res.items);

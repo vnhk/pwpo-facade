@@ -4,7 +4,7 @@
       <mat-label>I want to find:</mat-label>
       <mat-select [(value)]="search.resultType" [disabled]="searchPerformed">
         <mat-option value="project">Project</mat-option>
-        <mat-option value="user">User</mat-option>
+        <mat-option value="userAccount">User</mat-option>
         <mat-option value="task">Task</mat-option>
       </mat-select>
     </mat-form-field>
@@ -111,10 +111,10 @@
                 <mat-option *ngIf="criteria.type === 'task'" value="status">
                   Status
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'project'" value="project.shortForm">
+                <mat-option *ngIf="criteria.type === 'project'" value="shortForm">
                   Short form
                 </mat-option>
-                <mat-option *ngIf="criteria.type === 'project'" value="project.owner.nick">
+                <mat-option *ngIf="criteria.type === 'project'" value="owner.nick">
                   Owner nick
                 </mat-option>
                 <mat-option *ngIf="criteria.type === 'task'" value="number">
@@ -155,12 +155,12 @@
           </div>
         </div>
 
-        <div *ngIf="search.resultType === 'user'" class="criteria row">
+        <div *ngIf="search.resultType === 'userAccount'" class="criteria row">
           <div class="col-md-3">
             <mat-form-field appearance="fill">
               <mat-label>Select type</mat-label>
               <mat-select [(value)]="criteria.type" [disabled]="searchPerformed" required>
-                <mat-option value="user">User</mat-option>
+                <mat-option value="userAccount">User</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -169,9 +169,9 @@
             <mat-form-field appearance="fill">
               <mat-label>Select attribute</mat-label>
               <mat-select [(value)]="criteria.attr" [disabled]="searchPerformed" required>
-                <mat-option *ngIf="criteria.type === 'user'" value="firstName">First name</mat-option>
-                <mat-option *ngIf="criteria.type === 'user'" value="lastName">Last name</mat-option>
-                <mat-option *ngIf="criteria.type === 'user'" value="nick">Nick</mat-option>
+                <mat-option *ngIf="criteria.type === 'userAccount'" value="firstName">First name</mat-option>
+                <mat-option *ngIf="criteria.type === 'userAccount'" value="lastName">Last name</mat-option>
+                <mat-option *ngIf="criteria.type === 'userAccount'" value="nick">Nick</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
