@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   user: Person | undefined;
   changePasswordForm: FormGroup;
+  changePersonalDataForm: FormGroup;
+  changeContactForm: FormGroup;
   passwordsDoNotMatch = false;
 
   constructor(public authService: AuthService, private httpService: HttpService, private formBuilder: FormBuilder,
@@ -27,6 +29,15 @@ export class ProfileComponent implements OnInit {
       'oldPassword': [null, [Validators.minLength(3), Validators.maxLength(50)]],
       'newPassword': [null, [Validators.minLength(3), Validators.maxLength(50)]],
       'newPasswordRepeated': [null, [Validators.minLength(3), Validators.maxLength(50)]],
+    });
+
+    this.changePersonalDataForm = this.formBuilder.group({
+      'firstName': [null, [Validators.minLength(3), Validators.maxLength(50)]],
+      'lastName': [null, [Validators.minLength(3), Validators.maxLength(50)]]
+    });
+
+    this.changeContactForm = this.formBuilder.group({
+      'email': [null, [Validators.minLength(3), Validators.maxLength(50), Validators.email]]
     });
   }
 
@@ -66,6 +77,16 @@ export class ProfileComponent implements OnInit {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
+  private handleUpdateDataError(error: HttpErrorResponse) {
+    if (error.status == 400) {
+      this.showErrorPopup(error.error[0].message);
+    } else {
+      this.showErrorPopup("Could not update data. Contact with administrator.");
+    }
+
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
   private showErrorPopup(message: string) {
     this.openBarWithMessage(message, ['error-bar'], 15000);
   }
@@ -81,10 +102,28 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  private handleErrorSimple(error: HttpErrorResponse, msg: any) {
-
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+  changeContactData() {
+    if (this.changeContactForm.valid) {
+      console.log(this.changeContactForm);
+      this.httpService.updateContactData(this.changeContactForm.value)
+        .pipe(
+          catchError(this.handleUpdateDataError.bind(this))
+        ).subscribe(() => {
+        this.success("Contacts updated successfully!");
+        this.getLoggedUserDetails();
+      })
+    }
   }
 
-
+  changePersonalData() {
+    if (this.changePersonalDataForm.valid) {
+      this.httpService.updatePersonalData(this.changePersonalDataForm.value)
+        .pipe(
+          catchError(this.handleUpdateDataError.bind(this))
+        ).subscribe(() => {
+        this.success("Personal data updated successfully!");
+        this.getLoggedUserDetails();
+      })
+    }
+  }
 }

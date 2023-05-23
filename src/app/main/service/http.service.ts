@@ -350,6 +350,21 @@ export class HttpService {
     );
   }
 
+  updatePersonalData(value: any) {
+    return this.http.put(
+      `${this.baseUrl}/update-personal-data`,
+      value
+    );
+  }
+
+  updateContactData(value: any) {
+    return this.http.put(
+      `${this.baseUrl}/update-contact-data`,
+      value
+    );
+  }
+
+
   getLoggedUserDetails() {
     return this.http.get<Person>(
       `${this.baseUrl}/users/logged/details`

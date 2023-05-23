@@ -23,19 +23,18 @@
             <mat-icon>account_circle</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <form (ngSubmit)="changePersonalData()" [formGroup]="changePersonalDataForm" class="form-container">
+          <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>First name</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="next-form-element">
-          <mat-label>Last name</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <button class="grey-button next-form-element" mat-raised-button>Save</button>
-
+          <mat-form-field appearance="fill" class="next-form-element">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+          <button class="grey-button next-form-element" mat-raised-button>Save</button>
+        </form>
       </mat-expansion-panel>
       <mat-expansion-panel [disabled]="authService.hasNotActivatedAccount()">
         <mat-expansion-panel-header>
@@ -47,13 +46,14 @@
             <mat-icon>phone</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <form (ngSubmit)="changeContactData()" [formGroup]="changeContactForm" class="form-container">
 
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input matInput type="email">
-        </mat-form-field>
-        <button class="grey-button next-form-element" mat-raised-button>Save</button>
-
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+          </mat-form-field>
+          <button class="grey-button next-form-element" mat-raised-button type="submit">Save</button>
+        </form>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
