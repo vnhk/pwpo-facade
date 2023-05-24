@@ -72,7 +72,7 @@
   <button (click)="editData=true" *ngIf="!editData && !editRoles" class="grey-button" mat-raised-button tabindex="-1">
     Edit
   </button>
-  <button (click)="onSubmitEditUser()" *ngIf="editData" class="grey-button" mat-raised-button tabindex="-1"></button>
+  <button (click)="onSubmitEditUser()" *ngIf="editData" class="grey-button" mat-raised-button tabindex="-1">Save</button>
   <button (click)="onSubmitManageRoles()" *ngIf="editRoles" class="grey-button" mat-raised-button tabindex="-1">
     Save
   </button>
