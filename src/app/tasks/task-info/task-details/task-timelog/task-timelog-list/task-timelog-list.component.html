@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-list role="list">
     <mat-card role="listitem" *ngFor="let log of timelogs">
-      <a routerLink='/user/details/{{log.user?.id}}'>{{log.user?.firstName}} {{log.user?.lastName}} ({{log.user?.nick}})</a>
+      <strong>{{log.user?.firstName}} {{log.user?.lastName}} ({{log.user?.nick}})</strong>
       logged <strong>{{log.loggedTimeInMinutes}} {{log.loggedTimeInMinutes == 1 ? "minute" : "minutes"}}</strong>
       at {{log.date}}.
       <br>
