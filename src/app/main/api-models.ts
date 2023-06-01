@@ -96,7 +96,7 @@ export interface TaskHistory extends Item {
   type?: string;
   assignee?: string;
   status?: string;
-  dueDate?: string;
+  dueDate?: Date;
   priority?: string;
   summary?: string;
   description?: string;

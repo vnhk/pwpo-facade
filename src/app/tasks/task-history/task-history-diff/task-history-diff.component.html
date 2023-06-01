@@ -1,4 +1,4 @@
-<button mat-button style="float: right" (click)="goBack()">
+<button (click)="goBack()" mat-button style="float: right">
   <mat-icon>close</mat-icon>
 </button>
 <div style="margin: 10px; width: 10px; height: 10px"></div>
@@ -10,7 +10,7 @@
         <span [class]="getDiffClass(part.type)"> {{part.value}}</span>
         </ng-container>
     </span>
-    <span subtitle>
+    <span subtitle> </span>
     <span content>
     <div class="row">
       <div class="col-md-8">
@@ -77,7 +77,6 @@
       </div>
     </div>
   </span>
-    </span>
   </app-details>
 
 
