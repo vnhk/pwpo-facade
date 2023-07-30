@@ -75,6 +75,7 @@ import {
 import {
   UserProjectManageOptionModalComponent
 } from "./projects/project-user-list/user-manage-option-modal/user-project-manage-option-modal.component";
+import { DataManagementComponent } from './admin/data-management/data-management.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import {
     ProjectGoalsRisksComponent,
     AttachmentsComponent,
     GoalRiskManageOptionModalComponent,
-    UserProjectManageOptionModalComponent
+    UserProjectManageOptionModalComponent,
+    DataManagementComponent
   ],
   imports: [
     BrowserModule,

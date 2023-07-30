@@ -35,6 +35,11 @@ export class FileUploadService {
       {responseType: 'blob'});
   }
 
+  export(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/ie-entities/export`,
+      {responseType: 'blob'});
+  }
+
   remove(holderId: string, attachmentId: number) {
     return this.http.delete(`${this.baseUrl}/attachments/${holderId}/attachment/${attachmentId}`);
   }

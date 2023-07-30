@@ -68,6 +68,15 @@ export class AuthService {
     return false;
   }
 
+  isSuperAdmin() {
+    let roles = localStorage.getItem("roles");
+    if (roles) {
+      return roles.includes("ROLE_SUPER_ADMIN");
+    }
+
+    return false;
+  }
+
   hasNotActivatedAccount() {
     let roles = localStorage.getItem("roles");
     if (roles) {
