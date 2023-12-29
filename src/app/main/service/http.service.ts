@@ -25,6 +25,7 @@ import {
   UserProject
 } from "../api-models";
 import {GoalRiskApi} from "../../projects/project-info/project-goals-risks/project-goals-risks.component";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class HttpService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = environment.rooturl;
   private projectClass = "com.pwpo.project.model.Project";
   private projectDTOPrimaryClass = "com.pwpo.project.dto.ProjectPrimaryResponseDTO";
   private projectDTOSecondaryClass = "com.pwpo.project.dto.ProjectSecondaryResponseDTO";
