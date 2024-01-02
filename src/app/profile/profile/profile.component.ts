@@ -6,8 +6,8 @@ import {Person} from "../../main/api-models";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   passwordsDoNotMatch = false;
 
   constructor(public authService: AuthService, private httpService: HttpService, private formBuilder: FormBuilder,
-              public snackBar: MatSnackBar,) {
+              public snackBar: MatSnackBar) {
     this.changePasswordForm = this.formBuilder.group({
       'oldPassword': [null, [Validators.minLength(3), Validators.maxLength(50)]],
       'newPassword': [null, [Validators.minLength(3), Validators.maxLength(50)]],

@@ -1,16 +1,16 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
-import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../main/session/auth.service";
 import {Person} from "../../main/api-models";
-import {MatDialog} from "@angular/material/dialog";
 import {
   UserProjectManageOptionModalComponent
 } from "./user-manage-option-modal/user-project-manage-option-modal.component";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatDialog} from "@angular/material/dialog";
 
 export class PersonModal {
   projectId: string | null | undefined;

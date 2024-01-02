@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Person} from "../../main/api-models";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
 import {HttpService} from "../../main/service/http.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-user-manage-option-modal',

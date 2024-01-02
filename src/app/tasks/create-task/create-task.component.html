@@ -105,8 +105,9 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="!formGroup.valid" class="grey-button" mat-raised-button type="submit">Save</button>
-      <button (click)="this.resetForm()" class="yellow-button" mat-raised-button type="button">Reset</button>
-    </mat-card-actions>
+      <button [disabled]="!formGroup.valid" class="form-buttons" color="primary" mat-raised-button type="submit">Save
+      </button>
+      <button (click)="this.resetForm()" class="form-buttons" color="accent" mat-raised-button type="button">Reset
+      </button>    </mat-card-actions>
   </mat-card>
 </form>

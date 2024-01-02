@@ -1,9 +1,9 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute} from "@angular/router";
 import {HttpService} from "../../main/service/http.service";
 import {ProjectHistory, ProjectHistoryApi} from "../../main/api-models";
 import {Location} from "@angular/common";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-project-history-list',

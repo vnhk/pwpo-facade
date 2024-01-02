@@ -56,25 +56,33 @@
 </form>
 
 <div mat-dialog-actions>
-  <button (click)="disableUser()" *ngIf="!editData && !editRoles && !disabledUser" class="red-button" mat-raised-button tabindex="-1">
+  <button (click)="disableUser()" *ngIf="!editData && !editRoles && !disabledUser" class="form-buttons" color="accent"
+          mat-raised-button tabindex="-1">
     Disable
   </button>
-  <button (click)="enableUser()" *ngIf="!editData && !editRoles && disabledUser" class="yellow-button" mat-raised-button
+  <button (click)="enableUser()" *ngIf="!editData && !editRoles && disabledUser" class="form-buttons" color="primary"
+          mat-raised-button
           tabindex="-1">
     Enable
   </button>
-  <button (click)="resetPassword()" *ngIf="!editData && !editRoles" class="grey-button" mat-raised-button tabindex="-1">
+  <button (click)="resetPassword()" *ngIf="!editData && !editRoles" class="form-buttons" color="primary"
+          mat-raised-button tabindex="-1">
     Reset password
   </button>
-  <button *ngIf="!editData && !editRoles" (click)="editRoles=true" class="grey-button" mat-button mat-raised-button
+  <button (click)="editRoles=true" *ngIf="!editData && !editRoles" class="form-buttons" color="primary" mat-button
+          mat-raised-button
           tabindex="-1">Manage roles
   </button>
-  <button (click)="editData=true" *ngIf="!editData && !editRoles" class="grey-button" mat-raised-button tabindex="-1">
+  <button (click)="editData=true" *ngIf="!editData && !editRoles" class="form-buttons" color="primary" mat-raised-button
+          tabindex="-1">
     Edit
   </button>
-  <button (click)="onSubmitEditUser()" *ngIf="editData" class="grey-button" mat-raised-button tabindex="-1">Save</button>
-  <button (click)="onSubmitManageRoles()" *ngIf="editRoles" class="grey-button" mat-raised-button tabindex="-1">
+  <button (click)="onSubmitEditUser()" *ngIf="editData" class="form-buttons" color="primary" mat-raised-button
+          tabindex="-1">Save
+  </button>
+  <button (click)="onSubmitManageRoles()" *ngIf="editRoles" class="form-buttons" color="primary" mat-raised-button
+          tabindex="-1">
     Save
   </button>
-  <button class="grey-button" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
+  <button class="form-buttons" color="primary" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
 </div>

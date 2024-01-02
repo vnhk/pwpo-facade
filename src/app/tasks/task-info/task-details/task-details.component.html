@@ -80,19 +80,19 @@
 
   <span buttons>
     <button mat-button matTooltip="Edit task" routerLink="/tasks/{{primaryAttributes.id}}/edit">
-      <mat-icon>edit</mat-icon>
+      <mat-icon class="details-actions">edit</mat-icon>
     </button>
     <button mat-button matTooltip="Log time" routerLink='/tasks/{{primaryAttributes.id}}/details/timelog'>
-      <mat-icon>access_time</mat-icon>
+      <mat-icon class="details-actions">access_time</mat-icon>
     </button>
    <button mat-button matTooltip="Task history" routerLink="/tasks/{{primaryAttributes.id}}/history">
-      <mat-icon>history</mat-icon>
+      <mat-icon class="details-actions">history</mat-icon>
     </button>
     <button (click)="assignTask()" *ngIf="!currentUserAssigned" mat-button matTooltip="Assign task to me">
-      <mat-icon>assignment_returned</mat-icon>
+      <mat-icon class="details-actions">assignment_returned</mat-icon>
     </button>
     <button (click)="showChangeStatusForm()" mat-button matTooltip="Change status">
-      <mat-icon>swap_horizontal_circle</mat-icon>
+      <mat-icon class="details-actions">swap_horizontal_circle</mat-icon>
     </button>
   </span>
 </app-details>

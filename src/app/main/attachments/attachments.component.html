@@ -18,7 +18,7 @@
           <br>
         </mat-toolbar>
 
-        <mat-form-field>
+        <mat-form-field style="width: 100%">
           <div>
             <mat-toolbar>
               <input [value]="fileName" matInput/>
@@ -27,16 +27,16 @@
                 (click)="upload()"
                 [disabled]="!currentFile"
                 color="primary"
-                mat-flat-button>
+                mat-raised-button>
                 Upload
               </button>
             </mat-toolbar>
 
-            <input
-              (change)="selectFile($event)"
-              id="fileInput"
-              name="fileInput"
-              type="file"
+            <input (change)="selectFile($event)"
+                   id="fileInput"
+                   name="fileInput"
+                   style="width: 600px!important;"
+                   type="file"
             />
           </div>
         </mat-form-field>
@@ -55,10 +55,11 @@
                   {{ file.name }}
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <button *ngIf="downloadFileAccessGranted" (click)="download(i)" class="yellow-button" mat-raised-button
-                      type="button">Download
+              <button (click)="download(i)" *ngIf="downloadFileAccessGranted" class="form-buttons" color="primary"
+                      mat-raised-button type="button">Download
               </button>
-              <button *ngIf="removeFileAccessGranted" (click)="remove(i)" class="red-button" mat-raised-button
+              <button (click)="remove(i)" *ngIf="removeFileAccessGranted" class="form-buttons" color="accent"
+                      mat-raised-button
                       style="margin: 10px;" type="button">Remove
               </button>
             </mat-expansion-panel>

@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, HostListener, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
-import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-project-list',

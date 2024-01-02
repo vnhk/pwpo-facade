@@ -4,11 +4,11 @@ import {ActivatedRoute} from "@angular/router";
 import {DataEnum, Person} from "../../main/api-models";
 import {TaskService} from "../service/task.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-task',

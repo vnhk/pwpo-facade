@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {retry, throwError} from "rxjs";
+import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Person} from "../../../main/api-models";
 import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-project',
