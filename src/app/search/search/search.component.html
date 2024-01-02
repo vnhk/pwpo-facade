@@ -247,7 +247,7 @@
             <input [(ngModel)]="groupValue" [disabled]="searchPerformed" matInput type="text">
           </mat-form-field>
         </div>
-        <button (click)="saveGroup()" [disabled]="searchPerformed" mat-button="primary">Save</button>
+        <button (click)="saveGroup()" [disabled]="searchPerformed" color="primary" mat-button>Save</button>
         <hr>
         Groups: {{search.groups | json}}
         Available Groups: {{availableQueriesForGrouping | json}}
@@ -256,13 +256,13 @@
 
     <hr>
     <button (click)="performSearch()" *ngIf="!searchPerformed" [disabled]="!searchAvailable()"
-            class="grey-button" mat-raised-button>Search
+            class="form-buttons" color="primary" mat-raised-button>Search
     </button>
 
     <br>
     <br>
     <button (click)="newSearch()" *ngIf="search.resultType && search.resultType != ''"
-            class="yellow-button" mat-raised-button>New query
+            class="form-buttons" color="accent" mat-raised-button>New query
     </button>
 
     <br>

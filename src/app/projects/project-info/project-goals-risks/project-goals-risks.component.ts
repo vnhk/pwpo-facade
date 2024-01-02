@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
 import {HttpService} from "../../../main/service/http.service";
 import {ItemApi} from "../../../main/api-models";
 import {ActivatedRoute} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
 import {
   GoalRiskManageOptionModalComponent
 } from "./goal-risk-manage-option-modal/goal-risk-manage-option-modal.component";
 import {AuthService} from "../../../main/session/auth.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
 
 export class GoalRisk {
   id: number | undefined;

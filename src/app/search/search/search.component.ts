@@ -3,8 +3,8 @@ import {HttpService} from "../../main/service/http.service";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {Item, SearchRequest} from "../../main/api-models";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({

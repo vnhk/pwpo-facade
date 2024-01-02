@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, HostListener, Input, ViewChild} from '@angular/core';
-import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
@@ -7,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../main/session/auth.service";
 import {HttpService} from "../../main/service/http.service";
 import {DataEnum, DataEnumApi, TaskListDisplayOption} from "../../main/api-models";
+import {MatPaginator} from "@angular/material/paginator";
 
 
 @Component({

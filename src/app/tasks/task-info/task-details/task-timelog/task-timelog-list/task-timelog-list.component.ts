@@ -1,8 +1,8 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {PageEvent} from "@angular/material/paginator";
 import {HttpService} from "../../../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {TimeLog, TimeLogApi} from "../../../../../main/api-models";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-task-timelog-list',

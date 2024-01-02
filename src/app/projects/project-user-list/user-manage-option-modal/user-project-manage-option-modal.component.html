@@ -62,15 +62,15 @@
   </form>
 
   <div mat-dialog-actions>
-    <button [disabled]="!this.formGroup.valid" (click)="onSubmitSave()" class="grey-button"
+    <button [disabled]="!this.formGroup.valid" (click)="onSubmitSave()" class="form-buttons" color="primary"
             mat-raised-button
             tabindex="-1">
       Save
     </button>
-    <button (click)="delete()" *ngIf="!create" class="yellow-button" mat-raised-button tabindex="-1">
+    <button (click)="delete()" *ngIf="!create" class="form-buttons" color="accent" mat-raised-button tabindex="-1">
       Remove from project
     </button>
-    <button class="grey-button" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
+    <button class="form-buttons" color="primary" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
 
   </div>
 </div>

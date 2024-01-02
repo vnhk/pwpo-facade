@@ -21,7 +21,7 @@ mat-sidenav {
 
 #logout-button {
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
 }
 
 .content {

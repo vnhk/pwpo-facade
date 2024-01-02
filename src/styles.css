@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@ng-select/ng-select/themes/material.theme.css";
 
 html, body {
   height: 100%;
@@ -41,22 +40,15 @@ mat-card-header.form-header {
 
 /*snackbar*/
 
-.red-button {
-  background: #fa625f;
-  color: #e5eaf5;
-}
-
-.grey-button {
-  background: #3F4B59;
-  color: #e5eaf5;
-}
-
-.yellow-button {
-  background: #feda6a;
-  color: #3F4B59;
-}
-
 table[mat-table] {
+}
+
+.form-buttons {
+  margin-right: 10px;
+}
+
+.details-actions {
+  transform: scale(1.4);
 }
 
 mat-paginator {

@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {retry, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
 import {DataEnum, Person} from "../../main/api-models";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-user-project',

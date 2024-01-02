@@ -4,6 +4,7 @@
 }
 
 .attribute-label {
+  margin-top: 5px;
   font-size: 15px;
   font-weight: bold;
 }
@@ -37,6 +38,7 @@ mat-card-subtitle {
 }
 
 .details-flex-container {
+  min-height: 50px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;

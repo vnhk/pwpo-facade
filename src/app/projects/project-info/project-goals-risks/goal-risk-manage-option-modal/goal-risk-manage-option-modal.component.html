@@ -20,18 +20,19 @@
     </div>
   </form>
   <div mat-dialog-actions>
-    <button (click)="editGoalRisk()" *ngIf="!save" class="grey-button" mat-raised-button tabindex="-1">
+    <button (click)="editGoalRisk()" *ngIf="!save" class="form-buttons" color="primary" mat-raised-button tabindex="-1">
       Edit {{this.modalData.data?.type == "GOAL" ? "Goal" : "Risk"}}
     </button>
-    <button (click)="deleteGoalRisk()" *ngIf="!save" class="yellow-button" mat-raised-button tabindex="-1">
+    <button (click)="deleteGoalRisk()" *ngIf="!save" class="form-buttons" color="accent" mat-raised-button
+            tabindex="-1">
       Delete
     </button>
-    <button [disabled]="!this.formGroup.valid" (click)="onSubmitSave()" *ngIf="save" class="grey-button"
+    <button [disabled]="!this.formGroup.valid" (click)="onSubmitSave()" *ngIf="save" class="form-buttons" color="primary"
             mat-raised-button
             tabindex="-1">
       Save
     </button>
-    <button class="grey-button" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
+    <button class="form-buttons" color="primary" mat-dialog-close mat-raised-button tabindex="-1">Close</button>
 
   </div>
 </div>

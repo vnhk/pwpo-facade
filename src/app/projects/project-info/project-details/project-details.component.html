@@ -50,13 +50,13 @@
 
   <span buttons>
     <button *ngIf="authService.isManager()" mat-button routerLink="/projects/{{primaryAttributes.id}}/edit">
-      <mat-icon>edit</mat-icon>
+      <mat-icon class="details-actions">edit</mat-icon>
     </button>
     <button mat-button routerLink="/projects/{{primaryAttributes.id}}/history">
-      <mat-icon>history</mat-icon>
+      <mat-icon class="details-actions">history</mat-icon>
     </button>
     <button mat-button routerLink="/projects/{{primaryAttributes.id}}/create-task">
-      <mat-icon>note_add</mat-icon>
+      <mat-icon class="details-actions"> note_add</mat-icon>
     </button>
   </span>
 </app-details>

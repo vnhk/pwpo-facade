@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Person} from "../../main/api-models";
 import {HttpService} from "../../main/service/http.service";
-import {MatDialog} from "@angular/material/dialog";
 import {UserManageOptionModalComponent} from "../user-manage-option-modal/user-manage-option-modal.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
