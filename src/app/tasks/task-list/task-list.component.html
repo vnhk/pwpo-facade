@@ -97,13 +97,8 @@
       <ng-container matColumnDef="number">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>#</th>
         <td *matCellDef="let row" mat-cell>
-          <a routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+          <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
         </td>
-      </ng-container>
-
-      <ng-container matColumnDef="type">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
-        <td *matCellDef="let row" mat-cell>{{row.type}}</td>
       </ng-container>
 
       <ng-container matColumnDef="summary">

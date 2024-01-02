@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Input, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {merge, of as observableOf} from "rxjs";
@@ -15,7 +15,8 @@ import {DataEnum, DataEnumApi, TaskListDisplayOption} from "../../main/api-model
   styleUrls: ['../../main/list/list.component.css']
 })
 export class TaskListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['type', 'number', 'summary', 'status', 'assignee', 'dueDate', 'priority'];
+  allDisplayedColumns: string[] = ['number', 'summary', 'status', 'assignee', 'priority'];
+  displayedColumns: string[] = this.allDisplayedColumns;
 
   MAX_SUMMARY_LENGTH: number = 30;
 
@@ -65,7 +66,30 @@ export class TaskListComponent implements AfterViewInit {
 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    let width = event.target.innerWidth;
+    this.setDisplayedColumns(width);
+  }
+
+  private setDisplayedColumns(width: number) {
+    if (width > 1400) {
+      this.displayedColumns = this.allDisplayedColumns;
+    } else if (width > 1250) {
+      this.displayedColumns = ['number', 'summary', 'status', 'priority'];
+    } else if (width > 1100) {
+      this.displayedColumns = ['number', 'summary', 'status'];
+    } else if (width > 900) {
+      this.displayedColumns = ['number', 'summary'];
+    } else {
+      this.displayedColumns = ['number'];
+    }
+  }
+
   ngAfterViewInit() {
+    let screenWidth : number = window.innerWidth;
+    this.setDisplayedColumns(screenWidth);
+
     let projectId = this.route.snapshot.paramMap.get("id");
     this.initOptions();
 
@@ -222,5 +246,22 @@ export class TaskListComponent implements AfterViewInit {
       `(type IN_OPERATION ${this.getPreferencesAsString(this.searchOptions[this.TASKS_TYPE_INDEX].subOptions)}`
       + `)))`;
     return query;
+  }
+
+  getTextColorStyle(type: string) {
+    console.log(type)
+    switch (type) {
+      case "Bug":
+        return "red";
+      case "Feature":
+        return "blue";
+      case "Task":
+        return "black";
+      case "Objective":
+        return "purple";
+      case "Story":
+        return "green";
+    }
+    return "black";
   }
 }
