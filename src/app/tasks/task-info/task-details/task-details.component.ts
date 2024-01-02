@@ -30,6 +30,7 @@ export class TaskDetailsComponent implements AfterViewInit {
     ["Story", "assets/tasks/icons/Story.png"],
     ["Objective", "assets/tasks/icons/Objective.png"],
     ["Feature", "assets/tasks/icons/Feature.png"],
+    ["Bug", "assets/tasks/icons/Bug.png"],
     ["Task", "assets/tasks/icons/Task.png"]
   ]);
   currentUserAssigned = true;
