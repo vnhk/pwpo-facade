@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
@@ -11,7 +11,8 @@ import {catchError, map, startWith, switchMap} from "rxjs/operators";
   styleUrls: ['../../../main/list/list.component.css']
 })
 export class ProjectListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['shortForm', 'name', 'summary', 'status', "owner"];
+  allDisplayedColumns: string[] = ['shortForm', 'name', 'summary', 'status', "owner"];
+  displayedColumns: string[] = this.allDisplayedColumns;
 
   data: Object[] = [];
 
@@ -28,7 +29,30 @@ export class ProjectListComponent implements AfterViewInit {
 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    let width = event.target.innerWidth;
+    this.setDisplayedColumns(width);
+  }
+
+  private setDisplayedColumns(width: number) {
+    if (width > 1400) {
+      this.displayedColumns = this.allDisplayedColumns;
+    } else if (width > 1250) {
+      this.displayedColumns = ['shortForm', 'name', 'summary', 'status', "owner"];
+    } else if (width > 1100) {
+      this.displayedColumns = ['shortForm', 'name', 'summary', 'status'];
+    } else if (width > 900) {
+      this.displayedColumns = ['shortForm', 'name', 'summary'];
+    } else {
+      this.displayedColumns = ['shortForm', 'name'];
+    }
+  }
+
   ngAfterViewInit() {
+    let screenWidth: number = window.innerWidth;
+    this.setDisplayedColumns(screenWidth);
+
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
