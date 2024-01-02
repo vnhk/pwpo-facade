@@ -5,7 +5,7 @@ import {DataEnum, Person} from "../../main/api-models";
 import {TaskService} from "../service/task.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {retry, throwError} from "rxjs";
+import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
@@ -42,6 +42,17 @@ export class CreateTaskComponent implements OnInit {
       'estimationInMinutes': [0, [Validators.min(0), Validators.max(60)]],
       'description': [null, [Validators.maxLength(1500)]],
       'project': []
+    });
+
+    this.setDefaultDueDate();
+  }
+
+  private setDefaultDueDate() {
+    let nextYearDate = new Date();
+    nextYearDate.setFullYear(nextYearDate.getFullYear() + 1, nextYearDate.getMonth(), nextYearDate.getDay());
+
+    this.formGroup.patchValue({
+      dueDate: nextYearDate
     });
   }
 
