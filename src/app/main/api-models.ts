@@ -13,7 +13,6 @@ export interface PersonApi extends ItemApi {
   items: Person[];
 }
 
-
 export class AuthResponse {
   username: string | undefined;
   password: string | undefined;
@@ -200,4 +199,14 @@ export class SearchRequest {
   resultType: string | undefined;
   groups: SearchGroup[] = [];
   criteria: SearchCriteria[] = [];
+}
+
+export class TaskStructureChild {
+  taskId: number = 0;
+  type = "";
+  subTask: Task | undefined;
+}
+
+export class TaskStructureChildApi {
+  items: TaskStructureChild[] = [];
 }

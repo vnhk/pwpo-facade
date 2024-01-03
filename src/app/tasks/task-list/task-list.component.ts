@@ -249,7 +249,7 @@ export class TaskListComponent implements AfterViewInit {
   }
 
   getTextColorStyle(type: string) {
-    console.log(type)
+
     switch (type) {
       case "Bug":
         return "red";

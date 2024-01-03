@@ -19,7 +19,7 @@ import {
   Task,
   TaskApi,
   TaskHistoryApi,
-  TaskListDisplayOption,
+  TaskListDisplayOption, TaskStructureChildApi,
   TimeLogApi,
   TimeLogRequest,
   UserProject
@@ -388,6 +388,12 @@ export class HttpService {
   removeUserFromProject(projectId: string | null | undefined, id: any) {
     return this.http.delete(
       `${this.baseUrl}/projects/project/${projectId}/users/${id}`
+    );
+  }
+
+  getTaskChildren(taskId: string | null) {
+    return this.http.get<TaskStructureChildApi>(
+      `${this.baseUrl}/tasks/task/${taskId}/children`
     );
   }
 }

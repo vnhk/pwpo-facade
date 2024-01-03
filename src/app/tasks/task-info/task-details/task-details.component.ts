@@ -1,11 +1,13 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, HostListener, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {DataEnum, Task} from "../../../main/api-models";
+import {DataEnum, Task, TaskStructureChild} from "../../../main/api-models";
 import {catchError, map} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-task-details',
@@ -47,16 +49,70 @@ export class TaskDetailsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    let screenWidth: number = window.innerWidth;
+    this.setDisplayedColumns(screenWidth);
+
     this.id = this.route.snapshot.paramMap.get("id");
 
     this.httpService.getEnumByName("com.pwpo.common.enums.Status").subscribe((value) => this.status = value.items);
 
     this.loadPrimary();
 
+    this.httpService.getTaskChildren(this.id).subscribe(value => {
+      this.taskChildren = value.items;
+      this.loadingStructure = false;
+    });
+
     this.httpService.getTaskSecondaryById(this.id).subscribe(value => {
       this.secondaryAttributes = value.items[0];
       this.afterSecondaryLoaded();
     });
+  }
+
+  allDisplayedColumns: string[] = ['number', 'summary', 'status'];
+  displayedColumns: string[] = this.allDisplayedColumns;
+
+  MAX_SUMMARY_LENGTH: number = 50;
+
+  taskChildren: TaskStructureChild [] = [];
+
+  loadingStructure = true;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    let width = event.target.innerWidth;
+    this.setDisplayedColumns(width);
+  }
+
+  private setDisplayedColumns(width: number) {
+    if (width > 1250) {
+      this.displayedColumns = this.allDisplayedColumns;
+    } else if (width > 1100) {
+      this.displayedColumns = ['number', 'summary', 'status'];
+    } else if (width > 900) {
+      this.displayedColumns = ['number', 'summary'];
+    } else {
+      this.displayedColumns = ['number'];
+    }
+  }
+
+  getTextColorStyle(type: string) {
+    switch (type) {
+      case "Bug":
+        return "red";
+      case "Feature":
+        return "blue";
+      case "Task":
+        return "black";
+      case "Objective":
+        return "purple";
+      case "Story":
+        return "green";
+    }
+    return "black";
   }
 
   private loadPrimary() {
@@ -101,7 +157,6 @@ export class TaskDetailsComponent implements AfterViewInit {
   }
 
   private afterSecondaryLoaded() {
-    console.log(this.secondaryAttributes.estimation);
     if (this.secondaryAttributes.estimation != undefined) {
       this.estimation = this.secondaryAttributes.estimation;
       this.estimationText = this.getTimeText(this.estimation);

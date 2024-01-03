@@ -76,6 +76,52 @@
          <label class="attribute-label">Modified:</label> {{secondaryAttributes.updated | date: 'medium'}}
       </div>
     </div>
+    <br>
+    <hr>
+    <br>
+
+    <div class="row">
+<!--      *ngIf="(!loadingStructure) && taskChildren.length > 0"-->
+      <h2>Subtasks:</h2>
+      <div class="container">
+       <div class="main-table-container mat-elevation-z8">
+  <div class="table-container">
+
+    <table [dataSource]="taskChildren" class="http-table" mat-table
+           matSort matSortActive="status" matSortDirection="desc" matSortDisableClear>
+
+      <ng-container matColumnDef="number">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>#</th>
+        <td *matCellDef="let row" mat-cell>
+          <a [style.color]="getTextColorStyle(row.subTask.type)"
+             routerLink='/tasks/{{row.subTask.id}}/details'>{{row.subTask.number}}</a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="summary">
+        <th *matHeaderCellDef mat-header-cell>Summary</th>
+        <td *matCellDef="let row" mat-cell>
+          <span *ngIf="row.subTask.summary.length > MAX_SUMMARY_LENGTH; then substrSummary else origSummary"></span>
+          <ng-template #origSummary>{{row.subTask.summary}}</ng-template>
+          <ng-template #substrSummary>{{row.subTask.summary.substring(0, MAX_SUMMARY_LENGTH) + '...'}}</ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+        <td *matCellDef="let row" mat-cell>{{row.subTask.status}}</td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
+  </div>
+
+  <mat-paginator [length]="taskChildren.length" [pageSize]="taskChildren.length"
+                 aria-label="Select page of results"></mat-paginator>
+</div>
+      </div>
+    </div>
   </span>
 
   <span buttons>
