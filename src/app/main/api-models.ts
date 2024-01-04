@@ -201,12 +201,12 @@ export class SearchRequest {
   criteria: SearchCriteria[] = [];
 }
 
-export class TaskStructureChild {
-  taskId: number = 0;
+export class TaskStructureItem {
   type = "";
-  subTask: Task | undefined;
+  parent: Task | undefined;
+  child: Task | undefined;
 }
 
-export class TaskStructureChildApi {
-  items: TaskStructureChild[] = [];
+export class TaskStructureApi {
+  items: TaskStructureItem[] = [];
 }

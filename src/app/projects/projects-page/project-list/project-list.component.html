@@ -1,4 +1,5 @@
 <mat-card>
+  <br>
   <div class="main-table-container mat-elevation-z8">
     <div *ngIf="isLoadingResults || isRateLimitReached"
          class="table-loading-shade">
@@ -54,4 +55,5 @@
 
     <mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of results"></mat-paginator>
   </div>
+  <br>
 </mat-card>

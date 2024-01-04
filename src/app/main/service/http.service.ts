@@ -19,7 +19,7 @@ import {
   Task,
   TaskApi,
   TaskHistoryApi,
-  TaskListDisplayOption, TaskStructureChildApi,
+  TaskListDisplayOption, TaskStructureApi,
   TimeLogApi,
   TimeLogRequest,
   UserProject
@@ -391,9 +391,9 @@ export class HttpService {
     );
   }
 
-  getTaskChildren(taskId: string | null) {
-    return this.http.get<TaskStructureChildApi>(
-      `${this.baseUrl}/tasks/task/${taskId}/children`
+  getTaskOneLvlStructure(taskId: string | null) {
+    return this.http.get<TaskStructureApi>(
+      `${this.baseUrl}/tasks/task/${taskId}/one-lvl-structure`
     );
   }
 }

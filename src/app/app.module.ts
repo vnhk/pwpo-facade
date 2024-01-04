@@ -84,6 +84,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {TaskRelationListComponent} from './main/task-relation-list/task-relation-list.component';
+import {RouteReuseStrategy} from "@angular/router";
+import {RouterStrategyService} from "./router-strategy.service";
 
 @NgModule({
   declarations: [
@@ -125,7 +128,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     AttachmentsComponent,
     GoalRiskManageOptionModalComponent,
     UserProjectManageOptionModalComponent,
-    DataManagementComponent
+    DataManagementComponent,
+    TaskRelationListComponent
   ],
   imports: [
     BrowserModule,
@@ -167,7 +171,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
-    }
+    },
+    {provide: RouteReuseStrategy, useClass: RouterStrategyService}
   ],
   bootstrap: [AppComponent]
 })
