@@ -19,7 +19,8 @@ import {
   Task,
   TaskApi,
   TaskHistoryApi,
-  TaskListDisplayOption, TaskStructureApi,
+  TaskListDisplayOption,
+  TaskStructureApi,
   TimeLogApi,
   TimeLogRequest,
   UserProject
@@ -391,9 +392,15 @@ export class HttpService {
     );
   }
 
-  getTaskOneLvlStructure(taskId: string | null) {
+  getTaskOneLvlStructure(taskId: string | null | undefined) {
     return this.http.get<TaskStructureApi>(
       `${this.baseUrl}/tasks/task/${taskId}/one-lvl-structure`
+    );
+  }
+
+  appendSubTask(taskId: string | null | undefined, subTaskNumber: string | null, type: string) {
+    return this.http.post(
+      `${this.baseUrl}/tasks/task/${taskId}/append-subtask/${subTaskNumber}?type=${type}`, null
     );
   }
 }

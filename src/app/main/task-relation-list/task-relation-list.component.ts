@@ -1,26 +1,31 @@
-import {Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {TaskStructureItem} from "../api-models";
+import {HttpService} from "../service/http.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-task-relation-list',
   templateUrl: './task-relation-list.component.html',
   styleUrls: ['./task-relation-list.component.css']
 })
-export class TaskRelationListComponent implements OnInit, OnChanges {
+export class TaskRelationListComponent implements OnInit {
 
-  @Input()
-  tasks: TaskStructureItem[] = [];
+  tasks: TaskStructureItem[] | undefined;
   children: TaskStructureItem[] = [];
   parent: TaskStructureItem | undefined;
   @Input()
   listName: string = "";
   @Input()
-  openedTaskId: string | null | undefined = '';
+  taskNumber: string | undefined;
+  openedTaskId: string | undefined;
 
   allDisplayedColumns: string[] = ['number', 'summary', 'relation'];
   displayedColumns: string[] = this.allDisplayedColumns;
 
   MAX_SUMMARY_LENGTH: number = 50;
+
+  constructor(private httpService: HttpService, private route: ActivatedRoute) {
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: { target: { innerWidth: number; }; }) {
@@ -29,6 +34,30 @@ export class TaskRelationListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    let id = this.route.snapshot.paramMap.get("id");
+    if (id) {
+      this.openedTaskId = id;
+    }
+
+    if (this.openedTaskId) {
+      this.httpService.getTaskOneLvlStructure(this.openedTaskId).subscribe(value => {
+        this.tasks = value.items;
+        if (this.tasks && this.tasks.length > 0) {
+          this.children = []
+          for (let t of this.tasks) {
+            if (t.parent?.id == this.openedTaskId) {
+              this.children.push(t);
+            }
+
+            if (t.child?.id == this.openedTaskId) {
+              this.parent = t;
+            }
+          }
+        }
+
+      });
+    }
+
     let screenWidth: number = window.innerWidth;
     this.setDisplayedColumns(screenWidth);
   }
@@ -61,16 +90,8 @@ export class TaskRelationListComponent implements OnInit, OnChanges {
     return "black";
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.children = []
-    for (let t of this.tasks) {
-      if (t.parent?.id == this.openedTaskId) {
-        this.children.push(t);
-      }
-
-      if (t.child?.id == this.openedTaskId) {
-        this.parent = t;
-      }
-    }
+  appendSubTask(taskNumber: string, type: string) {
+    this.httpService.appendSubTask(this.openedTaskId, taskNumber, type)
+      .subscribe(() => this.ngOnInit());
   }
 }

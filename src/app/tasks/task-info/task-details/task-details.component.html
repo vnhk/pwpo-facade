@@ -81,8 +81,7 @@
 
     <div class="row">
 <!--      *ngIf="(!loadingStructure) && taskChildren.length > 0"-->
-     <app-task-relation-list [listName]="'Structure'" [openedTaskId]="id"
-                             [tasks]="taskStructureItems"></app-task-relation-list>
+     <app-task-relation-list [taskNumber]="primaryAttributes.number" [listName]="'Structure'"></app-task-relation-list>
     </div>
   </span>
 

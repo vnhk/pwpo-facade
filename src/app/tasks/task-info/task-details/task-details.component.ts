@@ -42,8 +42,6 @@ export class TaskDetailsComponent implements AfterViewInit {
   uploadFileAccessGranted = true;
   downloadFileAccessGranted = true;
   removeFileAccessGranted = true;
-  loadingStructure = true;
-  taskStructureItems: TaskStructureItem[] = [];
 
   constructor(private httpService: HttpService,
               private route: ActivatedRoute,
@@ -56,11 +54,6 @@ export class TaskDetailsComponent implements AfterViewInit {
     this.httpService.getEnumByName("com.pwpo.common.enums.Status").subscribe((value) => this.status = value.items);
 
     this.loadPrimary();
-
-    this.httpService.getTaskOneLvlStructure(this.id).subscribe(value => {
-      this.taskStructureItems = value.items;
-      this.loadingStructure = false;
-    });
 
     this.httpService.getTaskSecondaryById(this.id).subscribe(value => {
       this.secondaryAttributes = value.items[0];
