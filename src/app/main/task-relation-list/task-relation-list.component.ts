@@ -67,11 +67,11 @@ export class TaskRelationListComponent implements OnInit {
   }
 
   private setDisplayedColumns(width: number) {
-    if (width > 1250) {
+    if (width > 1100) {
       this.displayedColumns = this.allDisplayedColumns;
-    } else if (width > 1100) {
-      this.displayedColumns = ['number', 'summary', 'relation'];
     } else if (width > 900) {
+      this.displayedColumns = ['number', 'summary', 'relation'];
+    } else if (width > 700) {
       this.displayedColumns = ['number', 'summary'];
     } else {
       this.displayedColumns = ['number'];

@@ -75,9 +75,9 @@ export class TaskListComponent implements AfterViewInit {
   private setDisplayedColumns(width: number) {
     if (width > 1400) {
       this.displayedColumns = this.allDisplayedColumns;
-    } else if (width > 1250) {
+    } else if (width > 900) {
       this.displayedColumns = ['number', 'summary', 'priority'];
-    } else if (width > 1100) {
+    } else if (width > 700) {
       this.displayedColumns = ['number', 'summary'];
     } else {
       this.displayedColumns = ['number'];

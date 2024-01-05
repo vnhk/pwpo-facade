@@ -28,18 +28,15 @@ mat-card-header.form-header {
 }
 
 .mat-mdc-snack-bar-container {
-
 &
 .success-bar {
   --mdc-snackbar-container-color: #576373;
   --mat-mdc-snack-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
-
 }
 
 .mat-mdc-snack-bar-container {
-
 &
 .error-bar {
   --mdc-snackbar-container-color: #fa625f;
@@ -51,22 +48,22 @@ mat-card-header.form-header {
 
 .strikeout-task {
   font-size: 1em;
-  line-height: 1em;
+  line-height: 0.25em;
   position: relative;
 }
 
 .strikeout-task::after {
-  border-bottom: 0.250em solid #000000;
+  border-bottom: 0.125em solid #000000;
   content: "";
   left: 0;
-  margin-top: calc(0.250em / 2 * -1);
+  margin-top: calc(0.125em / 2 * -1);
   position: absolute;
   right: 0;
   top: 50%;
 }
 
 .strikeout-task-dotted::after {
-  border-bottom-style: double;
+  /*border-bottom-style: double;*/
 }
 
 .symbol-status {
@@ -92,6 +89,27 @@ mat-card-header.form-header {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .mat-column-number {
+    flex: 0 0 30% !important;
+    width: 30% !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .mat-column-number {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mat-column-number {
+    flex: 0 0 75% !important;
+    width: 75% !important;
+  }
 }
 
 

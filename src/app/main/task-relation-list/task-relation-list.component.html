@@ -21,12 +21,106 @@
               <ng-container matColumnDef="number">
                 <th *matHeaderCellDef mat-header-cell>#</th>
                 <td *matCellDef="let row" mat-cell>
-                  <a [style.color]="getTextColorStyle(row.child.type)"
-                     routerLink='/tasks/{{row.child.id}}/details'>{{row.child.number}}</a>
+                  <span *ngIf="row.child.status == 'Done'">
+            <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" style="fill:#000000;opacity:0.9"/>
+              </svg>
+            </span>
+            <span class="strikeout-task">
+            <a [style.color]="getTextColorStyle(row.child.type)"
+               routerLink='/tasks/{{row.child.id}}/details'>{{row.child.number}}</a>
+            </span>
+          </span>
+                  <span *ngIf="row.child.status == 'Canceled'">
+            <span class="symbol-status">
+               <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+                  <line stroke="black" style="stroke-width:3" x1="6" x2="24" y1="6" y2="24"/>
+                  <line stroke="black" style="stroke-width:3" x1="24" x2="6" y1="6" y2="24"/>
+              </svg>
+            </span>
+            <span class="strikeout-task strikeout-task-dotted">
+            <a [style.color]="getTextColorStyle(row.child.type)"
+               routerLink='/tasks/{{row.child.id}}/details'>{{row.child.number}}</a>
+            </span>
+          </span>
+
+                  <span *ngIf="row.child.status == 'New'">
+            <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+              </svg>
+           </span>
+            <span class="number-status-line new-status-line">
+              <a [style.color]="getTextColorStyle(row.child.type)"
+                 routerLink='/tasks/{{row.child.id}}/details'>{{row.child.number}}</a>
+            </span>
+          </span>
+                  <span *ngIf="row.child.status == 'In Progress'">
+             <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+                  <circle cx="15.5" cy="15.5" r="6.5" style="fill:#070707;"/>
+              </svg>
+           </span>
+            <span class="number-status-line in-progress-status-line">
+              <a [style.color]="getTextColorStyle(row.child.type)"
+                 routerLink='/tasks/{{row.child.id}}/details'>{{row.child.number}}</a>
+            </span>
+          </span>
                 </td>
-                <td *matFooterCellDef mat-footer-cell><strong> <a
-                  [style.color]="getTextColorStyle(parent?.parent?.type)"
-                  routerLink='/tasks/{{parent?.parent?.id}}/details'>{{parent?.parent?.number}}</a></strong></td>
+
+                <td *matFooterCellDef mat-footer-cell>
+                 <span *ngIf="parent?.parent?.status == 'Done'">
+            <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" style="fill:#000000;opacity:0.9"/>
+              </svg>
+            </span>
+            <span class="strikeout-task">
+            <a [style.color]="getTextColorStyle(parent?.parent?.type)"
+               routerLink='/tasks/{{parent?.parent?.id}}/details'>{{parent?.parent?.number}}</a>
+            </span>
+          </span>
+                  <span *ngIf="parent?.parent?.status == 'Canceled'">
+            <span class="symbol-status">
+               <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+                  <line stroke="black" style="stroke-width:3" x1="6" x2="24" y1="6" y2="24"/>
+                  <line stroke="black" style="stroke-width:3" x1="24" x2="6" y1="6" y2="24"/>
+              </svg>
+            </span>
+            <span class="strikeout-task strikeout-task-dotted">
+            <a [style.color]="getTextColorStyle(parent?.parent?.type)"
+               routerLink='/tasks/{{parent?.parent?.id}}/details'>{{parent?.parent?.number}}</a>
+            </span>
+          </span>
+
+                  <span *ngIf="parent?.parent?.status == 'New'">
+            <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+              </svg>
+           </span>
+            <span class="number-status-line new-status-line">
+              <a [style.color]="getTextColorStyle(parent?.parent?.type)"
+                 routerLink='/tasks/{{parent?.parent?.id}}/details'>{{parent?.parent?.number}}</a>
+            </span>
+          </span>
+                  <span *ngIf="parent?.parent?.status == 'In Progress'">
+             <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+                  <circle cx="15.5" cy="15.5" r="6.5" style="fill:#070707;"/>
+              </svg>
+           </span>
+            <span class="number-status-line in-progress-status-line">
+              <a [style.color]="getTextColorStyle(parent?.parent?.type)"
+                 routerLink='/tasks/{{parent?.parent?.id}}/details'>{{parent?.parent?.number}}</a>
+            </span>
+          </span>
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="summary">
