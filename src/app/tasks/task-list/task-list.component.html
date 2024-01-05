@@ -97,18 +97,51 @@
       <ng-container matColumnDef="number">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>#</th>
         <td *matCellDef="let row" mat-cell>
-          <span *ngIf="row.status == 'Done' || row.status == 'Canceled'" class="strikeout-task">
+          <span *ngIf="row.status == 'Done'">
+            <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" style="fill:#000000;opacity:0.9"/>
+              </svg>
+            </span>
+            <span class="strikeout-task">
             <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+            </span>
           </span>
+          <span *ngIf="row.status == 'Canceled'">
+            <span class="symbol-status">
+               <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+                  <line stroke="black" style="stroke-width:3" x1="6" x2="24" y1="6" y2="24"/>
+                  <line stroke="black" style="stroke-width:3" x1="24" x2="6" y1="6" y2="24"/>
+              </svg>
+            </span>
+            <span class="strikeout-task strikeout-task-dotted">
+            <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+            </span>
+          </span>
+
           <span *ngIf="row.status == 'New'">
-            <u class="number-status-underline new-status-underline">
-              <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
-            </u>
+            <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+              </svg>
+           </span>
+            <span class="number-status-line new-status-line">
+              <a [style.color]="getTextColorStyle(row.type)"
+                 routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+            </span>
           </span>
           <span *ngIf="row.status == 'In Progress'">
-            <u class="number-status-underline in-progress-status-underline">
-              <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
-            </u>
+             <span class="symbol-status">
+              <svg height="40" width="40">
+                  <circle cx="15" cy="15" r="12" stroke="black" style="fill:#ffffff; stroke-width:2"/>
+                  <circle cx="15.5" cy="15.5" r="6.5" style="fill:#070707;"/>
+              </svg>
+           </span>
+            <span class="number-status-line in-progress-status-line">
+              <a [style.color]="getTextColorStyle(row.type)"
+                 routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+            </span>
           </span>
         </td>
       </ng-container>

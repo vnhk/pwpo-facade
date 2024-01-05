@@ -65,17 +65,56 @@ mat-card-header.form-header {
   top: 50%;
 }
 
-.number-status-underline {
-  text-decoration-thickness: 10px;
+.strikeout-task-dotted::after {
+  border-bottom-style: double;
 }
 
-.new-status-underline {
-  color: #63ff97;
+.symbol-status {
+  margin-right: 2px;
+  margin-left: 2px;
 }
 
-.in-progress-status-underline {
-  color: #0579ff;
+.number-status-line {
 }
+
+
+.mat-column-number {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 20% !important;
+  width: 20% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+
+/*.number-status-line {*/
+/*  border: 4px solid black;*/
+/*  padding: 2px;*/
+/*}*/
+
+/*.new-status-line {*/
+/*  border-color: #0ffae2;*/
+/*}*/
+
+/*.in-progress-status-line {*/
+/*  border-color: #f5653d;*/
+/*}*/
+
+/*.canceled-status-line {*/
+/*  border-color: #ff0303;*/
+/*}*/
+
+/*.done-status-line {*/
+/*  border-color: black;*/
+/*}*/
 
 
 table[mat-table] {
