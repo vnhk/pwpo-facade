@@ -27,18 +27,22 @@ mat-card-header.form-header {
   justify-content: space-between;
 }
 
-/*snackbar*/
-.success-bar {
-  background: #3F4B59;
-  color: #e5eaf5;
+.mat-mdc-snack-bar-container {
+&.success-bar {
+   --mdc-snackbar-container-color: #576373;
+   --mat-mdc-snack-bar-button-color: #fff;
+   --mdc-snackbar-supporting-text-color: #fff;
+ }
 }
 
-.error-bar {
-  background: #fa625f;
-  color: #e5eaf5;
+.mat-mdc-snack-bar-container {
+&.error-bar {
+   --mdc-snackbar-container-color: #fa625f;
+   --mat-mdc-snack-bar-button-color: #fff;
+   --mdc-snackbar-supporting-text-color: #fff;
+ }
 }
 
-/*snackbar*/
 
 table[mat-table] {
 }

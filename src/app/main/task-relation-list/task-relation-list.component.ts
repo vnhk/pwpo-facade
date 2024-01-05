@@ -2,6 +2,10 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {TaskStructureItem} from "../api-models";
 import {HttpService} from "../service/http.service";
 import {ActivatedRoute} from "@angular/router";
+import {catchError} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
+import {throwError} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-task-relation-list',
@@ -24,7 +28,7 @@ export class TaskRelationListComponent implements OnInit {
 
   MAX_SUMMARY_LENGTH: number = 50;
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute) {
+  constructor(private httpService: HttpService, private route: ActivatedRoute, public snackBar: MatSnackBar) {
   }
 
   @HostListener('window:resize', ['$event'])
@@ -90,8 +94,46 @@ export class TaskRelationListComponent implements OnInit {
     return "black";
   }
 
-  appendSubTask(taskNumber: string, type: string) {
-    this.httpService.appendSubTask(this.openedTaskId, taskNumber, type)
-      .subscribe(() => this.ngOnInit());
+  appendSubTask(taskNumber: string, typeOption: string) {
+    if (typeOption == 'CURRENT_TASK_IS_PARENT') {
+      this.createRelationship(this.taskNumber, taskNumber, 'CHILD_IS_PART_OF');
+    } else if (typeOption == 'CURRENT_TASK_IS_CHILD') {
+      this.createRelationship(taskNumber, this.taskNumber, 'CHILD_IS_PART_OF');
+    } else if (typeOption == 'CURRENT_TASK_IS_SOLVED_BY') {
+      this.createRelationship(this.taskNumber, taskNumber, 'CHILD_SOLVES');
+    } else if (typeOption == 'CURRENT_TASK_SOLVES') {
+      this.createRelationship(taskNumber, this.taskNumber, 'CHILD_SOLVES');
+    }
+  }
+
+  private createRelationship(parent: string | undefined, child: string | undefined, type: string) {
+    this.httpService.appendSubTask(parent, child, type)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      ).subscribe(() => {
+      this.openBarWithMessage("Relationship created!", ['success-bar'], 15000);
+      this.ngOnInit()
+    });
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.log(error);
+    if (error.status === 400) {
+      this.showErrorPopup(error.error[0].message);
+    } else {
+      this.showErrorPopup("Cannot create relationship. Contact with administrator.");
+    }
+    return throwError(() => new Error('Cannot create relationship.'));
+  }
+
+  private showErrorPopup(message: string) {
+    this.openBarWithMessage(message, ['error-bar'], 15000);
+  }
+
+  private openBarWithMessage(message: string, classes: string[], duration: number) {
+    this.snackBar.open(message, "Ok", {
+      duration: duration,
+      panelClass: classes
+    });
   }
 }

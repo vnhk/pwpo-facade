@@ -68,8 +68,10 @@
           <hr>
           Relation type: <br>
           <select #select>
-            <option value="CHILD_IS_PART_OF">{{taskNumber}} is parent</option>
-            <option value="CHILD_SOLVES">{{taskNumber}} is solved by</option>
+            <option value="CURRENT_TASK_IS_PARENT">{{taskNumber}} is parent</option>
+            <option value="CURRENT_TASK_IS_CHILD">{{taskNumber}} is child</option>
+            <option value="CURRENT_TASK_IS_SOLVED_BY">{{taskNumber}} is solved by</option>
+            <option value="CURRENT_TASK_SOLVES">{{taskNumber}} solves</option>
           </select>
           <button (click)="appendSubTask(input.value, select.value)" color="primary" mat-button>Connect</button>
         </mat-card-actions>

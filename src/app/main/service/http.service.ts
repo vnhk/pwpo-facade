@@ -398,9 +398,9 @@ export class HttpService {
     );
   }
 
-  appendSubTask(taskId: string | null | undefined, subTaskNumber: string | null, type: string) {
+  appendSubTask(taskNumber: string | null | undefined, subTaskNumber: string | null | undefined, type: string) {
     return this.http.post(
-      `${this.baseUrl}/tasks/task/${taskId}/append-subtask/${subTaskNumber}?type=${type}`, null
+      `${this.baseUrl}/tasks/task/${taskNumber}/append-subtask/${subTaskNumber}?type=${type}`, null
     );
   }
 }
