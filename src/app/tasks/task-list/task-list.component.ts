@@ -15,7 +15,7 @@ import {MatPaginator} from "@angular/material/paginator";
   styleUrls: ['../../main/list/list.component.css']
 })
 export class TaskListComponent implements AfterViewInit {
-  allDisplayedColumns: string[] = ['number', 'summary', 'status', 'assignee', 'priority'];
+  allDisplayedColumns: string[] = ['number', 'summary', 'assignee', 'priority'];
   displayedColumns: string[] = this.allDisplayedColumns;
 
   MAX_SUMMARY_LENGTH: number = 30;
@@ -76,10 +76,8 @@ export class TaskListComponent implements AfterViewInit {
     if (width > 1400) {
       this.displayedColumns = this.allDisplayedColumns;
     } else if (width > 1250) {
-      this.displayedColumns = ['number', 'summary', 'status', 'priority'];
+      this.displayedColumns = ['number', 'summary', 'priority'];
     } else if (width > 1100) {
-      this.displayedColumns = ['number', 'summary', 'status'];
-    } else if (width > 900) {
       this.displayedColumns = ['number', 'summary'];
     } else {
       this.displayedColumns = ['number'];

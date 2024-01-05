@@ -28,19 +28,53 @@ mat-card-header.form-header {
 }
 
 .mat-mdc-snack-bar-container {
-&.success-bar {
-   --mdc-snackbar-container-color: #576373;
-   --mat-mdc-snack-bar-button-color: #fff;
-   --mdc-snackbar-supporting-text-color: #fff;
- }
+
+&
+.success-bar {
+  --mdc-snackbar-container-color: #576373;
+  --mat-mdc-snack-bar-button-color: #fff;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
 }
 
 .mat-mdc-snack-bar-container {
-&.error-bar {
-   --mdc-snackbar-container-color: #fa625f;
-   --mat-mdc-snack-bar-button-color: #fff;
-   --mdc-snackbar-supporting-text-color: #fff;
- }
+
+&
+.error-bar {
+  --mdc-snackbar-container-color: #fa625f;
+  --mat-mdc-snack-bar-button-color: #fff;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+}
+
+.strikeout-task {
+  font-size: 1em;
+  line-height: 1em;
+  position: relative;
+}
+
+.strikeout-task::after {
+  border-bottom: 0.250em solid #000000;
+  content: "";
+  left: 0;
+  margin-top: calc(0.250em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.number-status-underline {
+  text-decoration-thickness: 10px;
+}
+
+.new-status-underline {
+  color: #63ff97;
+}
+
+.in-progress-status-underline {
+  color: #0579ff;
 }
 
 

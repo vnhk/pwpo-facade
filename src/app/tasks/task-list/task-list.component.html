@@ -85,7 +85,7 @@
        class="table-loading-shade">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div *ngIf="isRateLimitReached" class="example-rate-limit-reached">
-      Wait...
+      <mat-spinner></mat-spinner>
     </div>
   </div>
 
@@ -97,7 +97,19 @@
       <ng-container matColumnDef="number">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>#</th>
         <td *matCellDef="let row" mat-cell>
-          <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+          <span *ngIf="row.status == 'Done' || row.status == 'Canceled'" class="strikeout-task">
+            <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+          </span>
+          <span *ngIf="row.status == 'New'">
+            <u class="number-status-underline new-status-underline">
+              <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+            </u>
+          </span>
+          <span *ngIf="row.status == 'In Progress'">
+            <u class="number-status-underline in-progress-status-underline">
+              <a [style.color]="getTextColorStyle(row.type)" routerLink='/tasks/{{row.id}}/details'>{{row.number}}</a>
+            </u>
+          </span>
         </td>
       </ng-container>
 
@@ -108,11 +120,6 @@
           <ng-template #origSummary>{{row.summary}}</ng-template>
           <ng-template #substrSummary>{{row.summary.substring(0, MAX_SUMMARY_LENGTH) + '...'}}</ng-template>
         </td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
-        <td *matCellDef="let row" mat-cell>{{row.status}}</td>
       </ng-container>
 
       <ng-container matColumnDef="assignee">
