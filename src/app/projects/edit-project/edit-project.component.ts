@@ -138,6 +138,7 @@ export class EditProjectComponent implements OnInit {
   private buildDefaultSecondaryValues() {
     if (this.projectSecondary.description) {
       this.editorComponent.content = this.projectSecondary.description;
+      this.editorComponent.writeValue(this.projectSecondary.description);
     }
     this.formGroup.patchValue({
       description: this.projectSecondary.description

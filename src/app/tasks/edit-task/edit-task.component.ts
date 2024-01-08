@@ -33,7 +33,7 @@ export class EditTaskComponent implements OnInit {
   private taskId: string | null | undefined;
 
   @ViewChild(QuillEditorComponent)
-  editorComponent: QuillEditorComponent | undefined;
+  editorComponent: QuillEditorComponent = new QuillEditorComponent();
 
   constructor(private httpService: HttpService,
               private location: Location,
@@ -167,15 +167,16 @@ export class EditTaskComponent implements OnInit {
       hours = (x - minutes) / 60;
     }
 
-    if (this.taskSecondary.description && this.editorComponent) {
-      this.editorComponent.content = this.taskSecondary.description;
-    }
-
     this.formGroup.patchValue({
       description: this.taskSecondary.description,
       estimationInHours: hours,
       estimationInMinutes: minutes,
     });
+
+    if (this.taskSecondary.description) {
+      this.editorComponent.content = this.taskSecondary.description;
+      this.editorComponent.writeValue(this.taskSecondary.description);
+    }
   }
 
   parseInt(value: string): number {
