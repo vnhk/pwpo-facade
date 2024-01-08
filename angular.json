@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pwpo-facade:build:production"
+              "buildTarget": "pwpo-facade:build:production"
             },
             "development": {
-              "browserTarget": "pwpo-facade:build:development"
+              "buildTarget": "pwpo-facade:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pwpo-facade:build"
+            "buildTarget": "pwpo-facade:build"
           }
         },
         "test": {
