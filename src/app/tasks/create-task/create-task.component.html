@@ -85,7 +85,7 @@
         <div class="col-md-6">
           <mat-form-field appearance="fill">
             <mat-label>Owner</mat-label>
-            <mat-select formControlName="owner" required>
+            <mat-select formControlName="owner" required val>
               <mat-option *ngFor="let user of addedToProject"
                           [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
             </mat-select>

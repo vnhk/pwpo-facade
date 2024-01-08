@@ -9,6 +9,7 @@ import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthService} from "../../main/session/auth.service";
 
 @Component({
   selector: 'app-create-task',
@@ -30,7 +31,7 @@ export class CreateTaskComponent implements OnInit {
               private location: Location,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar, private authService: AuthService) {
     this.formGroup = this.formBuilder.group({
       'type': [null, Validators.required],
       'priority': [null, Validators.required],
@@ -70,9 +71,23 @@ export class CreateTaskComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
     this.httpService.getUsersWithAccessToTheProject(this.id, "firstName", "asc", 1, 5000)
-      .subscribe(value => this.addedToProject = value.items);
+      .subscribe(value => {
+        this.addedToProject = value.items;
+        this.setDefaultOwner();
+      });
     this.httpService.getEnumByName("com.pwpo.common.enums.Priority").subscribe(value => this.priority = value.items);
     this.httpService.getEnumByName("com.pwpo.task.enums.TaskType").subscribe(value => this.taskType = value.items);
+  }
+
+  private setDefaultOwner() {
+    let loggedUser = this.authService.getLoggedUser();
+    let ownerForm = this.formGroup.get('owner');
+    if (ownerForm) {
+      let optionInFormForLoggedUser = this.addedToProject?.filter(p => p.nick == loggedUser.username);
+      if (optionInFormForLoggedUser && optionInFormForLoggedUser.length == 1) {
+        ownerForm.setValue(optionInFormForLoggedUser[0].id);
+      }
+    }
   }
 
   onSubmit() {
@@ -92,6 +107,7 @@ export class CreateTaskComponent implements OnInit {
     this.formGroup.reset();
     this.setDefaultDueDate();
     this.setDefaultEstimation();
+    this.setDefaultOwner();
   }
 
   parseInt(value: string) {
