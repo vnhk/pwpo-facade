@@ -1,5 +1,5 @@
 <mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
+  <mat-expansion-panel (expandedChange)="changeExpanded($event)" [expanded]="shouldBeExpanded()">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{listName}} ({{tasks?.length}})

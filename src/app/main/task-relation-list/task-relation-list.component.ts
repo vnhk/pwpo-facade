@@ -136,4 +136,17 @@ export class TaskRelationListComponent implements OnInit {
       panelClass: classes
     });
   }
+
+  shouldBeExpanded() {
+    let item = localStorage.getItem("STRUCTURE_LIST_EXPANDED_" + this.taskNumber);
+    if (item == null) {
+      return true;
+    } else {
+      return item == 'true';
+    }
+  }
+
+  changeExpanded($event: boolean) {
+    localStorage.setItem("STRUCTURE_LIST_EXPANDED_" + this.taskNumber, String($event));
+  }
 }
