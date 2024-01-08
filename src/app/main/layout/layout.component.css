@@ -39,6 +39,7 @@ mat-sidenav-container {
 .menu-button {
   width: 100%;
   display: flex;
+  color: white !important;
   align-items: center;
   justify-content: flex-start;
   font-size: 1rem;

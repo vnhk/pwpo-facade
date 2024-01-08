@@ -10,56 +10,56 @@
   <mat-sidenav>
     <div class="menu-button-container">
       <span *ngIf="!logged()">
-          <button mat-button color="white">
+          <button style="color: white" mat-button >
             <mat-icon>assessment</mat-icon>
             <span>PlanSoftApp</span>
           </button>
       </span>
       <span *ngIf="logged()">
-          <button color="white" mat-button routerLink="/profile">
+          <button style="color: white" mat-button routerLink="/profile">
             <mat-icon>perm_identity</mat-icon>
             <span>{{authService.getLoggedUser().username}}</span>
           </button>
       </span>
       <mat-divider></mat-divider>
       <span *ngIf="logged()">
-          <button [disabled]="authService.hasNotActivatedAccount()" class="menu-button" color="white" mat-button
+          <button [disabled]="authService.hasNotActivatedAccount()" class="menu-button" mat-button
                   routerLink="/my-work">
             <mat-icon>work</mat-icon>
             <span>My work</span>
           </button>
-          <button [disabled]="authService.hasNotActivatedAccount()" class="menu-button" color="white" mat-button
+          <button [disabled]="authService.hasNotActivatedAccount()" class="menu-button"  mat-button
                   routerLink="/projects">
             <mat-icon>list</mat-icon>
             <span>Projects</span>
           </button>
-          <button [disabled]="authService.hasNotActivatedAccount()" class="menu-button" color="white" mat-button
+          <button [disabled]="authService.hasNotActivatedAccount()" class="menu-button"  mat-button
                   routerLink="/search">
             <mat-icon>search</mat-icon>
             <span>Search</span>
           </button>
           <button *ngIf="authService.isAdmin()" [disabled]="authService.hasNotActivatedAccount()" class="menu-button"
-                  color="white"
+
                   mat-button
                   routerLink="/admin">
             <mat-icon>settings</mat-icon>
             <span>Admin panel</span>
           </button>
         <button *ngIf="authService.isSuperAdmin()" [disabled]="authService.hasNotActivatedAccount()" class="menu-button"
-                color="white"
+
                 mat-button
                 routerLink="/data-management">
             <mat-icon>storage</mat-icon>
             <span>Data</span>
           </button>
-          <button (click)="logout()" class="menu-button" color="white" id="logout-button" mat-button>
+          <button (click)="logout()" class="menu-button"  id="logout-button" mat-button>
             <mat-icon>power_settings_new</mat-icon>
             <span>Logout</span>
           </button>
       </span>
 
       <span *ngIf="!logged()">
-        <button class="menu-button" color="white" id="login" mat-button routerLink="/login">
+        <button class="menu-button"  id="login" mat-button routerLink="/login">
           <mat-icon>login</mat-icon>
           <span>Login</span>
         </button>
