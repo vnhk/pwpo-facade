@@ -56,6 +56,13 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
+  private setDefaultEstimation() {
+    this.formGroup.patchValue({
+      estimationInHours: 0,
+      estimationInMinutes: 0
+    });
+  }
+
   goBack() {
     this.location.back();
   }
@@ -83,6 +90,8 @@ export class CreateTaskComponent implements OnInit {
 
   resetForm() {
     this.formGroup.reset();
+    this.setDefaultDueDate();
+    this.setDefaultEstimation();
   }
 
   parseInt(value: string) {
