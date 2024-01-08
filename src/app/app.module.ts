@@ -20,7 +20,6 @@ import {CreateTaskComponent} from './tasks/create-task/create-task.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgSelectModule} from '@ng-select/ng-select';
 import {TaskInfoComponent} from "./tasks/task-info/task-info.component";
 import {TaskDetailsComponent} from "./tasks/task-info/task-details/task-details.component";
 import {MatExpansionModule} from "@angular/material/expansion";
@@ -156,7 +155,6 @@ import {RouterStrategyService} from "./router-strategy.service";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    NgSelectModule,
     MatSnackBarModule,
     MatExpansionModule,
     MatTooltipModule,
