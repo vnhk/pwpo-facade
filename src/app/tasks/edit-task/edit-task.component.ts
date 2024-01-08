@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -35,7 +35,8 @@ export class EditTaskComponent implements OnInit {
               private location: Location,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private router: Router) {
     this.formGroup = this.formBuilder.group({
       'id': [null, [Validators.required]],
       'type': [null, Validators.required],
@@ -51,9 +52,9 @@ export class EditTaskComponent implements OnInit {
     });
   }
 
-  goBack() {
+  goToTaskDetails() {
     this.formGroup.reset();
-    this.location.back();
+    this.router.navigateByUrl("/tasks/" + this.taskId + "/details");
   }
 
   async ngOnInit() {
@@ -110,7 +111,7 @@ export class EditTaskComponent implements OnInit {
 
   private successCreation() {
     this.openBarWithMessage('Task edited!', ['success-bar'], 15000);
-    this.goBack();
+    this.goToTaskDetails();
   }
 
   private openBarWithMessage(message: string, classes: string[], duration: number) {

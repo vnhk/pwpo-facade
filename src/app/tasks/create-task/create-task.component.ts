@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DataEnum, Person} from "../../main/api-models";
 import {TaskService} from "../service/task.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -31,7 +31,9 @@ export class CreateTaskComponent implements OnInit {
               private location: Location,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              public snackBar: MatSnackBar, private authService: AuthService) {
+              public snackBar: MatSnackBar,
+              private authService: AuthService,
+              private router: Router) {
     this.formGroup = this.formBuilder.group({
       'type': [null, Validators.required],
       'priority': [null, Validators.required],
@@ -64,8 +66,8 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
-  goBack() {
-    this.location.back();
+  goToProjectDetails() {
+    this.router.navigateByUrl("/projects/details/" + this.id);
   }
 
   ngOnInit(): void {
