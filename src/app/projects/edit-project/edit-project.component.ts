@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {retry, throwError} from "rxjs";
+import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
 import {DataEnum, Person, Project} from "../../main/api-models";
 import {HttpService} from "../../main/service/http.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {QuillEditorComponent} from "ngx-quill";
 
 @Component({
   selector: 'app-edit-project',
@@ -25,6 +26,9 @@ export class EditProjectComponent implements OnInit {
   SHORT_FORM_MAX_LENGTH = 6;
   private projectPrimary: Project = {};
   private projectSecondary: Project = {};
+
+  @ViewChild(QuillEditorComponent)
+  editorComponent: QuillEditorComponent = new QuillEditorComponent();
 
   constructor(private httpService: HttpService,
               private location: Location,
@@ -59,6 +63,7 @@ export class EditProjectComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
+      this.formGroup.value.description = this.editorComponent.valueGetter(this.editorComponent.quillEditor, this.editorComponent.editorElem);
       this.httpService.editProject(this.formGroup.value)
         .pipe(
           catchError(this.handleError.bind(this))
@@ -131,6 +136,9 @@ export class EditProjectComponent implements OnInit {
   }
 
   private buildDefaultSecondaryValues() {
+    if (this.projectSecondary.description) {
+      this.editorComponent.content = this.projectSecondary.description;
+    }
     this.formGroup.patchValue({
       description: this.projectSecondary.description
     });

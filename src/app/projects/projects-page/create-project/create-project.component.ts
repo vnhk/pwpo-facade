@@ -7,6 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Person} from "../../../main/api-models";
 import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {QuillEditorComponent} from "ngx-quill";
 
 @Component({
   selector: 'app-create-project',
@@ -23,6 +24,9 @@ export class CreateProjectComponent implements OnInit {
   spin: boolean = false;
   @ViewChild(MessageBarComponent)
   messageBar: MessageBarComponent | undefined;
+  @ViewChild(QuillEditorComponent)
+  editorComponent: QuillEditorComponent = new QuillEditorComponent();
+  description: string = '';
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
@@ -46,6 +50,7 @@ export class CreateProjectComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
+      this.formGroup.value.description = this.editorComponent.valueGetter(this.editorComponent.quillEditor, this.editorComponent.editorElem);
       this.spin = true;
       this.httpService.createProject(this.formGroup.value)
         .pipe(

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataEnum, Person} from "../../main/api-models";
@@ -10,6 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Location} from '@angular/common';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../main/session/auth.service";
+import {QuillEditorComponent} from "ngx-quill";
 
 @Component({
   selector: 'app-create-task',
@@ -25,6 +26,8 @@ export class CreateTaskComponent implements OnInit {
   MAX_SUMMARY_LENGTH = 150;
   id: string | null | undefined;
   oneDayInMs = 86400000;
+  @ViewChild(QuillEditorComponent)
+  editorComponent: QuillEditorComponent = new QuillEditorComponent();
 
   constructor(private httpService: HttpService,
               private taskService: TaskService,
@@ -95,6 +98,7 @@ export class CreateTaskComponent implements OnInit {
   onSubmit() {
     if (this.formGroup.valid) {
       this.formGroup.value.project = this.id;
+      this.formGroup.value.description = this.editorComponent.valueGetter(this.editorComponent.quillEditor, this.editorComponent.editorElem);
       let time = this.formGroup.value.dueDate.getTime();
       let twelveClock = time + (this.oneDayInMs / 2);
       this.formGroup.value.dueDate = new Date(twelveClock);

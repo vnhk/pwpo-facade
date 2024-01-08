@@ -86,6 +86,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {TaskRelationListComponent} from './main/task-relation-list/task-relation-list.component';
 import {RouteReuseStrategy} from "@angular/router";
 import {RouterStrategyService} from "./router-strategy.service";
+import {QuillModule} from "ngx-quill";
 
 @NgModule({
   declarations: [
@@ -139,6 +140,7 @@ import {RouterStrategyService} from "./router-strategy.service";
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    QuillModule.forRoot(),
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,

@@ -103,12 +103,11 @@
       </div>
 
       <div class="row">
-        <mat-form-field appearance="fill" hintLabel="Max {{MAX_DESC_LENGTH}} characters">
-          <mat-label>Description</mat-label>
-          <textarea #description formControlName="description" matAutosizeMaxRows="5" matAutosizeMinRows="2" matInput
-                    matTextareaAutosize></textarea>
-          <mat-hint align="end">{{description.value.length || 0}}/{{MAX_DESC_LENGTH}}</mat-hint>
-        </mat-form-field>
+        <div class="ql-container ql-snow" style="border-width: 0;">
+          <div class="ql-editor">
+            <quill-editor></quill-editor>
+          </div>
+        </div>
       </div>
 
     </mat-card-content>

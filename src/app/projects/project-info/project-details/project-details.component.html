@@ -27,7 +27,9 @@
 
     <label class="attribute-label">Description:</label>
     <br>
-    {{secondaryAttributes.description}}
+   <div *ngIf="secondaryAttributes.description">
+          <quill-view-html [content]="secondaryAttributes.description" theme="snow"></quill-view-html>
+   </div>
 
     <br>
     <br>

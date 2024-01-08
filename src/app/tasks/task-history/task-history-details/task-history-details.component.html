@@ -43,7 +43,9 @@
         <br>
         <label class="attribute-label">Description:</label>
         <br>
-        {{taskHistory.description}}
+          <div *ngIf="taskHistory.description">
+            <quill-view-html [content]="taskHistory.description" theme="snow"></quill-view-html>
+         </div>
       </div>
       <div class="col-md-1">
 

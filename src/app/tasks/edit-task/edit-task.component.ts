@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
@@ -8,6 +8,7 @@ import {Location} from '@angular/common';
 import {DataEnum, Person, Task} from "../../main/api-models";
 import {HttpService} from "../../main/service/http.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {QuillEditorComponent} from "ngx-quill";
 
 @Component({
   selector: 'app-edit-task',
@@ -30,6 +31,9 @@ export class EditTaskComponent implements OnInit {
   private taskPrimary: Task = {};
   private taskSecondary: Task = {};
   private taskId: string | null | undefined;
+
+  @ViewChild(QuillEditorComponent)
+  editorComponent: QuillEditorComponent | undefined;
 
   constructor(private httpService: HttpService,
               private location: Location,
@@ -71,7 +75,7 @@ export class EditTaskComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      console.log(this.formGroup.value);
+      this.formGroup.value.description = this.editorComponent?.valueGetter(this.editorComponent.quillEditor, this.editorComponent.editorElem);
       this.httpService.editTask(this.formGroup.value)
         .pipe(
           catchError(this.handleError.bind(this))
@@ -161,6 +165,10 @@ export class EditTaskComponent implements OnInit {
     if (x != undefined) {
       minutes = x % 60;
       hours = (x - minutes) / 60;
+    }
+
+    if (this.taskSecondary.description && this.editorComponent) {
+      this.editorComponent.content = this.taskSecondary.description;
     }
 
     this.formGroup.patchValue({
