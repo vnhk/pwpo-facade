@@ -103,5 +103,13 @@
     <button (click)="showChangeStatusForm()" mat-button matTooltip="Change status">
       <mat-icon class="details-actions">swap_horizontal_circle</mat-icon>
     </button>
+    <button (click)="changeStatus('IN_PROGRESS')" *ngIf="primaryAttributes.status == 'New'" mat-button
+            matTooltip="Start working on a task">
+      <mat-icon class="details-actions">build</mat-icon>
+    </button>
+    <button (click)="changeStatus('DONE')" *ngIf="primaryAttributes.status == 'In Progress'" mat-button
+            matTooltip="Close task">
+      <mat-icon class="details-actions">done</mat-icon>
+    </button>
   </span>
 </app-details>
