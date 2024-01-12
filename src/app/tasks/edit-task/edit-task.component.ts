@@ -52,7 +52,7 @@ export class EditTaskComponent implements OnInit {
       'status': [null, [Validators.required]],
       'estimationInHours': [0, [Validators.min(0), Validators.max(3600)]],
       'estimationInMinutes': [0, [Validators.min(0), Validators.max(60)]],
-      'description': [null, [Validators.maxLength(1500)]],
+      'description': [null, [Validators.maxLength(150000000)]],
     });
   }
 
@@ -181,6 +181,18 @@ export class EditTaskComponent implements OnInit {
 
   parseInt(value: string): number {
     return Number.parseInt(value);
+  }
+
+  isInvalidForm() {
+    // const invalid = [];
+    // const controls = this.formGroup.controls;
+    // for (const name in controls) {
+    //   if (controls[name].invalid) {
+    //     invalid.push(name);
+    //   }
+    // }
+    // console.log(invalid)
+    return !this.formGroup.valid
   }
 }
 

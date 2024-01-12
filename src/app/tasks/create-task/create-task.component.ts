@@ -46,7 +46,7 @@ export class CreateTaskComponent implements OnInit {
       'owner': [null, [Validators.required]],
       'estimationInHours': [0, [Validators.min(0), Validators.max(3600)]],
       'estimationInMinutes': [0, [Validators.min(0), Validators.max(60)]],
-      'description': [null, [Validators.maxLength(1500)]],
+      'description': [null, [Validators.maxLength(150000000)]],
       'project': []
     });
 
