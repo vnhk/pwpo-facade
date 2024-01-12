@@ -27,23 +27,32 @@ mat-card-header.form-header {
   justify-content: space-between;
 }
 
-.mat-mdc-snack-bar-container {
-&
-.success-bar {
+.mat-mdc-snack-bar-container {&  .success-bar {
   --mdc-snackbar-container-color: #576373;
   --mat-mdc-snack-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
 }
 
-.mat-mdc-snack-bar-container {
-&
-.error-bar {
+.mat-mdc-snack-bar-container {&.error-bar {
   --mdc-snackbar-container-color: #fa625f;
   --mat-mdc-snack-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
+}
 
+.success-bar {
+  --mdc-snackbar-container-color: #576373 !important;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-supporting-text-color: #fff !important;
+  white-space: pre-wrap
+}
+
+.error-bar {
+  --mdc-snackbar-container-color: #fa625f !important;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-supporting-text-color: #fff !important;
+  white-space: pre-wrap
 }
 
 .strikeout-task {
