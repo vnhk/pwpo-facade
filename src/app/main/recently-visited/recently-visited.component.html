@@ -1,0 +1,9 @@
+<hr>
+<h4>Recently visited:</h4>
+<span *ngFor="let item of recentlyVisited">
+  <button style="color: white" [matTooltip]="item.tooltip" mat-button routerLink="{{item.link}}">
+    {{item.name}}
+  </button>
+  <br>
+</span>
+<hr>

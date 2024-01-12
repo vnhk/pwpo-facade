@@ -46,13 +46,13 @@
             <span>Admin panel</span>
           </button>
         <button *ngIf="authService.isSuperAdmin()" [disabled]="authService.hasNotActivatedAccount()" class="menu-button"
-
                 mat-button
                 routerLink="/data-management">
             <mat-icon>storage</mat-icon>
             <span>Data</span>
-          </button>
-          <button (click)="logout()" class="menu-button"  id="logout-button" mat-button>
+        </button>
+       <app-recently-visited></app-recently-visited>
+          <button (click)="logout()" class="menu-button" id="logout-button" mat-button>
             <mat-icon>power_settings_new</mat-icon>
             <span>Logout</span>
           </button>

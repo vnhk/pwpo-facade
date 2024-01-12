@@ -13,6 +13,18 @@ export interface PersonApi extends ItemApi {
   items: Person[];
 }
 
+export class RecentlyVisited {
+  constructor(name: string, link: string, tooltip: string) {
+    this.name = name;
+    this.link = link;
+    this.tooltip = tooltip;
+  }
+
+  name = '';
+  tooltip = '';
+  link = '';
+}
+
 export class AuthResponse {
   username: string | undefined;
   password: string | undefined;

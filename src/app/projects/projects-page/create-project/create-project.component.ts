@@ -4,10 +4,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Person} from "../../../main/api-models";
+import {Person, ProjectApi, RecentlyVisited} from "../../../main/api-models";
 import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {QuillEditorComponent} from "ngx-quill";
+import {RecentlyVisitedService} from "../../../main/recently-visited/recently-visited.service";
 
 @Component({
   selector: 'app-create-project',
@@ -30,7 +31,8 @@ export class CreateProjectComponent implements OnInit {
 
   constructor(private httpService: HttpService,
               private formBuilder: FormBuilder,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private recentlyVisitedService: RecentlyVisitedService) {
     this.formGroup = this.formBuilder.group({
       'summary': [null, [Validators.required, Validators.maxLength(this.MAX_SUMMARY_LENGTH)]],
       'name': [null, [Validators.required, Validators.maxLength(this.NAME_MAX_LENGTH)]],
@@ -55,7 +57,14 @@ export class CreateProjectComponent implements OnInit {
       this.httpService.createProject(this.formGroup.value)
         .pipe(
           catchError(this.handleError.bind(this))
-        ).subscribe(() => this.successCreation());
+        ).subscribe((value: ProjectApi) => {
+        let item = value.items[0];
+        if (item.name && item.summary) {
+          this.recentlyVisitedService.addRecentlyVisited(new RecentlyVisited(item.name, "/projects/details/" + item.id,
+            item.summary));
+        }
+        this.successCreation();
+      });
     }
   }
 

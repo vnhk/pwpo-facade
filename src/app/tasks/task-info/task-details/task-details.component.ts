@@ -1,13 +1,14 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {DataEnum, Task, TaskStructureItem} from "../../../main/api-models";
+import {DataEnum, RecentlyVisited, Task} from "../../../main/api-models";
 import {catchError, map} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {RecentlyVisitedService} from "../../../main/recently-visited/recently-visited.service";
 
 @Component({
   selector: 'app-task-details',
@@ -45,7 +46,8 @@ export class TaskDetailsComponent implements AfterViewInit {
 
   constructor(private httpService: HttpService,
               private route: ActivatedRoute,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private recentlyVisitedService: RecentlyVisitedService) {
   }
 
   ngAfterViewInit() {
@@ -104,6 +106,9 @@ export class TaskDetailsComponent implements AfterViewInit {
         this.dueDateComingUp = true;
       }
     }
+    if (this.primaryAttributes.number && this.id && this.primaryAttributes.summary)
+      this.recentlyVisitedService.addRecentlyVisited(new RecentlyVisited(this.primaryAttributes.number, "/tasks/" + this.id + "/details",
+        this.primaryAttributes.summary));
   }
 
   private afterSecondaryLoaded() {

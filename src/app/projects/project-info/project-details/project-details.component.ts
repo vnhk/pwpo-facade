@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {HttpService} from "../../../main/service/http.service";
 import {ActivatedRoute} from "@angular/router";
-import {Project} from "../../../main/api-models";
+import {Project, RecentlyVisited} from "../../../main/api-models";
 import {MessageBarComponent} from "../../../main/message-bar/message-bar.component";
 import {AuthService} from "../../../main/session/auth.service";
+import {RecentlyVisitedService} from "../../../main/recently-visited/recently-visited.service";
 
 @Component({
   selector: 'app-project-details',
@@ -23,8 +24,9 @@ export class ProjectDetailsComponent implements AfterViewInit {
 
   constructor(private httpService: HttpService,
               private route: ActivatedRoute,
-              public authService: AuthService) {
-    if(authService.isManager()) {
+              public authService: AuthService,
+              private recentlyVisitedService: RecentlyVisitedService) {
+    if (authService.isManager()) {
       this.removeFileAccessGranted = true;
       this.uploadFileAccessGranted = true;
     }
@@ -49,6 +51,7 @@ export class ProjectDetailsComponent implements AfterViewInit {
         .subscribe({
             next: values => {
               this.primaryAttributes = values.items[0];
+              this.afterPrimaryLoaded(id);
               resolve(values);
             },
             error: err => this.error("Could not load project!")
@@ -71,5 +74,11 @@ export class ProjectDetailsComponent implements AfterViewInit {
     Promise.all([primary, secondary]).then((values) => {
       this.spin = false;
     });
+  }
+
+  private afterPrimaryLoaded(id: string | null) {
+    if (this.primaryAttributes.name && id && this.primaryAttributes.summary)
+      this.recentlyVisitedService.addRecentlyVisited(new RecentlyVisited(this.primaryAttributes.name, "/projects/details/" + id,
+        this.primaryAttributes.summary));
   }
 }

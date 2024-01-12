@@ -87,6 +87,7 @@ import {TaskRelationListComponent} from './main/task-relation-list/task-relation
 import {RouteReuseStrategy} from "@angular/router";
 import {RouterStrategyService} from "./router-strategy.service";
 import {QuillModule} from "ngx-quill";
+import {RecentlyVisitedComponent} from "./main/recently-visited/recently-visited.component";
 
 @NgModule({
   declarations: [
@@ -129,43 +130,44 @@ import {QuillModule} from "ngx-quill";
     GoalRiskManageOptionModalComponent,
     UserProjectManageOptionModalComponent,
     DataManagementComponent,
-    TaskRelationListComponent
+    TaskRelationListComponent,
+    RecentlyVisitedComponent
   ],
-  imports: [
-    BrowserModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    QuillModule.forRoot(),
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MatTabsModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatSnackBarModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatListModule,
-    MatButtonToggleModule,
-    MatDialogModule,
-    MatProgressBarModule,
-    NgxChartsModule
-  ],
+    imports: [
+        BrowserModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        QuillModule.forRoot(),
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatTabsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSnackBarModule,
+        MatExpansionModule,
+        MatTooltipModule,
+        MatListModule,
+        MatButtonToggleModule,
+        MatDialogModule,
+        MatProgressBarModule,
+        NgxChartsModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

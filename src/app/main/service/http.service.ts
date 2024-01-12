@@ -219,8 +219,8 @@ export class HttpService {
     );
   }
 
-  createProject(value: string) {
-    return this.http.post<Project>(
+  createProject(value: string): Observable<ProjectApi> {
+    return this.http.post<ProjectApi>(
       `${this.baseUrl}/projects`,
       value
     );

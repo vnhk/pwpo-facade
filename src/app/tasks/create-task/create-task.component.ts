@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../main/service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DataEnum, Person} from "../../main/api-models";
+import {DataEnum, Person, RecentlyVisited} from "../../main/api-models";
 import {TaskService} from "../service/task.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
@@ -11,6 +11,7 @@ import {Location} from '@angular/common';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../main/session/auth.service";
 import {QuillEditorComponent} from "ngx-quill";
+import {RecentlyVisitedService} from "../../main/recently-visited/recently-visited.service";
 
 @Component({
   selector: 'app-create-task',
@@ -36,7 +37,8 @@ export class CreateTaskComponent implements OnInit {
               private formBuilder: FormBuilder,
               public snackBar: MatSnackBar,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private recentlyVisitedService: RecentlyVisitedService) {
     this.formGroup = this.formBuilder.group({
       'type': [null, Validators.required],
       'priority': [null, Validators.required],
@@ -105,7 +107,14 @@ export class CreateTaskComponent implements OnInit {
       this.httpService.createTask(this.formGroup.value)
         .pipe(
           catchError(this.handleError.bind(this))
-        ).subscribe((value) => this.successCreation(value));
+        ).subscribe((value: any) => {
+        let item = value.items[0];
+        if (item) {
+          this.recentlyVisitedService.addRecentlyVisited(new RecentlyVisited(item.number, "/tasks/" + item.id + "/details",
+            item.summary));
+        }
+        this.successCreation(value);
+      });
     }
   }
 
